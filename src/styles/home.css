@@ -6,21 +6,6 @@
   margin: 0 auto;
 }
 
-.story-columns {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.story-column {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex: 1;
-  gap: 1.5rem;
-}
-
 .story-action {
   margin-top: auto;
   padding: 0.75rem 1.5rem;
@@ -60,15 +45,4 @@
 .share-action:hover {
   background: #ef4444;
   color: #fff;
-}
-
-/* Responsive: stack columns on small screens */
-@media (max-width: 900px) {
-  .story-columns {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .story-column {
-    width: 100%;
-  }
 }
