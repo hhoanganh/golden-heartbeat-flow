@@ -21,3 +21,28 @@
   flex-direction: column;
   height: 100%;
 }
+
+.content-section-3col {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.content-section-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .content-section-3col {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .content-section-col {
+    width: 100%;
+  }
+}
