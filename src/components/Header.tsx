@@ -1,0 +1,85 @@
+
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="bg-white w-full border-b border-warm-gray/30 relative z-50">
+      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center">
+            <div className="text-heading-2 font-bold text-compassion-red flex items-center">
+              <div className="w-8 h-8 bg-compassion-red rounded-full mr-3 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-compassion-red/30">
+                G
+              </div>
+              Giọt Máu Vàng
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+              Home
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+              Find Events
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+              FAQs
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+              Contact Us
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+          </nav>
+
+          {/* Right side - Login/Register and Language */}
+          <div className="flex items-center space-x-4">
+            <Button 
+              variant="outline" 
+              className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
+            >
+              Login / Register
+            </Button>
+            
+            <div className="w-8 h-8 bg-supportive-blue rounded-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:scale-110 transition-transform duration-200">
+              EN
+            </div>
+
+            {/* Mobile menu button */}
+            <button 
+              className="md:hidden p-2 text-deep-gray hover:text-compassion-red transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <div className="w-6 h-6 flex flex-col justify-center space-y-1">
+                <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+                <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-warm-gray/30 shadow-md-custom">
+            <nav className="flex flex-col space-y-4 p-4">
+              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</a>
+              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</a>
+              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</a>
+              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
