@@ -1,0 +1,10 @@
+.sections-container {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.section {
+  flex: 1;
+  /* Optional: add padding, border, or min-width as needed */
+}
