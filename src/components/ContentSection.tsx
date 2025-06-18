@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import './ContentSectionGrid.css';
 
 const ContentSection = () => {
   const newsArticles = [
@@ -67,11 +67,11 @@ const ContentSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-compassion-red to-supportive-blue mx-auto rounded-full"></div>
         </div>
 
-        {/* Masonry Grid */}
-        <div className="masonry-grid">
+        {/* Responsive Grid */}
+        <div className="content-section-grid">
           {/* News Articles */}
           {newsArticles.map((article) => (
-            <div key={article.id} className="masonry-item">
+            <div key={article.id} className="content-section-card">
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -106,7 +106,7 @@ const ContentSection = () => {
 
           {/* Events */}
           {events.map((event) => (
-            <div key={event.id} className="masonry-item">
+            <div key={event.id} className="content-section-card">
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -142,7 +142,7 @@ const ContentSection = () => {
 
           {/* Testimonials */}
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="masonry-item">
+            <div key={testimonial.id} className="content-section-card">
               <div className="thought-cloud">
                 <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
                   "{testimonial.quote}"

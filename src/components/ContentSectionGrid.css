@@ -1,0 +1,23 @@
+.content-section-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .content-section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-section-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.content-section-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
