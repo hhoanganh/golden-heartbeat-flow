@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,12 +12,12 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-heading-2 font-bold text-compassion-red flex items-center">
+            <Link to="/" className="text-heading-2 font-bold text-compassion-red flex items-center">
               <div className="w-8 h-8 bg-compassion-red rounded-full mr-3 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-compassion-red/30">
                 G
               </div>
               Giọt Máu Vàng
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -41,12 +42,14 @@ const Header = () => {
 
           {/* Right side - Login/Register and Language */}
           <div className="flex items-center space-x-4">
-            <Button 
-              variant="outline" 
-              className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
-            >
-              Login / Register
-            </Button>
+            <Link to="/login">
+              <Button 
+                variant="outline" 
+                className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
+              >
+                Login / Register
+              </Button>
+            </Link>
             
             <div className="w-8 h-8 bg-supportive-blue rounded-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:scale-110 transition-transform duration-200">
               EN
@@ -74,6 +77,7 @@ const Header = () => {
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</a>
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</a>
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
+              <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
             </nav>
           </div>
         )}
