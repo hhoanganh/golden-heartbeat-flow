@@ -13,11 +13,24 @@
   min-width: 0;
 }
 
+/* This new group will grow to fill the space */
+.content-section-card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+/* This ensures the cards inside the group are also full height */
 .content-section-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
+
+.content-section-card-group .content-section-card {
+  flex: 1;
+}
+
 
 @media (max-width: 900px) {
   .content-section-3col {
