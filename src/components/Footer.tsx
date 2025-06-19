@@ -9,7 +9,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-deep-gray text-white relative">
+    <footer id="contact-info" className="bg-deep-gray text-white relative"> {/* Added id="contact-info" here */}
       {/* Wave pattern at top */}
       <div className="wave-pattern"></div>
       

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -45,7 +44,8 @@ const Header = () => {
               FAQs
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </a>
-            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+            {/* Updated 'Contact Us' link for desktop navigation */}
+            <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Contact Us
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </a>
@@ -54,8 +54,8 @@ const Header = () => {
           {/* Right side - Login/Register and Language */}
           <div className="flex items-center space-x-4">
             <Link to="/login">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
               >
                 Login / Register
@@ -63,7 +63,7 @@ const Header = () => {
             </Link>
             
             {/* Mobile menu button */}
-            <button 
+            <button
               className="md:hidden p-2 text-deep-gray hover:text-compassion-red transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -83,7 +83,8 @@ const Header = () => {
               <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</Link>
               <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</Link>
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</a>
-              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
+              {/* Updated 'Contact Us' link for mobile navigation */}
+              <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
               <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
             </nav>
           </div>
