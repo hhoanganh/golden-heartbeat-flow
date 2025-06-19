@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import EventFilters from '@/components/EventFilters';
 import EventCard from '@/components/EventCard';
-import BloodDemandSnapshot from '@/components/BloodDemandSnapshot';
+// Removed BloodDemandSnapshot import
 import { Button } from '@/components/ui/button';
 
 const Events = () => {
@@ -142,8 +141,7 @@ const Events = () => {
           </div>
         </div>
 
-        {/* Blood Demand Snapshot */}
-        <BloodDemandSnapshot />
+        {/* Removed Blood Demand Snapshot component */}
 
         {/* Event Listings */}
         <section>
