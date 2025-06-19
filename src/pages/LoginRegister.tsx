@@ -23,9 +23,20 @@ const LoginRegister = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="text-heading-1 font-bold text-compassion-red flex items-center justify-center">
-            <div className="w-12 h-12 bg-compassion-red rounded-full mr-3 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-compassion-red/30">
-              G
-            </div>
+            {/* THIS IS THE UPDATED LOGO BLOCK */}
+            <svg
+              className="w-12 h-12 mr-3"
+              viewBox="0 0 384 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
+                transform="rotate(180 192 256)"
+                fill="currentColor"
+                stroke="#FFD700"
+                strokeWidth="25"
+              />
+            </svg>
             Giọt Máu Vàng
           </div>
         </div>
@@ -56,63 +67,67 @@ const LoginRegister = () => {
             </button>
           </div>
 
-          {/* Form Container */}
-          <div className="relative" style={{ minHeight: '350px' }}>
-            {/* Login Form */}
-            <div 
-              className={`absolute w-full transition-all duration-300 ease-in-out ${
-                isLogin ? 'opacity-100' : 'opacity-0 -translate-x-4'
-              }`}
-            >
-              <form className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="login_email" className="text-deep-gray">Email</Label>
-                  <Input id="login_email" type="email" placeholder="Enter your email" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="login_password" className="text-deep-gray">Password</Label>
-                  <Input id="login_password" type="password" placeholder="Enter your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <div className="text-right">
-                  <a href="#" className="text-supportive-blue hover:text-compassion-red transition-colors text-body">
-                    Forgot password?
-                  </a>
-                </div>
-                <Button type="submit" className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105">
-                  Sign In
-                </Button>
-              </form>
+          {/* Form */}
+          <form className="space-y-4">
+            {!isLogin && (
+              <div className="space-y-2">
+                <Label htmlFor="fullName" className="text-deep-gray">Full Name</Label>
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder="Enter your full name"
+                  className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
+                />
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-deep-gray">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
+              />
             </div>
-            
-            {/* Register Form */}
-            <div 
-              className={`absolute w-full transition-all duration-300 ease-in-out ${
-                !isLogin ? 'opacity-100' : 'opacity-0 translate-x-4'
-              }`}
-            >
-              <form className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="fullName" className="text-deep-gray">Full Name</Label>
-                  <Input id="fullName" type="text" placeholder="Enter your full name" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="register_email" className="text-deep-gray">Email</Label>
-                  <Input id="register_email" type="email" placeholder="Enter your email" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="register_password" className="text-deep-gray">Password</Label>
-                  <Input id="register_password" type="password" placeholder="Enter your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-deep-gray">Confirm Password</Label>
-                  <Input id="confirmPassword" type="password" placeholder="Confirm your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
-                </div>
-                <Button type="submit" className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105">
-                  Create Account
-                </Button>
-              </form>
+
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-deep-gray">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
+              />
             </div>
-          </div>
+
+            {!isLogin && (
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword" className="text-deep-gray">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Confirm your password"
+                  className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
+                />
+              </div>
+            )}
+
+            {isLogin && (
+              <div className="text-right">
+                <a href="#" className="text-supportive-blue hover:text-compassion-red transition-colors text-body">
+                  Forgot password?
+                </a>
+              </div>
+            )}
+
+            <Button 
+              type="submit"
+              className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105"
+            >
+              {isLogin ? 'Sign In' : 'Create Account'}
+            </Button>
+          </form>
 
           {/* Additional Options */}
           <div className="mt-6 text-center">
