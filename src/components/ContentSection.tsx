@@ -53,6 +53,20 @@ const ContentSection = () => {
       author: "Linh Tran",
       role: "Grateful Parent",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b830?q=80&w=100&h=100&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      id: 3,
+      quote: "The process was seamless and the staff were incredibly professional. It felt great to contribute.",
+      author: "An Pham",
+      role: "First-time Donor",
+      avatar: "https://images.unsplash.com/photo-1531123414780-f74242c2b052?q=80&w=100&h=100&auto=format&fit=crop"
+    },
+    {
+      id: 4,
+      quote: "A single donation can save up to three lives. It’s a simple act with a profound impact. I encourage everyone to participate.",
+      author: "Dr. Hoang",
+      role: "Medical Advisor",
+      avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=100&h=100&auto=format&fit=crop"
     }
   ];
 
@@ -72,8 +86,6 @@ const ContentSection = () => {
           {/* News Column */}
           <div className="content-section-col">
             <div className="content-section-card">
-              {/* ...existing code for first news article... */}
-              {/* Use newsArticles[0] */}
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -105,8 +117,6 @@ const ContentSection = () => {
               </div>
             </div>
             <div className="content-section-card">
-              {/* ...existing code for second news article... */}
-              {/* Use newsArticles[1] */}
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -148,8 +158,6 @@ const ContentSection = () => {
           {/* Events Column */}
           <div className="content-section-col">
             <div className="content-section-card">
-              {/* ...existing code for first event... */}
-              {/* Use events[0] */}
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -182,8 +190,6 @@ const ContentSection = () => {
               </div>
             </div>
             <div className="content-section-card">
-              {/* ...existing code for second event... */}
-              {/* Use events[1] */}
               <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                 <div className="relative overflow-hidden">
                   <img 
@@ -225,54 +231,30 @@ const ContentSection = () => {
 
           {/* Testimonials Column */}
           <div className="content-section-col">
-            <div className="content-section-card">
-              {/* ...existing code for first testimonial... */}
-              {/* Use testimonials[0] */}
-              <div className="thought-cloud">
-                <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
-                  "{testimonials[0].quote}"
-                </p>
-                <div className="flex items-center">
-                  <img 
-                    src={testimonials[0].avatar} 
-                    alt={testimonials[0].author}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <div className="text-body text-deep-gray font-medium">
-                      {testimonials[0].author}
-                    </div>
-                    <div className="text-caption text-gentle-gray">
-                      {testimonials[0].role}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="content-section-card">
-              {/* ...existing code for second testimonial... */}
-              {/* Use testimonials[1] */}
-              <div className="thought-cloud">
-                <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
-                  "{testimonials[1].quote}"
-                </p>
-                <div className="flex items-center">
-                  <img 
-                    src={testimonials[1].avatar} 
-                    alt={testimonials[1].author}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <div className="text-body text-deep-gray font-medium">
-                      {testimonials[1].author}
-                    </div>
-                    <div className="text-caption text-gentle-gray">
-                      {testimonials[1].role}
+            {testimonials.map((testimonial) => (
+              <div className="content-section-card" key={testimonial.id}>
+                <div className="thought-cloud">
+                  <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
+                    "{testimonial.quote}"
+                  </p>
+                  <div className="flex items-center">
+                    <img 
+                      src={testimonial.avatar} 
+                      alt={testimonial.author}
+                      className="w-12 h-12 rounded-full object-cover mr-4"
+                    />
+                    <div>
+                      <div className="text-body text-deep-gray font-medium">
+                        {testimonial.author}
+                      </div>
+                      <div className="text-caption text-gentle-gray">
+                        {testimonial.role}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
             <Button 
               variant="outline" 
               className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
