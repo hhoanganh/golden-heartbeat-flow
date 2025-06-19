@@ -17,7 +17,7 @@ const HeroSection = () => {
 
       {/* Content Container */}
       {/* This is now a flex container that left-aligns content on desktop */}
-      <div className="relative z-10 h-full flex items-center justify-center text-center lg:justify-start lg:text-left px-3 md:px-5 lg:px-10">
+      <div className="relative z-10 h-full flex items-end justify-center text-center lg:justify-start lg:text-left px-3 md:px-5 lg:px-10 pb-20 md:pb-24">
         <div className="max-w-4xl mx-auto lg:mx-0">
           <div className="lg:w-8/12 xl:w-7/12">
             {/* Main Headline - Font size is now responsive */}
