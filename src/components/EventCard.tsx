@@ -88,7 +88,7 @@ const EventCard = ({ event }: EventCardProps) => {
         <div className="mb-4">
           <div className="flex items-center justify-between text-caption text-gentle-gray mb-1">
             <span>{isFull ? 'Registration Full' : 'Registration Progress'}</span>
-            <span>{isFull ? 'Full' : `${event.registered}/${event.capacity}`}</span>
+            <span>{event.registered}/{event.capacity}</span>
           </div>
           <div className="w-full bg-warm-gray rounded-full h-2">
             {/* Conditional progress bar color */}
