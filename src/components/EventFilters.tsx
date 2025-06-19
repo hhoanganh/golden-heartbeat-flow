@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input'; // Keep Input import as it might be used elsewhere or future-proof
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -11,22 +10,15 @@ interface EventFiltersProps {
 }
 
 const EventFilters = ({ events, onFilterChange }: EventFiltersProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCity, setSelectedCity] = useState('Ho Chi Minh City'); // Initialize with the only city
   const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedType, setSelectedType] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+
+  const cities = ['Ho Chi Minh City']; // Only one city for now
 
   const districts = [
     'District 1', 'District 2', 'District 3', 'District 4', 'District 5',
     'District 7', 'Binh Thanh District', 'Thu Duc City'
-  ];
-
-  const eventTypes = [
-    { value: 'drive', label: 'Blood Drive' },
-    { value: 'campaign', label: 'Campaign' },
-    { value: 'corporate', label: 'Corporate Event' },
-    { value: 'health-fair', label: 'Health Fair' },
-    { value: 'emergency', label: 'Emergency Drive' }
   ];
 
   const dateFilters = [
@@ -40,13 +32,11 @@ const EventFilters = ({ events, onFilterChange }: EventFiltersProps) => {
   useEffect(() => {
     let filtered = events;
 
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(event =>
-        event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    // Filter by City (always Ho Chi Minh City for now, so effectively no filter needed unless events data changes)
+    if (selectedCity) {
+      // Assuming all events provided are already in Ho Chi Minh City
+      // If not, you would filter based on event.city property:
+      // filtered = filtered.filter(event => event.city === selectedCity);
     }
 
     // Filter by district
@@ -56,42 +46,68 @@ const EventFilters = ({ events, onFilterChange }: EventFiltersProps) => {
       );
     }
 
-    // Filter by type
-    if (selectedType) {
-      filtered = filtered.filter(event => event.type === selectedType);
+    // Filter by date (logic for 'today', 'this-week', etc. would be implemented here)
+    if (selectedDate) {
+      const today = new Date();
+      filtered = filtered.filter(event => {
+        const eventDate = new Date(event.date); // Assuming event.date is in a format parseable by Date
+
+        switch (selectedDate) {
+          case 'today':
+            return eventDate.toDateString() === today.toDateString();
+          case 'this-week':
+            // Simple week check (Sunday to Saturday)
+            const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+            const lastDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+            return eventDate >= firstDayOfWeek && eventDate <= lastDayOfWeek;
+          case 'this-month':
+            return eventDate.getMonth() === today.getMonth() && eventDate.getFullYear() === today.getFullYear();
+          case 'next-month':
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+            const endOfNextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+            return eventDate >= nextMonth && eventDate <= endOfNextMonth;
+          default:
+            return true; // No date filter applied
+        }
+      });
     }
 
     onFilterChange(filtered);
-  }, [searchTerm, selectedDistrict, selectedType, selectedDate, events, onFilterChange]);
+  }, [selectedCity, selectedDistrict, selectedDate, events, onFilterChange]);
 
   const clearFilters = () => {
-    setSearchTerm('');
     setSelectedDistrict('');
-    setSelectedType('');
     setSelectedDate('');
+    // selectedCity remains 'Ho Chi Minh City' as it's the only option
   };
 
   return (
     <Card className="bg-white shadow-md-custom rounded-md-custom">
       <CardContent className="p-6">
         <div className="space-y-6">
-          {/* Search Input */}
-          <div>
-            <Label htmlFor="search" className="text-deep-gray font-medium mb-2 block">
-              Search Events
-            </Label>
-            <Input
-              id="search"
-              type="text"
-              placeholder="Search by name, location, or description..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
-            />
-          </div>
-
           {/* Filter Controls */}
+          {/* Changed grid layout to accommodate the new City filter */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* City Filter */}
+            <div>
+              <Label htmlFor="city-filter" className="text-deep-gray font-medium mb-2 block">
+                City
+              </Label>
+              <select
+                id="city-filter"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)} // Although only one option, keep for consistency
+                className="w-full px-3 py-2 border border-warm-gray/50 rounded-md-custom focus:border-supportive-blue focus:outline-none text-body"
+                disabled // Disable as there's only one option
+              >
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* District Filter */}
             <div>
               <Label htmlFor="district" className="text-deep-gray font-medium mb-2 block">
@@ -107,26 +123,6 @@ const EventFilters = ({ events, onFilterChange }: EventFiltersProps) => {
                 {districts.map((district) => (
                   <option key={district} value={district}>
                     {district}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Event Type Filter */}
-            <div>
-              <Label htmlFor="event-type" className="text-deep-gray font-medium mb-2 block">
-                Event Type
-              </Label>
-              <select
-                id="event-type"
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full px-3 py-2 border border-warm-gray/50 rounded-md-custom focus:border-supportive-blue focus:outline-none text-body"
-              >
-                <option value="">All Types</option>
-                {eventTypes.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
                   </option>
                 ))}
               </select>
