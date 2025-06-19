@@ -104,11 +104,6 @@ const EventCard = ({ event }: EventCardProps) => {
               Only {availableSpots} spots remaining!
             </p>
           )}
-          {isFull && ( // Show full message if capacity reached
-            <p className="text-caption text-error-red mt-1">
-              This event is fully booked.
-            </p>
-          )}
         </div>
 
         {/* Action Buttons */}
