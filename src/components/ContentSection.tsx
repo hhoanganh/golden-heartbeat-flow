@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import './ContentSectionGrid.css';
 
 const ContentSection = () => {
@@ -164,12 +165,14 @@ const ContentSection = () => {
                 </div>
               ))}
             </div>
-            <Button
-              variant="outline"
-              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
-            >
-              Explore All Events
-            </Button>
+            <Link to="/events">
+              <Button
+                variant="outline"
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 w-full"
+              >
+                Explore All Events
+              </Button>
+            </Link>
           </div>
 
           {/* Testimonials Column */}

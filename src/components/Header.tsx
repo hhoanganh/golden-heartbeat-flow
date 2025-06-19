@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -32,14 +33,14 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+            <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Home
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </a>
-            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+            </Link>
+            <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Find Events
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </a>
+            </Link>
             <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               FAQs
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -79,8 +80,8 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-warm-gray/30 shadow-md-custom">
             <nav className="flex flex-col space-y-4 p-4">
-              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</a>
-              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</a>
+              <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</Link>
+              <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</Link>
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</a>
               <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
               <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
