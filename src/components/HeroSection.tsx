@@ -9,8 +9,8 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?q=80&w=3648&h=5472&auto=format&fit=crop')`
-        }}
+          backgroundImage: `url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1583&auto=format&fit=crop')`
+        }} 
       >
         {/* Organic Overlay */}
         <div className="absolute inset-0 organic-overlay opacity-90"></div>
