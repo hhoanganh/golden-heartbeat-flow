@@ -57,21 +57,23 @@ const BloodDemandSection = () => {
         {/* Blood Type Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
           {bloodTypes.map((blood, index) => (
+            // AFTER (The corrected code)
             <div
               key={blood.type}
-              className="relative aspect-square transition-all duration-300 hover:scale-105 bg-error-red/20"
+              className="relative aspect-square transition-all duration-300 hover:scale-105"
               style={{
                 animationDelay: `${index * 0.1}s`
               }}
             >
-              {/* Blood Drop SVG Background */}
-              <svg
-                viewBox="0 0 384 512"
-                className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
+              <svg 
+                viewBox="0 0 384 512" 
+                className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
+                style={{ transform: 'rotate(180deg)' }}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"/>
+                <path d="M192 0C298 126.9 384 248.7 384 320c0 71.3-86 193.1-192 320S0 391.3 0 320c0-71.3 86-193.1 192-320z"/>
               </svg>
+
 
               {/* Pulse effect for urgent cases */}
               {blood.demand === 'urgent' && (
