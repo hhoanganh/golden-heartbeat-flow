@@ -1,210 +1,167 @@
-import React, { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import EventFilters from '@/components/EventFilters';
-import EventCard from '@/components/EventCard';
-// Removed BloodDemandSnapshot import
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input'; // Keep Input import as it might be used elsewhere or future-proof
+import { Label } from '@/components/ui/label';
+import { Card, CardContent } from '@/components/ui/card';
 
-const Events = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filteredEvents, setFilteredEvents] = useState([]);
+interface EventFiltersProps {
+  events: any[];
+  onFilterChange: (filteredEvents: any[]) => void;
+}
 
-  // Sample events data
-  const events = [
-    {
-      id: 1,
-      title: "Weekend Blood Drive - District 3",
-      date: "Dec 28, 2024",
-      time: "8:00 AM - 5:00 PM",
-      location: "Tao Dan Park, District 3",
-      address: "123 Nguyen Du Street, District 3, Ho Chi Minh City",
-      description: "Join us for our weekend blood drive at beautiful Tao Dan Park. Professional medical staff will be on-site to ensure a safe and comfortable donation experience.",
-      image: "https://images.unsplash.com/photo-1652149590094-98093f08509f?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["O-", "AB+"],
-      capacity: 150,
-      registered: 87,
-      type: "drive"
-    },
-    {
-      id: 2,
-      title: "New Year Hope Campaign",
-      date: "Jan 2, 2025",
-      time: "9:00 AM - 6:00 PM",
-      location: "Nguyen Hue Walking Street",
-      address: "Nguyen Hue Walking Street, District 1, Ho Chi Minh City",
-      description: "Start the new year by giving the gift of life. Our New Year Hope Campaign aims to collect 200 units to help patients in need during the holiday season.",
-      image: "https://images.unsplash.com/photo-1642697552227-ca21f326fe41?q=80&w=1562&auto=format&fit=crop",
-      urgentNeeds: ["A+", "O+"],
-      capacity: 200,
-      registered: 156,
-      type: "campaign"
-    },
-    {
-      id: 3,
-      title: "University Blood Drive - HCMUS",
-      date: "Jan 5, 2025",
-      time: "10:00 AM - 4:00 PM",
-      location: "Ho Chi Minh City University of Science",
-      address: "227 Nguyen Van Cu Street, District 5, Ho Chi Minh City",
-      description: "Student-organized blood drive focusing on first-time donors. Educational sessions about blood donation will be available throughout the day.",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["B+", "AB-"],
-      capacity: 100,
-      registered: 45,
-      type: "drive"
-    },
-    {
-      id: 4,
-      title: "Corporate Partnership Drive",
-      date: "Jan 8, 2025",
-      time: "8:00 AM - 3:00 PM",
-      location: "Landmark 81 Tower",
-      address: "720A Dien Bien Phu Street, Binh Thanh District, Ho Chi Minh City",
-      description: "Special corporate event partnering with major companies in the financial district. Easy access and convenient scheduling for busy professionals.",
-      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["O-", "A-"],
-      capacity: 120,
-      registered: 89,
-      type: "corporate"
-    },
-    {
-      id: 5,
-      title: "Community Health Fair",
-      date: "Jan 12, 2025",
-      time: "7:00 AM - 6:00 PM",
-      location: "District 7 Cultural Center",
-      address: "456 Nguyen Thi Thap Street, District 7, Ho Chi Minh City",
-      description: "Combined health fair and blood drive offering free health screenings, wellness education, and blood donation opportunities for the whole family.",
-      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["B-", "AB+"],
-      capacity: 180,
-      registered: 134,
-      type: "health-fair"
-    },
-    {
-      id: 6,
-      title: "Emergency Response Drive",
-      date: "Jan 15, 2025",
-      time: "6:00 AM - 8:00 PM",
-      location: "Cho Ray Hospital",
-      address: "201B Nguyen Chi Thanh Street, District 5, Ho Chi Minh City",
-      description: "Urgent blood collection drive in response to increased hospital demand. All blood types needed, with special focus on rare types.",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["O-", "AB-", "B-"],
-      capacity: 250,
-      registered: 198,
-      type: "emergency"
-    }
+const EventFilters = ({ events, onFilterChange }: EventFiltersProps) => {
+  const [selectedCity, setSelectedCity] = useState('Ho Chi Minh City'); // Initialize with the only city
+  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const cities = ['Ho Chi Minh City']; // Only one city for now
+
+  const districts = [
+    'District 1', 'District 2', 'District 3', 'District 4', 'District 5',
+    'District 7', 'Binh Thanh District', 'Thu Duc City'
   ];
 
-  const eventsPerPage = 6;
-  const totalPages = Math.ceil(events.length / eventsPerPage);
-  const startIndex = (currentPage - 1) * eventsPerPage;
-  const currentEvents = events.slice(startIndex, startIndex + eventsPerPage);
+  const dateFilters = [
+    { value: '', label: 'All Dates' },
+    { value: 'today', label: 'Today' },
+    { value: 'this-week', label: 'This Week' },
+    { value: 'this-month', label: 'This Month' },
+    { value: 'next-month', label: 'Next Month' }
+  ];
+
+  useEffect(() => {
+    let filtered = events;
+
+    // Filter by City (always Ho Chi Minh City for now, so effectively no filter needed unless events data changes)
+    if (selectedCity) {
+      // Assuming all events provided are already in Ho Chi Minh City
+      // If not, you would filter based on event.city property:
+      // filtered = filtered.filter(event => event.city === selectedCity);
+    }
+
+    // Filter by district
+    if (selectedDistrict) {
+      filtered = filtered.filter(event =>
+        event.address.includes(selectedDistrict)
+      );
+    }
+
+    // Filter by date (logic for 'today', 'this-week', etc. would be implemented here)
+    if (selectedDate) {
+      const today = new Date();
+      filtered = filtered.filter(event => {
+        const eventDate = new Date(event.date); // Assuming event.date is in a format parseable by Date
+
+        switch (selectedDate) {
+          case 'today':
+            return eventDate.toDateString() === today.toDateString();
+          case 'this-week':
+            // Simple week check (Sunday to Saturday)
+            const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+            const lastDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+            return eventDate >= firstDayOfWeek && eventDate <= lastDayOfWeek;
+          case 'this-month':
+            return eventDate.getMonth() === today.getMonth() && eventDate.getFullYear() === today.getFullYear();
+          case 'next-month':
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+            const endOfNextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+            return eventDate >= nextMonth && eventDate <= endOfNextMonth;
+          default:
+            return true; // No date filter applied
+        }
+      });
+    }
+
+    onFilterChange(filtered);
+  }, [selectedCity, selectedDistrict, selectedDate, events, onFilterChange]);
+
+  const clearFilters = () => {
+    setSelectedDistrict('');
+    setSelectedDate('');
+    // selectedCity remains 'Ho Chi Minh City' as it's the only option
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-l">
-        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
-          <div className="text-center">
-            <h1 className="text-display text-deep-gray font-bold mb-4">
-              Find Blood Donation Events
-            </h1>
-            <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
-              Discover upcoming blood drives, donation centers, and community events near you. 
-              Every donation saves lives and strengthens our community.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
-        
-        {/* Filters and Map Section */}
-        <div className="mb-xl">
-          <EventFilters events={events} onFilterChange={setFilteredEvents} />
-          
-          {/* Interactive Map Placeholder */}
-          <div className="mt-l">
-            <div className="bg-warm-gray rounded-md-custom h-64 md:h-80 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-heading-2 text-gentle-gray mb-2">🗺️</div>
-                <p className="text-body text-gentle-gray">Interactive Map</p>
-                <p className="text-caption text-gentle-gray">Donation centers and event locations</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Removed Blood Demand Snapshot component */}
-
-        {/* Event Listings */}
-        <section>
-          <div className="flex items-center justify-between mb-l">
-            <h2 className="text-heading-2 text-deep-gray font-semibold">
-              Upcoming Events
-            </h2>
-            <div className="text-body text-gentle-gray">
-              Showing {startIndex + 1}-{Math.min(startIndex + eventsPerPage, events.length)} of {events.length} events
-            </div>
-          </div>
-
-          {/* Event Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-l mb-xl">
-            {currentEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center space-x-4">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white"
+    <Card className="bg-white shadow-md-custom rounded-md-custom">
+      <CardContent className="p-6">
+        <div className="space-y-6">
+          {/* Filter Controls */}
+          {/* Changed grid layout to accommodate the new City filter */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* City Filter */}
+            <div>
+              <Label htmlFor="city-filter" className="text-deep-gray font-medium mb-2 block">
+                City
+              </Label>
+              <select
+                id="city-filter"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)} // Although only one option, keep for consistency
+                className="w-full px-3 py-2 border border-warm-gray/50 rounded-md-custom focus:border-supportive-blue focus:outline-none text-body"
+                disabled // Disable as there's only one option
               >
-                Previous
-              </Button>
-              
-              <div className="flex space-x-2">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <Button
-                    key={page}
-                    variant={page === currentPage ? "default" : "outline"}
-                    onClick={() => setCurrentPage(page)}
-                    className={page === currentPage 
-                      ? "bg-compassion-red hover:bg-compassion-red/90 text-white" 
-                      : "border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white"
-                    }
-                  >
-                    {page}
-                  </Button>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
                 ))}
-              </div>
-              
-              <Button
-                variant="outline"
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white"
-              >
-                Next
-              </Button>
+              </select>
             </div>
-          )}
-        </section>
-      </div>
 
-      <Footer />
-    </div>
+            {/* District Filter */}
+            <div>
+              <Label htmlFor="district" className="text-deep-gray font-medium mb-2 block">
+                District
+              </Label>
+              <select
+                id="district"
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                className="w-full px-3 py-2 border border-warm-gray/50 rounded-md-custom focus:border-supportive-blue focus:outline-none text-body"
+              >
+                <option value="">All Districts</option>
+                {districts.map((district) => (
+                  <option key={district} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Date Filter */}
+            <div>
+              <Label htmlFor="date-filter" className="text-deep-gray font-medium mb-2 block">
+                When
+              </Label>
+              <select
+                id="date-filter"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="w-full px-3 py-2 border border-warm-gray/50 rounded-md-custom focus:border-supportive-blue focus:outline-none text-body"
+              >
+                {dateFilters.map((filter) => (
+                  <option key={filter.value} value={filter.value}>
+                    {filter.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Clear Filters Button */}
+          <div className="flex justify-end">
+            <Button
+              variant="outline"
+              onClick={clearFilters}
+              className="border-gentle-gray text-gentle-gray hover:bg-gentle-gray hover:text-white"
+            >
+              Clear All Filters
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
-export default Events;
+export default EventFilters;
