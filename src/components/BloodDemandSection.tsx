@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const BloodDemandSection = () => {
@@ -28,10 +27,11 @@ const BloodDemandSection = () => {
     }
   };
 
+  // This function is no longer needed but kept in case you want to use it elsewhere
   const getStatusColor = (color: string) => {
     switch (color) {
       case 'error-red':
-        return 'text-white font-semibold'; // Changed to white for high contrast and made it bolder
+        return 'text-white font-semibold';
       case 'warning-yellow':
         return 'text-warning-yellow';
       case 'success-green':
@@ -57,7 +57,6 @@ const BloodDemandSection = () => {
         {/* Blood Type Grid */}
         <div className="grid grid-cols-4 gap-4 md:gap-8 max-w-2xl mx-auto">
           {bloodTypes.map((blood, index) => (
-            // AFTER (The corrected code)
             <div
               key={blood.type}
               className="relative aspect-square transition-all duration-300 hover:scale-105"
@@ -66,41 +65,37 @@ const BloodDemandSection = () => {
               }}
             >
               <svg
-              viewBox="0 0 384 512"
-              className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
-                transform="rotate(180 192 256)"
-              />
-            </svg>
-
-
-              {/* Pulse effect for urgent cases */}
-              {blood.demand === 'urgent' && (
-                <svg 
-                viewBox="0 0 384 512" 
-                className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
+                viewBox="0 0 384 512"
+                className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path 
+                <path
                   d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
                   transform="rotate(180 192 256)"
                 />
               </svg>
+
+              {/* Pulse effect for urgent cases */}
+              {blood.demand === 'urgent' && (
+                <svg 
+                  viewBox="0 0 384 512" 
+                  className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path 
+                    d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
+                    transform="rotate(180 192 256)"
+                  />
+                </svg>
               )}
               
               {/* Content positioned over the SVG */}
-              <div className="relative z-10 h-full flex flex-col items-center justify-center">
-                <div className="text-heading-3 font-medium text-deep-gray mb-2">
+              <div className="relative z-10 h-full flex flex-col items-center justify-center space-y-1">
+                <div className="text-2xl md:text-heading-3 font-medium text-deep-gray">
                   {blood.type}
                 </div>
-                <div className="text-2xl mb-2">
+                <div className="text-xl md:text-2xl">
                   {getStatusIcon(blood.demand)}
-                </div>
-                <div className={`text-caption font-medium ${getStatusColor(blood.color)}`}>
-                  {blood.status}
                 </div>
               </div>
             </div>
