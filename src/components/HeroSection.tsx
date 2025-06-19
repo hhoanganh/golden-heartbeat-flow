@@ -7,7 +7,7 @@ return (
           backgroundImage: `url('https://images.unsplash.com/photo-1659718282962-452648b6eba6?q=80&w=1170&auto=format&fit=crop')`
         }} 
       >
-        {/* This adds a dark overlay gradient to ensure text is always readable */}
+        {/* This adds a dark overlay gradient to ensure text is readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
 
