@@ -67,7 +67,7 @@ const BloodDemandSection = () => {
             >
               <svg
               viewBox="0 0 384 512"
-              className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
+              className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -80,12 +80,15 @@ const BloodDemandSection = () => {
               {/* Pulse effect for urgent cases */}
               {blood.demand === 'urgent' && (
                 <svg 
-                  viewBox="0 0 384 512" 
-                  className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"/>
-                </svg>
+                viewBox="0 0 384 512" 
+                className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path 
+                  d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
+                  transform="rotate(180 192 256)"
+                />
+              </svg>
               )}
               
               {/* Content positioned over the SVG */}
