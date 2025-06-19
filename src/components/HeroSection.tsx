@@ -15,11 +15,10 @@ const HeroSection = () => {
       </div>
 
       {/* Content Container */}
-      {/* This container pushes a single content block to the bottom and handles side padding */}
-      <div className="relative z-10 h-full flex flex-col justify-end items-center text-center lg:items-start lg:text-left p-3 md:p-5 lg:p-10">
+      <div className="relative z-10 h-full flex flex-col justify-end items-center text-center lg:items-start lg:text-left">
         
-        {/* This inner block controls the content's max-width and bottom padding */}
-        <div className="w-full max-w-7xl pb-10 md:pb-14">
+        {/* This inner block now has NO bottom padding */}
+        <div className="w-full max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
           <div className="lg:w-8/12 xl:w-7/12">
             
             <h1 className="text-4xl md:text-display text-white font-bold mb-6 leading-tight">
@@ -30,7 +29,9 @@ const HeroSection = () => {
               Giọt Máu Vàng weaves compassion into action, connecting every vital drop to those who need it most, seamlessly.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+            {/* CTA Buttons */}
+            {/* We add a margin-bottom here to give some space from the absolute bottom */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start mb-12">
               <Button 
                 size="lg" 
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom shadow-md-custom px-l py-4 text-body-large font-medium animate-pulse-soft hover:scale-105 transition-all duration-300"
