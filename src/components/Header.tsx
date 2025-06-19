@@ -12,19 +12,22 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="text-xl md:text-heading-2 font-bold text-compassion-red flex items-center">
-              {/* New Blood Drop SVG Logo */}
-              <svg
-                className="w-8 h-8 mr-2 fill-current"
-                viewBox="0 0 384 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
-                  transform="rotate(180 192 256)"
-                />
-              </svg>
-              Giọt Máu Vàng
-            </Link>
+            {/* New Blood Drop SVG Logo with a FITTED Gold Border */}
+            <svg
+              className="w-8 h-8 mr-2"
+              viewBox="0 0 384 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
+                transform="rotate(180 192 256)"
+                fill="#E23E57"
+                stroke="#FFD700"
+                strokeWidth="25"
+              />
+            </svg>
+            Giọt Máu Vàng
+          </Link>
           </div>
 
           {/* Desktop Navigation */}
