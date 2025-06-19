@@ -12,13 +12,14 @@ const HeroSection = () => {
         }} 
       >
         {/* This adds a dark overlay gradient to ensure text is always readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
 
       {/* Content Container */}
-      {/* This is now a flex container that left-aligns content on desktop */}
-      <div className="relative z-10 h-full flex items-end justify-center text-center lg:justify-start lg:text-left px-3 md:px-5 lg:px-10 pb-20 md:pb-24">
-        <div className="max-w-4xl mx-auto lg:mx-0">
+      {/* The main container no longer has vertical padding */}
+      <div className="relative z-10 h-full flex items-end justify-center text-center lg:justify-start lg:text-left">
+        {/* The inner container now controls its own padding */}
+        <div className="w-full max-w-7xl mx-auto px-3 md:px-5 lg:px-10 pb-20 md:pb-24">
           <div className="lg:w-8/12 xl:w-7/12">
             {/* Main Headline - Font size is now responsive */}
             <h1 className="text-4xl md:text-display text-white font-bold mb-6 leading-tight">
