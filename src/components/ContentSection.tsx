@@ -151,7 +151,7 @@ const ContentSection = () => {
             </div>
             <Button 
               variant="outline" 
-              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 mt-auto"
+              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
             >
               Dive Deeper into News
             </Button>
@@ -227,7 +227,7 @@ const ContentSection = () => {
             </div>
             <Button 
               variant="outline" 
-              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 mt-auto"
+              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
             >
               Explore All Events
             </Button>
