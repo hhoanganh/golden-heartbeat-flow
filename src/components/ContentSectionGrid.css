@@ -1,9 +1,8 @@
 .content-section-3col {
   display: flex;
   gap: 2rem;
-  /* This is the key change: We use align-items: start to prevent columns from stretching in an undesirable way. */
-  /* We will enforce the grid alignment within each column instead. */
-  align-items: start;
+  /* This is the corrected line. It MUST be 'stretch' to make the columns equal height. */
+  align-items: stretch;
 }
 
 .content-section-col {
@@ -16,19 +15,13 @@
 
 .content-section-card-group {
   flex-grow: 1;
-  
-  /* Use CSS Grid for the card groups */
   display: grid;
   gap: 1.5rem;
-  
-  /* This is the magic property. It forces all direct children (the cards) to have the same height. */
+  /* This forces all direct children (the cards) to have the same height within the stretched group. */
   grid-auto-rows: 1fr;
 }
 
-/*
-  This targets the actual visible card element inside the wrappers
-  and makes sure it fills its grid cell and can align its own content.
-*/
+/* This targets the actual visible card element and makes it fill its grid cell. */
 .content-section-card > .group, 
 .content-section-card > .thought-cloud {
   height: 100%;
@@ -36,10 +29,7 @@
   flex-direction: column;
 }
 
-/*
-  This targets the content area (the div with padding) inside the card
-  and makes it grow to push the button down.
-*/
+/* This targets the content area within the card to make it grow. */
 .content-section-card > .group > .p-6 {
   flex-grow: 1;
   display: flex;
