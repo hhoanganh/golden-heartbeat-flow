@@ -166,7 +166,7 @@ const ContentSection = () => {
                     <img 
                       src={events[0].image} 
                       alt={events[0].title}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 right-4">
                       <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
@@ -198,7 +198,7 @@ const ContentSection = () => {
                     <img 
                       src={events[1].image} 
                       alt={events[1].title}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 right-4">
                       <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
