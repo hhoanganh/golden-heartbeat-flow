@@ -59,7 +59,7 @@ const BloodDemandSection = () => {
           {bloodTypes.map((blood, index) => (
             <div 
               key={blood.type}
-              className={`blood-cell relative ${index % 2 === 0 ? 'lg:mt-4' : 'lg:-mt-4'}`}
+              className={`blood-cell relative`}
               style={{
                 animationDelay: `${index * 0.1}s`
               }}
