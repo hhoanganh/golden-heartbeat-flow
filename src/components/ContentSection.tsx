@@ -73,7 +73,6 @@ const ContentSection = () => {
   return (
     <section className="py-xl bg-white">
       <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
-        {/* Section Title */}
         <div className="text-center mb-xl">
           <h2 className="text-heading-2 text-deep-gray font-semibold mb-4">
             Where Every Drop Makes a Story
@@ -81,73 +80,43 @@ const ContentSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-compassion-red to-supportive-blue mx-auto rounded-full"></div>
         </div>
 
-        {/* 3 Columns Layout */}
         <div className="content-section-3col">
           {/* News Column */}
           <div className="content-section-col">
             <div className="content-section-card-group">
-              <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={newsArticles[0].image}
-                      alt={newsArticles[0].title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-compassion-red text-white px-3 py-1 rounded-full text-caption font-medium">
-                        {newsArticles[0].type === 'news' ? 'News' : 'Impact Story'}
-                      </span>
+              {newsArticles.map((article) => (
+                <div className="content-section-card" key={article.id}>
+                  <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                    <div className="p-6">
+                      <div className="relative overflow-hidden mb-4">
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-compassion-red text-white px-3 py-1 rounded-full text-caption font-medium">
+                            {article.type === 'news' ? 'News' : 'Impact Story'}
+                          </span>
+                        </div>
+                      </div>
+                      <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-body text-gentle-gray mb-4 line-clamp-3">
+                        {article.snippet}
+                      </p>
+                      <Button
+                        variant="ghost"
+                        className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
+                      >
+                        Read More
+                        <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
+                      </Button>
                     </div>
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
-                      {newsArticles[0].title}
-                    </h3>
-                    <p className="text-body text-gentle-gray mb-4 line-clamp-3">
-                      {newsArticles[0].snippet}
-                    </p>
-                    <Button
-                      variant="ghost"
-                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
-                    >
-                      Read More
-                      <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
-                    </Button>
-                  </div>
                 </div>
-              </div>
-              <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={newsArticles[1].image}
-                      alt={newsArticles[1].title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-compassion-red text-white px-3 py-1 rounded-full text-caption font-medium">
-                        {newsArticles[1].type === 'news' ? 'News' : 'Impact Story'}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
-                      {newsArticles[1].title}
-                    </h3>
-                    <p className="text-body text-gentle-gray mb-4 line-clamp-3">
-                      {newsArticles[1].snippet}
-                    </p>
-                    <Button
-                      variant="ghost"
-                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
-                    >
-                      Read More
-                      <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
             <Button
               variant="outline"
@@ -160,70 +129,40 @@ const ContentSection = () => {
           {/* Events Column */}
           <div className="content-section-col">
             <div className="content-section-card-group">
-              <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={events[0].image}
-                      alt={events[0].title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
-                        <div className="text-caption font-bold">{events[0].date.split(' ')[1]}</div>
-                        <div className="text-micro">{events[0].date.split(' ')[0]}</div>
+              {events.map((event) => (
+                <div className="content-section-card" key={event.id}>
+                  <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                    <div className="p-6">
+                      <div className="relative overflow-hidden mb-4">
+                        <img
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-4 right-4">
+                          <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
+                            <div className="text-caption font-bold">{event.date.split(' ')[1]}</div>
+                            <div className="text-micro">{event.date.split(' ')[0]}</div>
+                          </div>
+                        </div>
                       </div>
+                      <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
+                        {event.title}
+                      </h3>
+                      <div className="space-y-1 mb-4">
+                        <p className="text-body text-gentle-gray">📍 {event.location}</p>
+                        <p className="text-body text-gentle-gray">🕐 {event.time}</p>
+                      </div>
+                      <Button
+                        size="sm"
+                        className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
+                      >
+                        Register Now
+                      </Button>
                     </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
-                      {events[0].title}
-                    </h3>
-                    <div className="space-y-1 mb-4">
-                      <p className="text-body text-gentle-gray">📍 {events[0].location}</p>
-                      <p className="text-body text-gentle-gray">🕐 {events[0].time}</p>
-                    </div>
-                    <Button
-                      size="sm"
-                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
-                    >
-                      Register Now
-                    </Button>
                   </div>
                 </div>
-              </div>
-              <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={events[1].image}
-                      alt={events[1].title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
-                        <div className="text-caption font-bold">{events[1].date.split(' ')[1]}</div>
-                        <div className="text-micro">{events[1].date.split(' ')[0]}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
-                      {events[1].title}
-                    </h3>
-                    <div className="space-y-1 mb-4">
-                      <p className="text-body text-gentle-gray">📍 {events[1].location}</p>
-                      <p className="text-body text-gentle-gray">🕐 {events[1].time}</p>
-                    </div>
-                    <Button
-                      size="sm"
-                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
-                    >
-                      Register Now
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
             <Button
               variant="outline"
@@ -234,40 +173,40 @@ const ContentSection = () => {
           </div>
 
           {/* Testimonials Column */}
-        <div className="content-section-col">
-          <div className="content-section-card-group"> {/* <--- ADD THIS WRAPPER */}
-            {testimonials.map((testimonial) => (
-              <div className="content-section-card" key={testimonial.id}>
-                <div className="thought-cloud">
-                  <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="flex items-center">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.author}
-                      className="w-12 h-12 rounded-full object-cover mr-4"
-                    />
-                    <div>
-                      <div className="text-body text-deep-gray font-medium">
-                        {testimonial.author}
-                      </div>
-                      <div className="text-caption text-gentle-gray">
-                        {testimonial.role}
+          <div className="content-section-col">
+            <div className="content-section-card-group">
+              {testimonials.map((testimonial) => (
+                <div className="content-section-card" key={testimonial.id}>
+                  <div className="thought-cloud">
+                    <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center">
+                      <img 
+                        src={testimonial.avatar} 
+                        alt={testimonial.author}
+                        className="w-12 h-12 rounded-full object-cover mr-4"
+                      />
+                      <div>
+                        <div className="text-body text-deep-gray font-medium">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-caption text-gentle-gray">
+                          {testimonial.role}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div> {/* <--- AND CLOSE IT HERE */}
-          <Button 
-            variant="outline" 
-            className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
-          >
-            Share Your Story
-          </Button>
-        </div>
+              ))}
+            </div>
+            <Button 
+              variant="outline" 
+              className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
+            >
+              Share Your Story
+            </Button>
+          </div>
         </div>
       </div>
     </section>

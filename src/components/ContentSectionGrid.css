@@ -1,37 +1,52 @@
 .content-section-3col {
   display: flex;
   gap: 2rem;
-  justify-content: center;
-  align-items: stretch;
+  /* This is the key change: We use align-items: start to prevent columns from stretching in an undesirable way. */
+  /* We will enforce the grid alignment within each column instead. */
+  align-items: start;
 }
 
 .content-section-col {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;
+  flex: 1 1 0%;
   gap: 1.5rem;
   min-width: 0;
 }
 
-/* This new group will grow to fill the space */
 .content-section-card-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
   flex-grow: 1;
+  
+  /* Use CSS Grid for the card groups */
+  display: grid;
+  gap: 1.5rem;
+  
+  /* This is the magic property. It forces all direct children (the cards) to have the same height. */
+  grid-auto-rows: 1fr;
 }
 
-/* This ensures the cards inside the group are also full height */
-.content-section-card {
+/*
+  This targets the actual visible card element inside the wrappers
+  and makes sure it fills its grid cell and can align its own content.
+*/
+.content-section-card > .group, 
+.content-section-card > .thought-cloud {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.content-section-card-group .content-section-card {
-  flex: 1;
+/*
+  This targets the content area (the div with padding) inside the card
+  and makes it grow to push the button down.
+*/
+.content-section-card > .group > .p-6 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-
+/* Responsive styles */
 @media (max-width: 900px) {
   .content-section-3col {
     flex-direction: column;
