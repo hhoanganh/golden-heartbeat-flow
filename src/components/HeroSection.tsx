@@ -31,7 +31,7 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             {/* We add a margin-bottom here to give some space from the absolute bottom */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start mb-4">
               <Button 
                 size="lg" 
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom shadow-md-custom px-l py-4 text-body-large font-medium animate-pulse-soft hover:scale-105 transition-all duration-300"
