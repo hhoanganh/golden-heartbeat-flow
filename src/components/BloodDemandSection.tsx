@@ -31,7 +31,7 @@ const BloodDemandSection = () => {
   const getStatusColor = (color: string) => {
     switch (color) {
       case 'error-red':
-        return 'text-error-red';
+        return 'text-white font-semibold'; // Changed to white for high contrast and made it bolder
       case 'warning-yellow':
         return 'text-warning-yellow';
       case 'success-green':
@@ -67,7 +67,7 @@ const BloodDemandSection = () => {
             >
               <svg
               viewBox="0 0 384 512"
-              className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
+              className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -81,7 +81,7 @@ const BloodDemandSection = () => {
               {blood.demand === 'urgent' && (
                 <svg 
                 viewBox="0 0 384 512" 
-                className="absolute inset-0 w-full h-full text-white/20 fill-current animate-ping"
+                className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path 
