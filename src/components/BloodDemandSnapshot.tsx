@@ -29,6 +29,42 @@ const BloodDemandSnapshot = () => {
     }
   };
 
+  const getCardClassName = (bloodType: any) => {
+    let baseClasses = "relative p-4 rounded-md-custom border-2 text-center transition-all duration-300 hover:shadow-md-custom";
+    
+    if (bloodType.color === 'error-red') {
+      baseClasses += " border-error-red bg-error-red/5";
+    } else if (bloodType.color === 'warning-yellow') {
+      baseClasses += " border-warning-yellow bg-warning-yellow/5";
+    } else if (bloodType.color === 'info-blue') {
+      baseClasses += " border-info-blue bg-info-blue/5";
+    } else if (bloodType.color === 'harmony-green') {
+      baseClasses += " border-harmony-green bg-harmony-green/5";
+    }
+    
+    if (bloodType.pulse) {
+      baseClasses += " animate-pulse-soft";
+    }
+    
+    return baseClasses;
+  };
+
+  const getDemandTextClassName = (color: string) => {
+    let baseClasses = "text-caption font-medium";
+    
+    if (color === 'error-red') {
+      baseClasses += " text-error-red";
+    } else if (color === 'warning-yellow') {
+      baseClasses += " text-warning-yellow";
+    } else if (color === 'info-blue') {
+      baseClasses += " text-info-blue";
+    } else if (color === 'harmony-green') {
+      baseClasses += " text-harmony-green";
+    }
+    
+    return baseClasses;
+  };
+
   return (
     <Card className="bg-white shadow-md-custom rounded-md-custom mb-xl">
       <CardHeader className="pb-4">
@@ -46,15 +82,7 @@ const BloodDemandSnapshot = () => {
           {bloodTypes.map((bloodType) => (
             <div
               key={bloodType.type}
-              className={`
-                relative p-4 rounded-md-custom border-2 text-center transition-all duration-300
-                ${bloodType.color === 'error-red' ? 'border-error-red bg-error-red/5' : ''}
-                ${bloodType.color === 'warning-yellow' ? 'border-warning-yellow bg-warning-yellow/5' : ''}
-                ${bloodType.color === 'info-blue' ? 'border-info-blue bg-info-blue/5' : ''}
-                ${bloodType.color === 'harmony-green' ? 'border-harmony-green bg-harmony-green/5' : ''}
-                ${bloodType.pulse ? 'animate-pulse-soft' : ''}
-                hover:shadow-md-custom
-              `}
+              className={getCardClassName(bloodType)}
             >
               {/* Blood Type */}
               <div className="text-heading-3 font-bold text-deep-gray mb-1">
@@ -64,13 +92,7 @@ const BloodDemandSnapshot = () => {
               {/* Demand Level */}
               <div className="flex items-center justify-center mb-2">
                 <span className="mr-1">{getDemandIcon(bloodType.demand)}</span>
-                <span className={`
-                  text-caption font-medium
-                  ${bloodType.color === 'error-red' ? 'text-error-red' : ''}
-                  ${bloodType.color === 'warning-yellow' ? 'text-warning-yellow' : ''}
-                  ${bloodType.color === 'info-blue' ? 'text-info-blue' : ''}
-                  ${bloodType.color === 'harmony-green' ? 'text-harmony-green' : ''}
-                `}>
+                <span className={getDemandTextClassName(bloodType.color)}>
                   {bloodType.demand}
                 </span>
               </div>
@@ -94,7 +116,7 @@ const BloodDemandSnapshot = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-caption">
             <div className="flex items-center">
               <div className="w-3 h-3 bg-error-red rounded mr-2"></div>
-              <span className="text-gentle-gray">Critical (< 20 units)</span>
+              <span className="text-gentle-gray">Critical (&lt; 20 units)</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-warning-yellow rounded mr-2"></div>
@@ -106,7 +128,7 @@ const BloodDemandSnapshot = () => {
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-harmony-green rounded mr-2"></div>
-              <span className="text-gentle-gray">Low (> 100 units)</span>
+              <span className="text-gentle-gray">Low (&gt; 100 units)</span>
             </div>
           </div>
         </div>
