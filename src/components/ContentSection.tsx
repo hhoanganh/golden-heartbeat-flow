@@ -234,7 +234,8 @@ const ContentSection = () => {
           </div>
 
           {/* Testimonials Column */}
-          <div className="content-section-col">
+        <div className="content-section-col">
+          <div className="content-section-card-group"> {/* <--- ADD THIS WRAPPER */}
             {testimonials.map((testimonial) => (
               <div className="content-section-card" key={testimonial.id}>
                 <div className="thought-cloud">
@@ -242,8 +243,8 @@ const ContentSection = () => {
                     "{testimonial.quote}"
                   </p>
                   <div className="flex items-center">
-                    <img
-                      src={testimonial.avatar}
+                    <img 
+                      src={testimonial.avatar} 
                       alt={testimonial.author}
                       className="w-12 h-12 rounded-full object-cover mr-4"
                     />
@@ -259,13 +260,14 @@ const ContentSection = () => {
                 </div>
               </div>
             ))}
-            <Button
-              variant="outline"
-              className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
-            >
-              Share Your Story
-            </Button>
-          </div>
+          </div> {/* <--- AND CLOSE IT HERE */}
+          <Button 
+            variant="outline" 
+            className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
+          >
+            Share Your Story
+          </Button>
+        </div>
         </div>
       </div>
     </section>
