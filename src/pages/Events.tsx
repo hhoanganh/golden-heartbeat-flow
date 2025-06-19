@@ -23,7 +23,7 @@ const Events = () => {
       image: "https://images.unsplash.com/photo-1652149590094-98093f08509f?q=80&w=1170&auto=format&fit=crop",
       urgentNeeds: ["O-", "AB+"],
       capacity: 150,
-      registered: 87,
+      registered: 150, // Changed to 150 to demonstrate full registration
       type: "drive"
     },
     {

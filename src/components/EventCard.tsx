@@ -1,7 +1,8 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+// Import Progress component for semantic progress bar (optional, but good practice if available)
+// import { Progress } from '@/components/ui/progress';
 
 interface EventCardProps {
   event: {
@@ -21,40 +22,11 @@ interface EventCardProps {
 }
 
 const EventCard = ({ event }: EventCardProps) => {
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'emergency':
-        return 'bg-error-red text-white';
-      case 'corporate':
-        return 'bg-supportive-blue text-white';
-      case 'health-fair':
-        return 'bg-harmony-green text-white';
-      case 'campaign':
-        return 'bg-kindness-orange text-white';
-      default:
-        return 'bg-compassion-red text-white';
-    }
-  };
-
-  const getTypeLabel = (type: string) => {
-    switch (type) {
-      case 'drive':
-        return 'Blood Drive';
-      case 'campaign':
-        return 'Campaign';
-      case 'corporate':
-        return 'Corporate Event';
-      case 'health-fair':
-        return 'Health Fair';
-      case 'emergency':
-        return 'Emergency Drive';
-      default:
-        return 'Event';
-    }
-  };
-
   const availableSpots = event.capacity - event.registered;
-  const isAlmostFull = availableSpots <= event.capacity * 0.1;
+  const isAlmostFull = availableSpots <= event.capacity * 0.1 && availableSpots > 0; // Ensure it's not full
+  const isFull = event.registered >= event.capacity; // Check if registered is equal or more than capacity
+
+  // Removed getTypeColor and getTypeLabel as event type badge is removed
 
   return (
     <Card className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-all duration-300 group h-full flex flex-col">
@@ -65,12 +37,7 @@ const EventCard = ({ event }: EventCardProps) => {
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         
-        {/* Event Type Badge */}
-        <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 rounded-full text-caption font-medium ${getTypeColor(event.type)}`}>
-            {getTypeLabel(event.type)}
-          </span>
-        </div>
+        {/* Removed Event Type Badge */}
 
         {/* Date Badge */}
         <div className="absolute top-4 right-4">
@@ -120,20 +87,26 @@ const EventCard = ({ event }: EventCardProps) => {
         {/* Capacity Info */}
         <div className="mb-4">
           <div className="flex items-center justify-between text-caption text-gentle-gray mb-1">
-            <span>Registration Progress</span>
-            <span>{event.registered}/{event.capacity}</span>
+            <span>{isFull ? 'Registration Full' : 'Registration Progress'}</span>
+            <span>{isFull ? 'Full' : `${event.registered}/${event.capacity}`}</span>
           </div>
           <div className="w-full bg-warm-gray rounded-full h-2">
+            {/* Conditional progress bar color */}
             <div
               className={`h-2 rounded-full transition-all duration-300 ${
-                isAlmostFull ? 'bg-warning-yellow' : 'bg-harmony-green'
+                isFull ? 'bg-error-red' : (isAlmostFull ? 'bg-warning-yellow' : 'bg-harmony-green')
               }`}
               style={{ width: `${(event.registered / event.capacity) * 100}%` }}
             ></div>
           </div>
-          {isAlmostFull && (
+          {!isFull && isAlmostFull && ( // Only show if not full but almost full
             <p className="text-caption text-warning-yellow mt-1">
               Only {availableSpots} spots remaining!
+            </p>
+          )}
+          {isFull && ( // Show full message if capacity reached
+            <p className="text-caption text-error-red mt-1">
+              This event is fully booked.
             </p>
           )}
         </div>
@@ -143,6 +116,7 @@ const EventCard = ({ event }: EventCardProps) => {
           <Button
             size="lg"
             className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+            disabled={isFull} // Disable button if full
           >
             Register Now
           </Button>
