@@ -54,35 +54,48 @@ const BloodDemandSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-compassion-red to-supportive-blue mx-auto rounded-full"></div>
         </div>
 
-        {/* Blood Type Grid - Organic Cluster */}
+        {/* Blood Type Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
           {bloodTypes.map((blood, index) => (
             <div 
               key={blood.type}
-              className={`blood-cell relative`}
+              className="relative aspect-square transition-all duration-300 hover:scale-105"
               style={{
                 animationDelay: `${index * 0.1}s`
               }}
             >
-              {/* Blood Type */}
-              <div className="text-heading-3 font-medium text-deep-gray mb-2">
-                {blood.type}
-              </div>
-              
-              {/* Status Icon */}
-              <div className="text-2xl mb-2">
-                {getStatusIcon(blood.demand)}
-              </div>
-              
-              {/* Status Text */}
-              <div className={`text-caption font-medium ${getStatusColor(blood.color)}`}>
-                {blood.status}
-              </div>
+              {/* Blood Drop SVG Background */}
+              <svg 
+                viewBox="0 0 384 512" 
+                className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"/>
+              </svg>
 
               {/* Pulse effect for urgent cases */}
               {blood.demand === 'urgent' && (
-                <div className="absolute inset-0 rounded-full bg-error-red/20 animate-ping"></div>
+                <svg 
+                  viewBox="0 0 384 512" 
+                  className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"/>
+                </svg>
               )}
+              
+              {/* Content positioned over the SVG */}
+              <div className="relative z-10 h-full flex flex-col items-center justify-center">
+                <div className="text-heading-3 font-medium text-deep-gray mb-2">
+                  {blood.type}
+                </div>
+                <div className="text-2xl mb-2">
+                  {getStatusIcon(blood.demand)}
+                </div>
+                <div className={`text-caption font-medium ${getStatusColor(blood.color)}`}>
+                  {blood.status}
+                </div>
+              </div>
             </div>
           ))}
         </div>
