@@ -1,8 +1,4 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-
-const HeroSection = () => {
-  return (
+return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image */}
       <div 
@@ -15,40 +11,38 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
 
-      {/* Content Container */}
-      {/* The main container no longer has vertical padding */}
-      <div className="relative z-10 h-full flex items-end justify-center text-center lg:justify-start lg:text-left">
-        {/* The inner container now controls its own padding */}
-        <div className="w-full max-w-7xl mx-auto px-3 md:px-5 lg:px-10 pb-20 md:pb-24">
-          <div className="lg:w-8/12 xl:w-7/12">
-            {/* Main Headline - Font size is now responsive */}
-            <h1 className="text-4xl md:text-display text-white font-bold mb-6 leading-tight">
-              The Golden Drop: A Heartbeat for Ho Chi Minh City
-            </h1>
+      {/* --- CORRECTED CONTENT CONTAINER --- */}
+      <div className="relative z-10 h-full flex items-end justify-center text-center lg:justify-start lg:text-left p-6 md:p-12 lg:p-16">
+        <div className="w-full max-w-7xl mx-auto">
+            <div className="lg:w-8/12 xl:w-7/12">
+                {/* Main Headline - Font size is now responsive */}
+                <h1 className="text-4xl md:text-display text-white font-bold mb-6 leading-tight">
+                The Golden Drop: A Heartbeat for Ho Chi Minh City
+                </h1>
 
-            {/* Sub-headline */}
-            <p className="text-body-large text-white mb-8 leading-relaxed opacity-95">
-              Giọt Máu Vàng weaves compassion into action, connecting every vital drop to those who need it most, seamlessly.
-            </p>
+                {/* Sub-headline */}
+                <p className="text-body-large text-white mb-8 leading-relaxed opacity-95">
+                Giọt Máu Vàng weaves compassion into action, connecting every vital drop to those who need it most, seamlessly.
+                </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
-              <Button 
-                size="lg" 
-                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom shadow-md-custom px-l py-4 text-body-large font-medium animate-pulse-soft hover:scale-105 transition-all duration-300"
-              >
-                Begin Your Life-Saving Journey
-              </Button>
-              
-              <Button 
-                size="lg"
-                variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-supportive-blue rounded-md-custom px-l py-4 text-body-large font-medium transition-all duration-300 hover:scale-105"
-              >
-                See Our Impact
-              </Button>
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                <Button 
+                    size="lg" 
+                    className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom shadow-md-custom px-l py-4 text-body-large font-medium animate-pulse-soft hover:scale-105 transition-all duration-300"
+                >
+                    Begin Your Life-Saving Journey
+                </Button>
+                
+                <Button 
+                    size="lg"
+                    variant="outline" 
+                    className="border-2 border-white text-white hover:bg-white hover:text-supportive-blue rounded-md-custom px-l py-4 text-body-large font-medium transition-all duration-300 hover:scale-105"
+                >
+                    See Our Impact
+                </Button>
+                </div>
             </div>
-          </div>
         </div>
       </div>
 
@@ -56,6 +50,3 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-1 wave-pattern"></div>
     </section>
   );
-};
-
-export default HeroSection;
