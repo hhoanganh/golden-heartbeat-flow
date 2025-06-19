@@ -55,7 +55,7 @@ const BloodDemandSection = () => {
         </div>
 
         {/* Blood Type Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 max-w-1xl mx-auto">
           {bloodTypes.map((blood, index) => (
             // AFTER (The corrected code)
             <div
