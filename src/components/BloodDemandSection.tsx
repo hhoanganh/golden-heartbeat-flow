@@ -67,11 +67,10 @@ const BloodDemandSection = () => {
               {/* Blood Drop SVG Background */}
               <svg
                 viewBox="0 0 384 512"
-                className="absolute inset-0 w-full h-full fill-current drop-shadow-md-custom"
+                className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
                 xmlns="http://www.w3.org/2000/svg"
-                style={{ transform: 'rotate(180deg)' }}
               >
-                <path d="M192 0C298 126.9 384 248.7 384 320c0 71.3-86 193.1-192 320S0 391.3 0 320c0-71.3 86-193.1 192-320z"/>
+                <path d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"/>
               </svg>
 
               {/* Pulse effect for urgent cases */}
