@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer = () => {
@@ -19,9 +18,20 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-compassion-red rounded-full mr-3 flex items-center justify-center text-white font-bold">
-                G
-              </div>
+              {/* Replaced 'G' div with the Blood Drop SVG logo */}
+              <svg
+                className="w-8 h-8 mr-2" // Adjusted size for footer, keeping proportions
+                viewBox="0 0 384 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M192 512C86 385.1 0 263.3 0 192 0 86 86 0 192 0s192 86 192 192c0 71.3-86 193.1-192 320z"
+                  transform="rotate(180 192 256)"
+                  fill="#E23E57" // Using compassion-red directly as fill
+                  stroke="#FFD700" // Using a gold stroke for emphasis
+                  strokeWidth="25"
+                />
+              </svg>
               <span className="text-heading-3 font-semibold">Giọt Máu Vàng</span>
             </div>
             <p className="text-body text-gentle-gray leading-relaxed mb-4">
