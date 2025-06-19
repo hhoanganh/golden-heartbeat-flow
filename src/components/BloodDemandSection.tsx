@@ -67,7 +67,7 @@ const BloodDemandSection = () => {
             >
               <svg
               viewBox="0 0 384 512"
-              className="absolute inset-0 w-full h-full text-warm-gray/80 fill-current drop-shadow-md-custom"
+              className="absolute inset-0 w-full h-full text-compassion-red/80 fill-current drop-shadow-md-custom"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
