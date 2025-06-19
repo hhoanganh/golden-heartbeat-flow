@@ -87,10 +87,10 @@ const ContentSection = () => {
           <div className="content-section-col">
             <div className="content-section-card-group">
               <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={newsArticles[0].image} 
+                    <img
+                      src={newsArticles[0].image}
                       alt={newsArticles[0].title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -100,16 +100,16 @@ const ContentSection = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
                       {newsArticles[0].title}
                     </h3>
                     <p className="text-body text-gentle-gray mb-4 line-clamp-3">
                       {newsArticles[0].snippet}
                     </p>
-                    <Button 
-                      variant="ghost" 
-                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group"
+                    <Button
+                      variant="ghost"
+                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
                     >
                       Read More
                       <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
@@ -118,10 +118,10 @@ const ContentSection = () => {
                 </div>
               </div>
               <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={newsArticles[1].image} 
+                    <img
+                      src={newsArticles[1].image}
                       alt={newsArticles[1].title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -131,16 +131,16 @@ const ContentSection = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
                       {newsArticles[1].title}
                     </h3>
                     <p className="text-body text-gentle-gray mb-4 line-clamp-3">
                       {newsArticles[1].snippet}
                     </p>
-                    <Button 
-                      variant="ghost" 
-                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group"
+                    <Button
+                      variant="ghost"
+                      className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
                     >
                       Read More
                       <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
@@ -149,8 +149,8 @@ const ContentSection = () => {
                 </div>
               </div>
             </div>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
             >
               Dive Deeper into News
@@ -161,10 +161,10 @@ const ContentSection = () => {
           <div className="content-section-col">
             <div className="content-section-card-group">
               <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={events[0].image} 
+                    <img
+                      src={events[0].image}
                       alt={events[0].title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -175,7 +175,7 @@ const ContentSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
                       {events[0].title}
                     </h3>
@@ -183,9 +183,9 @@ const ContentSection = () => {
                       <p className="text-body text-gentle-gray">📍 {events[0].location}</p>
                       <p className="text-body text-gentle-gray">🕐 {events[0].time}</p>
                     </div>
-                    <Button 
+                    <Button
                       size="sm"
-                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full"
+                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
                     >
                       Register Now
                     </Button>
@@ -193,10 +193,10 @@ const ContentSection = () => {
                 </div>
               </div>
               <div className="content-section-card">
-                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={events[1].image} 
+                    <img
+                      src={events[1].image}
                       alt={events[1].title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -207,7 +207,7 @@ const ContentSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
                       {events[1].title}
                     </h3>
@@ -215,9 +215,9 @@ const ContentSection = () => {
                       <p className="text-body text-gentle-gray">📍 {events[1].location}</p>
                       <p className="text-body text-gentle-gray">🕐 {events[1].time}</p>
                     </div>
-                    <Button 
+                    <Button
                       size="sm"
-                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full"
+                      className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
                     >
                       Register Now
                     </Button>
@@ -225,8 +225,8 @@ const ContentSection = () => {
                 </div>
               </div>
             </div>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
             >
               Explore All Events
@@ -242,8 +242,8 @@ const ContentSection = () => {
                     "{testimonial.quote}"
                   </p>
                   <div className="flex items-center">
-                    <img 
-                      src={testimonial.avatar} 
+                    <img
+                      src={testimonial.avatar}
                       alt={testimonial.author}
                       className="w-12 h-12 rounded-full object-cover mr-4"
                     />
@@ -259,8 +259,8 @@ const ContentSection = () => {
                 </div>
               </div>
             ))}
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
             >
               Share Your Story
