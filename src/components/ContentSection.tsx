@@ -8,14 +8,14 @@ const ContentSection = () => {
       id: 1,
       title: "Local Hospital Reports 40% Increase in Emergency Blood Needs",
       snippet: "District 1 General Hospital sees unprecedented demand as community responds with overwhelming support...",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400&h=250&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1686797366685-6420f4bd9c2f?q=80&w=1170&auto=format&fit=crop",
       type: "news"
     },
     {
       id: 2,
       title: "Community Blood Drive Saves 150 Lives This Month",
       snippet: "Thanks to generous donors across Ho Chi Minh City, our latest campaign exceeded all expectations...",
-      image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=400&h=300&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1583&auto=format&fit=crop",
       type: "impact"
     }
   ];
@@ -27,7 +27,7 @@ const ContentSection = () => {
       date: "Dec 28",
       location: "Tao Dan Park",
       time: "8:00 AM - 5:00 PM",
-      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=400&h=250&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1652149590094-98093f08509f?q=80&w=1170&auto=format&fit=crop"
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const ContentSection = () => {
       date: "Jan 2",
       location: "Nguyen Hue Walking Street",
       time: "9:00 AM - 6:00 PM",
-      image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=400&h=200&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1642697552227-ca21f326fe41?q=80&w=1562&auto=format&fit=crop"
     }
   ];
 
@@ -52,7 +52,7 @@ const ContentSection = () => {
       quote: "When my daughter needed emergency surgery, the blood was available immediately. I'll never stop being grateful to every donor.",
       author: "Linh Tran",
       role: "Grateful Parent",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b830?q=80&w=100&h=100&auto=format&fit=crop&ixlib=rb-4.0.3"
+      avatar: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"
     },
     {
       id: 3,
