@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -9,17 +8,20 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1659718282962-452648b6eba6?q=80&w=1170&auto=format&fit=crop')`
+          backgroundImage: `url('https://images.unsplash.com/photo-1659718282962-452b6eba6?q=80&w=1170&auto=format&fit=crop')`
         }} 
       >
+        {/* This adds a dark overlay gradient to ensure text is always readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20"></div>
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 h-full flex items-center justify-center px-3 md:px-5 lg:px-10">
-        <div className="max-w-4xl mx-auto text-center lg:text-left lg:max-w-7xl">
+      {/* This is now a flex container that left-aligns content on desktop */}
+      <div className="relative z-10 h-full flex items-center justify-center text-center lg:justify-start lg:text-left px-3 md:px-5 lg:px-10">
+        <div className="max-w-4xl mx-auto lg:mx-0">
           <div className="lg:w-8/12 xl:w-7/12">
-            {/* Main Headline */}
-            <h1 className="text-display text-white font-bold mb-6 leading-tight">
+            {/* Main Headline - Font size is now responsive */}
+            <h1 className="text-4xl md:text-display text-white font-bold mb-6 leading-tight">
               The Golden Drop: A Heartbeat for Ho Chi Minh City
             </h1>
 
@@ -29,7 +31,7 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
               <Button 
                 size="lg" 
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom shadow-md-custom px-l py-4 text-body-large font-medium animate-pulse-soft hover:scale-105 transition-all duration-300"
