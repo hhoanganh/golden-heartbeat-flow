@@ -12,8 +12,6 @@ const HeroSection = () => {
           backgroundImage: `url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1583&auto=format&fit=crop')`
         }} 
       >
-        {/* Organic Overlay */}
-        <div className="absolute inset-0 organic-overlay opacity-90"></div>
       </div>
 
       {/* Content Container */}
