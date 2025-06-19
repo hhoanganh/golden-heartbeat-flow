@@ -81,7 +81,7 @@ const BloodDemandSection = () => {
               {blood.demand === 'urgent' && (
                 <svg 
                 viewBox="0 0 384 512" 
-                className="absolute inset-0 w-full h-full text-error-red/20 fill-current animate-ping"
+                className="absolute inset-0 w-full h-full text-white/20 fill-current animate-ping"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path 
