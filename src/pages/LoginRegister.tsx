@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -57,67 +56,63 @@ const LoginRegister = () => {
             </button>
           </div>
 
-          {/* Form */}
-          <form className="space-y-4">
-            {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-deep-gray">Full Name</Label>
-                <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
-                />
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-deep-gray">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-deep-gray">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
-              />
-            </div>
-
-            {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-deep-gray">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Confirm your password"
-                  className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue"
-                />
-              </div>
-            )}
-
-            {isLogin && (
-              <div className="text-right">
-                <a href="#" className="text-supportive-blue hover:text-compassion-red transition-colors text-body">
-                  Forgot password?
-                </a>
-              </div>
-            )}
-
-            <Button 
-              type="submit"
-              className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105"
+          {/* Form Container */}
+          <div className="relative" style={{ minHeight: '350px' }}>
+            {/* Login Form */}
+            <div 
+              className={`absolute w-full transition-all duration-300 ease-in-out ${
+                isLogin ? 'opacity-100' : 'opacity-0 -translate-x-4'
+              }`}
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
-            </Button>
-          </form>
+              <form className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="login_email" className="text-deep-gray">Email</Label>
+                  <Input id="login_email" type="email" placeholder="Enter your email" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="login_password" className="text-deep-gray">Password</Label>
+                  <Input id="login_password" type="password" placeholder="Enter your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <div className="text-right">
+                  <a href="#" className="text-supportive-blue hover:text-compassion-red transition-colors text-body">
+                    Forgot password?
+                  </a>
+                </div>
+                <Button type="submit" className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105">
+                  Sign In
+                </Button>
+              </form>
+            </div>
+            
+            {/* Register Form */}
+            <div 
+              className={`absolute w-full transition-all duration-300 ease-in-out ${
+                !isLogin ? 'opacity-100' : 'opacity-0 translate-x-4'
+              }`}
+            >
+              <form className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName" className="text-deep-gray">Full Name</Label>
+                  <Input id="fullName" type="text" placeholder="Enter your full name" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="register_email" className="text-deep-gray">Email</Label>
+                  <Input id="register_email" type="email" placeholder="Enter your email" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="register_password" className="text-deep-gray">Password</Label>
+                  <Input id="register_password" type="password" placeholder="Enter your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword" className="text-deep-gray">Confirm Password</Label>
+                  <Input id="confirmPassword" type="password" placeholder="Confirm your password" className="rounded-md-custom border-warm-gray/50 focus:border-supportive-blue" />
+                </div>
+                <Button type="submit" className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom py-3 text-body font-medium transition-all duration-300 hover:scale-105">
+                  Create Account
+                </Button>
+              </form>
+            </div>
+          </div>
 
           {/* Additional Options */}
           <div className="mt-6 text-center">
