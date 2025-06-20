@@ -102,7 +102,7 @@ const FAQs = () => {
       <Header />
       
       {/* Hero/Page Title Section */}
-      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-xl">
+      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-l">
         <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
           <div className="text-center">
             <h1 className="text-display font-bold text-deep-gray mb-4">
