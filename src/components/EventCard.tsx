@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Ensure Link is imported
 
 interface EventCardProps {
   event: {
@@ -16,16 +16,14 @@ interface EventCardProps {
     urgentNeeds: string[];
     capacity: number;
     registered: number;
-    type: string;
+    type: string; // Keep type property for consistency
   };
 }
 
 const EventCard = ({ event }: EventCardProps) => {
   const availableSpots = event.capacity - event.registered;
-  const isAlmostFull = availableSpots <= event.capacity * 0.1 && availableSpots > 0; // Ensure it's not full
-  const isFull = event.registered >= event.capacity; // Check if registered is equal or more than capacity
-
-  // Removed getTypeColor and getTypeLabel as event type badge is removed
+  const isAlmostFull = availableSpots <= event.capacity * 0.1 && availableSpots > 0;
+  const isFull = event.registered >= event.capacity;
 
   return (
     <Card className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-all duration-300 group h-full flex flex-col">
@@ -36,8 +34,6 @@ const EventCard = ({ event }: EventCardProps) => {
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         
-        {/* Removed Event Type Badge */}
-
         {/* Date Badge */}
         <div className="absolute top-4 right-4">
           <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-2 text-center">
@@ -87,7 +83,7 @@ const EventCard = ({ event }: EventCardProps) => {
         <div className="mb-4">
           <div className="flex items-center justify-between text-caption text-gentle-gray mb-1">
             <span>{isFull ? 'Registration Full' : 'Registration Progress'}</span>
-            <span>{event.registered}/{event.capacity}</span>
+            <span>{event.registered}/{event.capacity}</span> {/* Always show numerical ratio */}
           </div>
           <div className="w-full bg-warm-gray rounded-full h-2">
             {/* Conditional progress bar color */}
@@ -98,20 +94,26 @@ const EventCard = ({ event }: EventCardProps) => {
               style={{ width: `${(event.registered / event.capacity) * 100}%` }}
             ></div>
           </div>
-          {!isFull && isAlmostFull && ( // Only show if not full but almost full
+          {!isFull && isAlmostFull && (
             <p className="text-caption text-warning-yellow mt-1">
               Only {availableSpots} spots remaining!
+            </p>
+          )}
+          {isFull && (
+            <p className="text-caption text-error-red mt-1">
+              This event is fully booked.
             </p>
           )}
         </div>
 
         {/* Action Buttons */}
         <div className="space-y-2 mt-auto">
-          <Link to={`/booking/${event.id}`}>
+          {/* Wrap Button with Link to BookingPage */}
+          <Link to={`/book/${event.id}`}> 
             <Button
               size="lg"
               className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-              disabled={isFull} // Disable button if full
+              disabled={isFull}
             >
               Register Now
             </Button>
