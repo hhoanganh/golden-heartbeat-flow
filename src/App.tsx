@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react'; // Import useEffect
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -35,7 +36,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/booking/:eventId" element={<BookingPage />} />
+            <Route path="/book/:eventId" element={<BookingPage />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

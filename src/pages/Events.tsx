@@ -1,3 +1,4 @@
+
 // src/pages/Events.tsx
 import React, { useState } from 'react';
 import Header from '@/components/Header';
@@ -11,8 +12,6 @@ const Events = () => {
   const [currentPage, setCurrentPage] = useState(1);
   // Initialize with allEvents, and EventFilters will update this based on filters
   const [filteredEvents, setFilteredEvents] = useState(allEvents); 
-
-  // Removed hardcoded events array from here
 
   const eventsPerPage = 6;
   // Use filteredEvents.length for totalPages calculation

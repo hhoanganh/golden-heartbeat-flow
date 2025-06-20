@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { allEvents } from '@/data/eventsData'; // Import centralized events data
 import './ContentSectionGrid.css';
 
 const ContentSection = () => {
@@ -21,24 +22,15 @@ const ContentSection = () => {
     }
   ];
 
-  const events = [
-    {
-      id: 1,
-      title: "Weekend Blood Drive - District 3",
-      date: "Dec 28",
-      location: "Tao Dan Park",
-      time: "8:00 AM - 5:00 PM",
-      image: "https://images.unsplash.com/photo-1652149590094-98093f08509f?q=80&w=1170&auto=format&fit=crop"
-    },
-    {
-      id: 2,
-      title: "New Year Hope Campaign",
-      date: "Jan 2",
-      location: "Nguyen Hue Walking Street",
-      time: "9:00 AM - 6:00 PM",
-      image: "https://images.unsplash.com/photo-1642697552227-ca21f326fe41?q=80&w=1562&auto=format&fit=crop"
-    }
-  ];
+  // Use the first 2 events from centralized data
+  const events = allEvents.slice(0, 2).map(event => ({
+    id: event.id,
+    title: event.title,
+    date: event.date.split(',')[0] + ' ' + event.date.split(',')[1]?.trim(), // Format date for display
+    location: event.location,
+    time: event.time,
+    image: event.image
+  }));
 
   const testimonials = [
     {
@@ -64,7 +56,7 @@ const ContentSection = () => {
     },
     {
       id: 4,
-      quote: "A single donation can save up to three lives. It’s a simple act with a profound impact. I encourage everyone to participate.",
+      quote: "A single donation can save up to three lives. It's a simple act with a profound impact. I encourage everyone to participate.",
       author: "Dr. Hoang",
       role: "Medical Advisor",
       avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=100&h=100&auto=format&fit=crop"
