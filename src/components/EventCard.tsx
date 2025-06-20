@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-// Import Progress component for semantic progress bar (optional, but good practice if available)
-// import { Progress } from '@/components/ui/progress';
+import { Link } from 'react-router-dom';
 
 interface EventCardProps {
   event: {
@@ -108,13 +107,15 @@ const EventCard = ({ event }: EventCardProps) => {
 
         {/* Action Buttons */}
         <div className="space-y-2 mt-auto">
-          <Button
-            size="lg"
-            className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-            disabled={isFull} // Disable button if full
-          >
-            Register Now
-          </Button>
+          <Link to={`/booking/${event.id}`}>
+            <Button
+              size="lg"
+              className="w-full bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+              disabled={isFull} // Disable button if full
+            >
+              Register Now
+            </Button>
+          </Link>
           <Button
             variant="outline"
             className="w-full border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
