@@ -121,7 +121,6 @@ const BookingPage = () => {
               </p>
             </CardHeader>
             <CardContent className="space-y-1">
-              {/* All questions are now included */}
               <QuestionRow question="1. Anh/chị đã từng hiến máu chưa?"><RadioGroup onValueChange={(v) => handleFormChange('everDonated', v)} value={healthFormData.everDonated} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q1-yes" /><Label htmlFor="q1-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q1-no" /><Label htmlFor="q1-no">Không</Label></div></RadioGroup></QuestionRow>
               <QuestionRow question="2. Hiện tại, anh/chị có bị các bệnh: viêm khớp, đau dạ dày, viêm gan/vàng da, bệnh tim, huyết áp thấp/cao, hen, ho kéo dài, bệnh máu, lao?"><RadioGroup onValueChange={(v) => handleFormChange('hasCurrentIllness', v)} value={healthFormData.hasCurrentIllness} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q2-yes" /><Label htmlFor="q2-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q2-no" /><Label htmlFor="q2-no">Không</Label></div></RadioGroup></QuestionRow>
               {healthFormData.hasCurrentIllness === 'yes' && <Input placeholder="Bệnh khác (ghi cụ thể)..." className="mt-2" onChange={e => handleFormChange('currentIllnessOther', e.target.value)} />}
@@ -137,39 +136,120 @@ const BookingPage = () => {
               <QuestionRow question="8. Chữa răng, châm cứu, nhổ răng?"><RadioGroup onValueChange={(v) => handleFormChange('had6mDental', v)} value={healthFormData.had6mDental} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q8-yes" /><Label htmlFor="q8-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q8-no" /><Label htmlFor="q8-no">Không</Label></div></RadioGroup></QuestionRow>
               <QuestionRow question="9. Xăm mình, xỏ lỗ tai, lỗ mũi?"><RadioGroup onValueChange={(v) => handleFormChange('had6mTattoo', v)} value={healthFormData.had6mTattoo} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q9-yes" /><Label htmlFor="q9-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q9-no" /><Label htmlFor="q9-no">Không</Label></div></RadioGroup></QuestionRow>
               <QuestionRow question="10. Sử dụng ma túy?"><RadioGroup onValueChange={(v) => handleFormChange('had6mDrugs', v)} value={healthFormData.had6mDrugs} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q10-yes" /><Label htmlFor="q10-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q10-no" /><Label htmlFor="q10-no">Không</Label></div></RadioGroup></QuestionRow>
-              <QuestionRow question="11. Quan hệ tình dục với người nhiễm HIV hoặc người có nguy cơ cao?"><RadioGroup onValueChange={(v) => handleFormChange('had6mHivRisk', v)} value={healthFormData.had6mHivRisk} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q11-yes" /><Label htmlFor="q11-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q11-no" /><Label htmlFor="q11-no">Không</Label></div></RadioGroup></QuestionRow>
+              <QuestionRow question="11. Quan hệ tình dục với người nhiễm HIV hoặc người có hành vi nguy cơ lây nhiễm HIV?"><RadioGroup onValueChange={(v) => handleFormChange('had6mHivRisk', v)} value={healthFormData.had6mHivRisk} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q11-yes" /><Label htmlFor="q11-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q11-no" /><Label htmlFor="q11-no">Không</Label></div></RadioGroup></QuestionRow>
               <QuestionRow question="12. Quan hệ tình dục với người cùng giới?"><RadioGroup onValueChange={(v) => handleFormChange('had6mSameSex', v)} value={healthFormData.had6mSameSex} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q12-yes" /><Label htmlFor="q12-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q12-no" /><Label htmlFor="q12-no">Không</Label></div></RadioGroup></QuestionRow>
+             
+              <div className="font-bold text-deep-gray pt-4 mt-4 border-t">Trong vòng 01 tháng gần đây:</div>
+              <QuestionRow question="13. Khỏi bệnh sau khi mắc viêm đường tiết niệu, viêm da nhiễm trùng, viêm phế quản, viêm phổi, sởi, quai bị, Rubella?"><RadioGroup onValueChange={(v) => handleFormChange('had1mSickness', v)} value={healthFormData.had1mSickness} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q13-yes" /><Label htmlFor="q13-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q13-no" /><Label htmlFor="q13-no">Không</Label></div></RadioGroup></QuestionRow>
+              <QuestionRow question="14. Tiêm vắc xin phòng bệnh?"><RadioGroup onValueChange={(v) => handleFormChange('had1mVax', v)} value={healthFormData.had1mVax} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q14-yes" /><Label htmlFor="q14-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q14-no" /><Label htmlFor="q14-no">Không</Label></div></RadioGroup></QuestionRow>
+              {healthFormData.had1mVax === 'yes' && <Input placeholder="Loại Vắc xin (ghi cụ thể)..." className="mt-2" onChange={e => handleFormChange('vaxOther', e.target.value)} />}
+              <QuestionRow question="15. Đi vào vùng dịch bệnh lưu hành (sốt rét, sốt xuất huyết, Zika,...)?"><RadioGroup onValueChange={(v) => handleFormChange('inEpidemicZone', v)} value={healthFormData.inEpidemicZone} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q15-yes" /><Label htmlFor="q15-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q15-no" /><Label htmlFor="q15-no">Không</Label></div></RadioGroup></QuestionRow>
 
-              <div className="font-bold text-deep-gray pt-4 mt-4 border-t">Câu hỏi dành cho phụ nữ:</div>
-              <div className="flex items-center space-x-2 py-2"><Checkbox id="isFemale" onCheckedChange={(c) => handleFormChange('isFemale', c)} checked={healthFormData.isFemale} /><Label htmlFor="isFemale">Tôi là nữ giới</Label></div>
+              <div className="font-bold text-deep-gray pt-4 mt-4 border-t">Trong vòng 07 ngày gần đây:</div>
+              <QuestionRow question="16. Bị cảm cúm (ho, nhức đầu, sốt...)?"><RadioGroup onValueChange={(v) => handleFormChange('had7dFlu', v)} value={healthFormData.had7dFlu} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q16-yes" /><Label htmlFor="q16-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q16-no" /><Label htmlFor="q16-no">Không</Label></div></RadioGroup></QuestionRow>
+              <QuestionRow question="17. Dùng thuốc kháng sinh, Aspirin, Corticoid?"><RadioGroup onValueChange={(v) => handleFormChange('had7dMeds', v)} value={healthFormData.had7dMeds} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q17-yes" /><Label htmlFor="q17-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q17-no" /><Label htmlFor="q17-no">Không</Label></div></RadioGroup></QuestionRow>
+              <QuestionRow question="18. Tiêm Vắc xin phòng Viêm gan siêu vi B, Human Papilloma Virus?"><RadioGroup onValueChange={(v) => handleFormChange('had7dHepB', v)} value={healthFormData.had7dHepB} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q18-yes" /><Label htmlFor="q18-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q18-no" /><Label htmlFor="q18-no">Không</Label></div></RadioGroup></QuestionRow>
+
+              <div className="flex items-center space-x-2 py-4 mt-4 border-t"><Checkbox id="isFemale" onCheckedChange={(c) => handleFormChange('isFemale', c)} checked={healthFormData.isFemale} /><Label htmlFor="isFemale" className="font-bold text-deep-gray">Câu hỏi dành cho phụ nữ</Label></div>
               {healthFormData.isFemale && (
                 <div className="pl-6 space-y-1">
-                   <QuestionRow question="13. Hiện có thai, hoặc nuôi con dưới 12 tháng tuổi?"><RadioGroup onValueChange={(v) => handleFormChange('isPregnant', v)} value={healthFormData.isPregnant} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf1-yes" /><Label htmlFor="qf1-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf1-no" /><Label htmlFor="qf1-no">Không</Label></div></RadioGroup></QuestionRow>
-                  <QuestionRow question="14. Có kinh nguyệt trong vòng một tuần hay không?"><RadioGroup onValueChange={(v) => handleFormChange('hadPeriod', v)} value={healthFormData.hadPeriod} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf2-yes" /><Label htmlFor="qf2-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf2-no" /><Label htmlFor="qf2-no">Không</Label></div></RadioGroup></QuestionRow>
+                   <QuestionRow question="19. Hiện có thai, hoặc nuôi con dưới 12 tháng tuổi?"><RadioGroup onValueChange={(v) => handleFormChange('isPregnant', v)} value={healthFormData.isPregnant} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf1-yes" /><Label htmlFor="qf1-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf1-no" /><Label htmlFor="qf1-no">Không</Label></div></RadioGroup></QuestionRow>
+                  <QuestionRow question="20. Có kinh nguyệt trong vòng một tuần hay không?"><RadioGroup onValueChange={(v) => handleFormChange('hadPeriod', v)} value={healthFormData.hadPeriod} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf2-yes" /><Label htmlFor="qf2-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf2-no" /><Label htmlFor="qf2-no">Không</Label></div></RadioGroup></QuestionRow>
                 </div>
               )}
               
               <div className="flex items-start space-x-3 pt-6 border-t mt-4">
                   <Checkbox id="agreesToHivTest" onCheckedChange={(c) => handleFormChange('agreesToHivTest', c as boolean)} checked={healthFormData.agreesToHivTest} className="mt-1" />
                   <Label htmlFor="agreesToHivTest" className="text-body text-deep-gray -mt-px">
-                  15. Anh/chị có đồng ý xét nghiệm HIV, nhận thông báo và được tư vấn khi kết quả xét nghiệm HIV nghi ngờ dương tính?
+                  21. Anh/chị có đồng ý xét nghiệm HIV, nhận thông báo và được tư vấn khi kết quả xét nghiệm HIV nghi ngờ dương tính?
                   </Label>
               </div>
             </CardContent>
           </Card>
         );
 
-      // Cases 2 and 3 are unchanged from your working version
       case 2:
-        return (/* ... As per your working file ... */);
+        return (
+          <Card className="bg-white shadow-md-custom rounded-md-custom">
+            <CardHeader className="pb-6">
+              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
+                Chọn Khung Giờ
+              </CardTitle>
+              <p className="text-body text-gentle-gray">
+                Chọn khung giờ bạn muốn hiến máu vào ngày {selectedEvent.date}.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Khung giờ có sẵn</h3>
+                  <div className="space-y-2">
+                    {timeSlots.map((slot) => (
+                      <div key={slot} className="flex items-center space-x-2">
+                        <input type="radio" id={slot} name="timeSlot" value={slot} checked={selectedTimeSlot === slot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="text-compassion-red focus:ring-compassion-red" />
+                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">{slot}</Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Quy trình dự kiến</h3>
+                  <div className="space-y-3 text-body text-gentle-gray">
+                    <div className="flex items-start"><span className="mr-2 mt-1">⏱️</span><div><strong>Tổng thời gian:</strong> Khoảng 45-60 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">📋</span><div><strong>Sàng lọc sức khoẻ:</strong> 10-15 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">🩸</span><div><strong>Quá trình hiến máu:</strong> 8-10 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">🍪</span><div><strong>Nghỉ ngơi & phục hồi:</strong> 10-15 phút</div></div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
       case 3:
-        return (/* ... As per your working file ... */);
+        return (
+          <Card className="bg-white shadow-md-custom rounded-md-custom">
+            <CardHeader className="pb-6">
+              <CardTitle className="text-heading-2 text-deep-gray font-semibold">Xem Lại & Xác Nhận</CardTitle>
+              <p className="text-body text-gentle-gray">Vui lòng kiểm tra lại thông tin trước khi xác nhận lịch hẹn.</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <div className="p-4 bg-supportive-blue/5 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Thông tin sự kiện</h3>
+                  <div className="space-y-2 text-body text-gentle-gray">
+                    <div><strong>Sự kiện:</strong> {selectedEvent.title}</div>
+                    <div><strong>Ngày:</strong> {selectedEvent.date}</div>
+                    <div><strong>Địa điểm:</strong> {selectedEvent.location}</div>
+                    <div><strong>Địa chỉ:</strong> {selectedEvent.address}</div>
+                  </div>
+                </div>
+                <div className="p-4 bg-harmony-green/5 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Lịch hẹn của bạn</h3>
+                  <div className="space-y-2 text-body text-gentle-gray">
+                    <div><strong>Khung giờ:</strong> {selectedTimeSlot || "Chưa chọn"}</div>
+                    <div><strong>Thời gian dự kiến:</strong> 45-60 phút</div>
+                  </div>
+                </div>
+                <div className="p-4 bg-warning-yellow/10 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Nhắc nhở quan trọng</h3>
+                  <ul className="space-y-2 text-body text-gentle-gray">
+                    <li>• Mang theo giấy tờ tùy thân có ảnh</li>
+                    <li>• Ăn nhẹ trước khi hiến máu</li>
+                    <li>• Uống nhiều nước</li>
+                    <li>• Mặc trang phục thoải mái, tay áo có thể xắn lên</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
       default:
         return null;
     }
   };
   
-  // The rest of the component remains the same
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -184,7 +264,6 @@ const BookingPage = () => {
         </section>
 
         <div className="grid lg:grid-cols-3 gap-xl">
-          {/* --- LEFT COLUMN: Event Info & Progress Bar --- */}
           <div className="lg:col-span-1 space-y-l">
             <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
               <div className="relative h-32 lg:h-40">
@@ -241,13 +320,11 @@ const BookingPage = () => {
             </Card>
           </div>
 
-          {/* --- RIGHT COLUMN: Dynamic Content --- */}
           <div className="lg:col-span-2">
             {renderStepContent()}
           </div>
         </div>
         
-        {/* --- BOTTOM NAVIGATION BUTTONS --- */}
         <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex gap-4">
                 <Button variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">
