@@ -1,5 +1,3 @@
-// src/components/ContentSection.tsx
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -24,21 +22,10 @@ const ContentSection = () => {
     }
   ];
 
-  // Sort events by date to get the latest two, then map to the required format
+  // Get the two latest events, keeping the full event object
   const latestEvents = [...allEvents]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 2)
-    .map(event => ({
-      id: event.id,
-      title: event.title,
-      date: event.date.split(',')[0] + ' ' + event.date.split(',')[1]?.trim(), // Format date for display
-      location: event.location,
-      time: event.time,
-      image: event.image,
-      // Pass the original event object for the link
-      originalEvent: event
-    }));
-
+    .slice(0, 2);
 
   const testimonials = [
     {
@@ -130,42 +117,76 @@ const ContentSection = () => {
           {/* Events Column */}
           <div className="content-section-col">
             <div className="content-section-card-group">
-              {latestEvents.map((event) => (
-                <div className="content-section-card" key={event.id}>
-                  <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                    <div className="p-6">
-                      <div className="relative overflow-hidden mb-4">
-                        <img
-                          src={event.image}
-                          alt={event.title}
-                          className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute top-4 right-4">
-                          <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
-                            <div className="text-caption font-bold">{event.date.split(' ')[1]}</div>
-                            <div className="text-micro">{event.date.split(' ')[0]}</div>
+              {latestEvents.map((event) => {
+                // Add the progress calculation logic here
+                const availableSpots = event.capacity - event.registered;
+                const isAlmostFull = availableSpots <= event.capacity * 0.1 && availableSpots > 0;
+                const isFull = event.registered >= event.capacity;
+
+                return (
+                  <div className="content-section-card" key={event.id}>
+                    <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
+                      <div className="p-6 flex flex-col flex-grow">
+                        <div className="relative overflow-hidden mb-4">
+                          <img
+                            src={event.image}
+                            alt={event.title}
+                            className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
+                              <div className="text-caption font-bold">{event.date.split(',')[0]}</div>
+                              <div className="text-micro">{event.date.split(',')[1]?.trim()}</div>
+                            </div>
                           </div>
                         </div>
+                        <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
+                          {event.title}
+                        </h3>
+                        <div className="space-y-1 mb-4">
+                          <p className="text-body text-gentle-gray">📍 {event.location}</p>
+                          <p className="text-body text-gentle-gray">🕐 {event.time}</p>
+                        </div>
+
+                        {/* Capacity Info - Added from EventCard logic */}
+                        <div className="mb-4 mt-auto">
+                          <div className="flex items-center justify-between text-caption text-gentle-gray mb-1">
+                            <span>{isFull ? 'Registration Full' : 'Registration Progress'}</span>
+                            <span>{event.registered}/{event.capacity}</span>
+                          </div>
+                          <div className="w-full bg-warm-gray rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full transition-all duration-300 ${isFull ? 'bg-error-red' : (isAlmostFull ? 'bg-warning-yellow' : 'bg-harmony-green')
+                                }`}
+                              style={{ width: `${(event.registered / event.capacity) * 100}%` }}
+                            ></div>
+                          </div>
+                          {!isFull && isAlmostFull && (
+                            <p className="text-caption text-warning-yellow mt-1">
+                              Only {availableSpots} spots remaining!
+                            </p>
+                          )}
+                          {isFull && (
+                            <p className="text-caption text-error-red mt-1">
+                              This event is fully booked.
+                            </p>
+                          )}
+                        </div>
+
+                        <Link to={`/book/${event.id}`}>
+                          <Button
+                            size="sm"
+                            className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full"
+                            disabled={isFull} // Disable button if event is full
+                          >
+                            Register Now
+                          </Button>
+                        </Link>
                       </div>
-                      <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
-                        {event.title}
-                      </h3>
-                      <div className="space-y-1 mb-4">
-                        <p className="text-body text-gentle-gray">📍 {event.location}</p>
-                        <p className="text-body text-gentle-gray">🕐 {event.time}</p>
-                      </div>
-                      <Link to={`/book/${event.id}`}>
-                        <Button
-                          size="sm"
-                          className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
-                        >
-                          Register Now
-                        </Button>
-                      </Link>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
             <Link to="/events">
               <Button
@@ -187,8 +208,8 @@ const ContentSection = () => {
                       "{testimonial.quote}"
                     </p>
                     <div className="flex items-center">
-                      <img 
-                        src={testimonial.avatar} 
+                      <img
+                        src={testimonial.avatar}
                         alt={testimonial.author}
                         className="w-12 h-12 rounded-full object-cover mr-4"
                       />
@@ -205,8 +226,8 @@ const ContentSection = () => {
                 </div>
               ))}
             </div>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
             >
               Share Your Story
