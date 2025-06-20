@@ -12,11 +12,10 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { allEvents } from '@/data/eventsData';
 
 // Helper component for layout consistency in the form
-// Helper component for layout consistency in the form
 const QuestionRow = ({ question, children }: { question: string, children: React.ReactNode }) => (
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-3 border-b border-warm-gray/60">
     <Label className="text-body text-deep-gray mb-2 sm:mb-0 flex-grow pr-4">{question}</Label>
-    <div className="flex-shrink-0">{children}</div>
+    <div className="flex-shrink-0 flex items-center space-x-6">{children}</div>
   </div>
 );
 
@@ -90,6 +89,7 @@ const BookingPage = () => {
 
   const selectedEvent = allEvents.find(event => event.id === parseInt(eventId || '0')) || allEvents[0];
 
+  // Updated to a 2-step process
   const processSteps = [
     { id: 1, title: "Khai Báo & Chọn Lịch", status: currentStep === 1 ? "active" : "completed" },
     { id: 2, title: "Xem Lại & Xác Nhận", status: currentStep === 2 ? "active" : "upcoming" }
@@ -172,7 +172,6 @@ const BookingPage = () => {
             </CardContent>
           </Card>
         );
-
       case 2:
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
@@ -231,6 +230,23 @@ const BookingPage = () => {
 
         <div className="grid lg:grid-cols-3 gap-xl">
           <div className="lg:col-span-1 space-y-l">
+            {/* THIS IS THE NEW POSITION FOR THE TIME SLOT SELECTOR */}
+            <Card className="bg-white shadow-md-custom rounded-md-custom">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-heading-3 text-deep-gray font-medium">Chọn Khung Giờ</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <RadioGroup value={selectedTimeSlot} onValueChange={setSelectedTimeSlot} className="space-y-2">
+                  {timeSlots.map((slot) => (
+                    <div key={slot} className="flex items-center space-x-2">
+                      <RadioGroupItem value={slot} id={slot} />
+                      <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">{slot}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
             <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
               <div className="relative h-32 lg:h-40"><img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div></div>
               <CardHeader className="pb-4">
@@ -250,22 +266,6 @@ const BookingPage = () => {
               <CardHeader className="pb-4"><CardTitle className="text-heading-3 text-deep-gray font-medium">Tiến độ đăng ký</CardTitle></CardHeader>
               <CardContent className="pt-0"><div className="space-y-4">{processSteps.map((step, index) => (<div key={step.id}><div className="flex items-center space-x-3">{getStepIcon(step)}<div className="flex-1"><p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' : step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'}`}>{step.title}</p></div>{step.status === 'active' && <Badge variant="default" className="bg-compassion-red text-white text-micro">Hiện tại</Badge>}{step.status === 'completed' && <Badge variant="default" className="bg-harmony-green text-white text-micro">Hoàn tất</Badge>}</div>{index < processSteps.length - 1 && (<div className="ml-4 mt-2 mb-2"><div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' : step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'}`}></div></div>)}</div>))}</div></CardContent>
             </Card>
-
-            {currentStep === 1 && (
-              <Card className="bg-white shadow-md-custom rounded-md-custom">
-                <CardHeader className="pb-4"><CardTitle className="text-heading-3 text-deep-gray font-medium">Chọn Khung Giờ</CardTitle></CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {timeSlots.map((slot) => (
-                      <div key={slot} className="flex items-center space-x-2">
-                        <input type="radio" id={slot} name="timeSlot" value={slot} checked={selectedTimeSlot === slot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="text-compassion-red focus:ring-compassion-red" />
-                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">{slot}</Label>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </div>
 
           <div className="lg:col-span-2">
@@ -280,12 +280,20 @@ const BookingPage = () => {
             </div>
             <div className="flex gap-4">
                 {currentStep < 2 ? (
-                    <Button size="lg" onClick={handleNext} className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                        disabled={!isStep1Complete}>
+                    <Button
+                        size="lg"
+                        onClick={handleNext}
+                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                        disabled={!isStep1Complete}
+                    >
                         Bước tiếp theo →
                     </Button>
                 ) : (
-                    <Button size="lg" onClick={() => navigate(`/booking-success/${selectedEvent.id}`)} className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105">
+                    <Button
+                        size="lg"
+                        onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
+                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                    >
                         Xác nhận Đặt lịch
                     </Button>
                 )}
@@ -297,4 +305,4 @@ const BookingPage = () => {
   );
 };
 
-export default BookingPage;
+export default BookingPage;"
