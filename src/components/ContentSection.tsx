@@ -1,461 +1,242 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Calendar } from '@/components/ui/calendar';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { allEvents } from '@/data/eventsData';
+import { Link } from 'react-router-dom';
+import { allEvents } from '@/data/eventsData'; // Import centralized events data
+import './ContentSectionGrid.css';
 
-const BookingPage = () => {
-  const { eventId } = useParams();
-  const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
-
-  // Updated healthDeclaration state to match the Vietnamese form
-  const [healthDeclaration, setHealthDeclaration] = useState({
-    noRecentIllness: false,
-    noHighRiskBehavior: false,
-    noRecentMedicalProcedures: false,
-    isFemaleAndEligible: true, // Default to true, will be checked if female
-    agreesToHivTest: false,
-    feelingWell: false,
-  });
-
-
-  const selectedEvent = allEvents.find(event => event.id === parseInt(eventId || '0')) || allEvents[0];
-
-  const processSteps = [
-    { id: 1, title: "Khai Báo Y Tế", status: currentStep === 1 ? "active" : currentStep > 1 ? "completed" : "upcoming" },
-    { id: 2, title: "Chọn Lịch Hẹn", status: currentStep === 2 ? "active" : currentStep > 2 ? "completed" : "upcoming" },
-    { id: 3, title: "Xem Lại & Xác Nhận", status: currentStep === 3 ? "active" : "upcoming" }
+const ContentSection = () => {
+  const newsArticles = [
+    {
+      id: 1,
+      title: "Local Hospital Reports 40% Increase in Emergency Blood Needs",
+      snippet: "District 1 General Hospital sees unprecedented demand as community responds with overwhelming support...",
+      image: "https://images.unsplash.com/photo-1686797366685-6420f4bd9c2f?q=80&w=1170&auto=format&fit=crop",
+      type: "news"
+    },
+    {
+      id: 2,
+      title: "Community Blood Drive Saves 150 Lives This Month",
+      snippet: "Thanks to generous donors across Ho Chi Minh City, our latest campaign exceeded all expectations...",
+      image: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1583&auto=format&fit=crop",
+      type: "impact"
+    }
   ];
 
-  const timeSlots = [
-    "8:00 AM - 9:00 AM",
-    "9:00 AM - 10:00 AM",
-    "10:00 AM - 11:00 AM",
-    "11:00 AM - 12:00 PM",
-    "1:00 PM - 2:00 PM",
-    "2:00 PM - 3:00 PM",
-    "3:00 PM - 4:00 PM",
-    "4:00 PM - 5:00 PM"
+  // Get the two latest events, keeping the full event object
+  const latestEvents = [...allEvents]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 2);
+
+  const testimonials = [
+    {
+      id: 1,
+      quote: "Donating blood through Giọt Máu Vàng wasn't just easy - it felt like joining a family dedicated to saving lives.",
+      author: "Minh Nguyen",
+      role: "Regular Donor",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      id: 2,
+      quote: "When my daughter needed emergency surgery, the blood was available immediately. I'll never stop being grateful to every donor.",
+      author: "Linh Tran",
+      role: "Grateful Parent",
+      avatar: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"
+    },
+    {
+      id: 3,
+      quote: "The process was seamless and the staff were incredibly professional. It felt great to contribute.",
+      author: "An Pham",
+      role: "First-time Donor",
+      avatar: "https://images.unsplash.com/photo-1531123414780-f74242c2b052?q=80&w=100&h=100&auto=format&fit=crop"
+    },
+    {
+      id: 4,
+      quote: "A single donation can save up to three lives. It's a simple act with a profound impact. I encourage everyone to participate.",
+      author: "Dr. Hoang",
+      role: "Medical Advisor",
+      avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=100&h=100&auto=format&fit=crop"
+    }
   ];
-
-  const handleNext = () => {
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const handleBack = () => {
-    navigate('/events');
-  };
-
-  const getStepIcon = (step: typeof processSteps[0]) => {
-    if (step.status === 'completed') {
-      return <div className="w-8 h-8 bg-harmony-green text-white rounded-full flex items-center justify-center text-body font-medium">✓</div>;
-    } else if (step.status === 'active') {
-      return <div className="w-8 h-8 bg-compassion-red text-white rounded-full flex items-center justify-center text-body font-medium">{step.id}</div>;
-    } else {
-      return <div className="w-8 h-8 bg-warm-gray text-gentle-gray rounded-full flex items-center justify-center text-body font-medium">{step.id}</div>;
-    }
-  };
-
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <Card className="bg-white shadow-md-custom rounded-md-custom">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
-                Bảng câu hỏi dành cho người hiến máu
-              </CardTitle>
-              <p className="text-body text-gentle-gray">
-                Vui lòng xác nhận các thông tin dưới đây để đảm bảo an toàn cho việc hiến máu.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                {/* Simplified questions from the provided image */}
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="feelingWell"
-                    checked={healthDeclaration.feelingWell}
-                    onCheckedChange={(checked) =>
-                      setHealthDeclaration(prev => ({ ...prev, feelingWell: checked as boolean }))
-                    }
-                    className="mt-1"
-                  />
-                  <Label htmlFor="feelingWell" className="text-body text-deep-gray -mt-px">
-                    Hiện tại, tôi cảm thấy khỏe mạnh, không có các triệu chứng như cúm, ho, nhức đầu, sốt.
-                  </Label>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="noRecentIllness"
-                    checked={healthDeclaration.noRecentIllness}
-                    onCheckedChange={(checked) =>
-                      setHealthDeclaration(prev => ({ ...prev, noRecentIllness: checked as boolean }))
-                    }
-                    className="mt-1"
-                  />
-                  <Label htmlFor="noRecentIllness" className="text-body text-deep-gray -mt-px">
-                    Trong vòng 1 tháng qua, tôi không mắc các bệnh về đường tiết niệu, viêm da, viêm phế quản, sởi, quai bị, và không tiêm vắc-xin.
-                  </Label>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="noRecentMedicalProcedures"
-                    checked={healthDeclaration.noRecentMedicalProcedures}
-                    onCheckedChange={(checked) =>
-                      setHealthDeclaration(prev => ({ ...prev, noRecentMedicalProcedures: checked as boolean }))
-                    }
-                    className="mt-1"
-                  />
-                  <Label htmlFor="noRecentMedicalProcedures" className="text-body text-deep-gray -mt-px">
-                    Trong vòng 6 tháng qua, tôi không chữa răng, châm cứu, xăm mình, xỏ lỗ tai/mũi.
-                  </Label>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="noHighRiskBehavior"
-                    checked={healthDeclaration.noHighRiskBehavior}
-                    onCheckedChange={(checked) =>
-                      setHealthDeclaration(prev => ({ ...prev, noHighRiskBehavior: checked as boolean }))
-                    }
-                    className="mt-1"
-                  />
-                  <Label htmlFor="noHighRiskBehavior" className="text-body text-deep-gray -mt-px">
-                    Trong vòng 6 tháng qua, tôi không sử dụng ma túy và không có hành vi tình dục nguy cơ cao.
-                  </Label>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="agreesToHivTest"
-                    checked={healthDeclaration.agreesToHivTest}
-                    onCheckedChange={(checked) =>
-                      setHealthDeclaration(prev => ({ ...prev, agreesToHivTest: checked as boolean }))
-                    }
-                    className="mt-1"
-                  />
-                  <Label htmlFor="agreesToHivTest" className="text-body text-deep-gray -mt-px">
-                    Tôi đồng ý xét nghiệm HIV, nhận thông báo và được tư vấn khi kết quả xét nghiệm HIV nghi ngờ hoặc dương tính.
-                  </Label>
-                </div>
-              </div>
-
-              <div className="p-4 bg-warning-yellow/10 rounded-md-custom border border-warning-yellow/30">
-                <p className="text-caption text-gentle-gray">
-                  <strong>Lưu ý:</strong> Nhân viên y tế sẽ thực hiện sàng lọc sức khỏe nhanh trước khi hiến máu để đảm bảo an toàn cho bạn và người nhận máu.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
-      case 2:
-        return (
-          <Card className="bg-white shadow-md-custom rounded-md-custom">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
-                Chọn Khung Giờ
-              </CardTitle>
-              <p className="text-body text-gentle-gray">
-                Chọn khung giờ bạn muốn hiến máu vào ngày {selectedEvent.date}.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Khung giờ có sẵn</h3>
-                  <div className="space-y-2">
-                    {timeSlots.map((slot) => (
-                      <div key={slot} className="flex items-center space-x-2">
-                        <input
-                          type="radio"
-                          id={slot}
-                          name="timeSlot"
-                          value={slot}
-                          checked={selectedTimeSlot === slot}
-                          onChange={(e) => setSelectedTimeSlot(e.target.value)}
-                          className="text-compassion-red focus:ring-compassion-red"
-                        />
-                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">
-                          {slot}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Quy trình dự kiến</h3>
-                  <div className="space-y-3 text-body text-gentle-gray">
-                    <div className="flex items-start">
-                      <span className="mr-2 mt-1">⏱️</span>
-                      <div>
-                        <strong>Tổng thời gian:</strong> Khoảng 45-60 phút
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="mr-2 mt-1">📋</span>
-                      <div>
-                        <strong>Sàng lọc sức khoẻ:</strong> 10-15 phút
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="mr-2 mt-1">🩸</span>
-                      <div>
-                        <strong>Quá trình hiến máu:</strong> 8-10 phút
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="mr-2 mt-1">🍪</span>
-                      <div>
-                        <strong>Nghỉ ngơi & phục hồi:</strong> 10-15 phút
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
-      case 3:
-        return (
-          <Card className="bg-white shadow-md-custom rounded-md-custom">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
-                Xem Lại & Xác Nhận
-              </CardTitle>
-              <p className="text-body text-gentle-gray">
-                Vui lòng kiểm tra lại thông tin trước khi xác nhận lịch hẹn.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="p-4 bg-supportive-blue/5 rounded-md-custom">
-                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Thông tin sự kiện</h3>
-                  <div className="space-y-2 text-body text-gentle-gray">
-                    <div><strong>Sự kiện:</strong> {selectedEvent.title}</div>
-                    <div><strong>Ngày:</strong> {selectedEvent.date}</div>
-                    <div><strong>Địa điểm:</strong> {selectedEvent.location}</div>
-                    <div><strong>Địa chỉ:</strong> {selectedEvent.address}</div>
-                  </div>
-                </div>
-
-                <div className="p-4 bg-harmony-green/5 rounded-md-custom">
-                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Lịch hẹn của bạn</h3>
-                  <div className="space-y-2 text-body text-gentle-gray">
-                    <div><strong>Khung giờ:</strong> {selectedTimeSlot || "Chưa chọn"}</div>
-                    <div><strong>Thời gian dự kiến:</strong> 45-60 phút</div>
-                  </div>
-                </div>
-
-                <div className="p-4 bg-warning-yellow/10 rounded-md-custom">
-                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Nhắc nhở quan trọng</h3>
-                  <ul className="space-y-2 text-body text-gentle-gray">
-                    <li>• Mang theo giấy tờ tùy thân có ảnh</li>
-                    <li>• Ăn nhẹ trước khi hiến máu</li>
-                    <li>• Uống nhiều nước</li>
-                    <li>• Mặc trang phục thoải mái, tay áo có thể xắn lên</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
-      default:
-        return null;
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-
-      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
-        {/* Hero/Introduction Section */}
-        <section className="mb-xl">
-          <h1 className="text-display text-deep-gray font-bold mb-4 text-center lg:text-left">
-            Đặt Lịch Hiến Máu
-          </h1>
-          <p className="text-body-large text-gentle-gray text-center lg:text-left max-w-2xl">
-            Hoàn thành các bước để giữ chỗ của bạn tại sự kiện cứu người này.
-          </p>
-        </section>
-
-        <div className="grid lg:grid-cols-3 gap-xl">
-          {/* Left Column - Event Summary & Progress */}
-          <div className="lg:col-span-1 space-y-l">
-            <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
-              <div className="relative h-32 lg:h-40">
-                <img
-                  src={selectedEvent.image}
-                  alt={selectedEvent.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              </div>
-
-              <CardHeader className="pb-4">
-                <CardTitle className="text-heading-3 text-deep-gray font-medium line-clamp-2">
-                  {selectedEvent.title}
-                </CardTitle>
-                <div className="space-y-2">
-                  <div className="flex items-center text-body text-gentle-gray">
-                    <span className="mr-2">📅</span>
-                    <span>{selectedEvent.date}</span>
-                  </div>
-                  <div className="flex items-center text-body text-gentle-gray">
-                    <span className="mr-2">🕐</span>
-                    <span>{selectedEvent.time}</span>
-                  </div>
-                  <div className="flex items-center text-body text-gentle-gray">
-                    <span className="mr-2">📍</span>
-                    <span className="line-clamp-2">{selectedEvent.location}</span>
-                  </div>
-                </div>
-              </CardHeader>
-
-              {selectedEvent.urgentNeeds.length > 0 && (
-                <CardContent className="pt-0">
-                  <div className="p-3 bg-error-red/10 rounded-md-custom">
-                    <p className="text-caption font-medium text-error-red mb-1">
-                      Nhu cầu khẩn cấp:
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {selectedEvent.urgentNeeds.map((bloodType) => (
-                        <Badge key={bloodType} variant="destructive" className="text-micro">
-                          {bloodType}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              )}
-            </Card>
-
-            <Card className="bg-white shadow-md-custom rounded-md-custom">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-heading-3 text-deep-gray font-medium">
-                  Tiến độ đăng ký
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="space-y-4">
-                  {processSteps.map((step, index) => (
-                    <div key={step.id}>
-                      <div className="flex items-center space-x-3">
-                        {getStepIcon(step)}
-                        <div className="flex-1">
-                          <p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' :
-                            step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'
-                            }`}>
-                            {step.title}
-                          </p>
-                        </div>
-                        {step.status === 'active' && (
-                          <Badge variant="default" className="bg-compassion-red text-white text-micro">
-                            Hiện tại
-                          </Badge>
-                        )}
-                        {step.status === 'completed' && (
-                          <Badge variant="default" className="bg-harmony-green text-white text-micro">
-                            Hoàn tất
-                          </Badge>
-                        )}
-                      </div>
-                      {index < processSteps.length - 1 && (
-                        <div className="ml-4 mt-2 mb-2">
-                          <div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' :
-                            step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'
-                            }`}></div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Column - Dynamic Content/Form Section */}
-          <div className="lg:col-span-2">
-            {renderStepContent()}
-          </div>
+    <section className="py-xl bg-white">
+      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
+        <div className="text-center mb-xl">
+          <h2 className="text-heading-2 text-deep-gray font-semibold mb-4">
+            Where Every Drop Makes a Story
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-compassion-red to-supportive-blue mx-auto rounded-full"></div>
         </div>
 
-        {/* Navigation & Action Buttons Section */}
-        <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex gap-4">
+        <div className="content-section-3col">
+          {/* News Column */}
+          <div className="content-section-col">
+            <div className="content-section-card-group">
+              {newsArticles.map((article) => (
+                <div className="content-section-card" key={article.id}>
+                  <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                    <div className="p-6">
+                      <div className="relative overflow-hidden mb-4">
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-compassion-red text-white px-3 py-1 rounded-full text-caption font-medium">
+                            {article.type === 'news' ? 'News' : 'Impact Story'}
+                          </span>
+                        </div>
+                      </div>
+                      <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-body text-gentle-gray mb-4 line-clamp-3">
+                        {article.snippet}
+                      </p>
+                      <Button
+                        variant="ghost"
+                        className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
+                      >
+                        Read More
+                        <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             <Button
               variant="outline"
-              onClick={handleBack}
-              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
+              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
             >
-              ← Quay lại Sự kiện
+              Dive Deeper into News
             </Button>
-            {currentStep > 1 && (
-              <Button
-                variant="outline"
-                onClick={handlePrevious}
-                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
-              >
-                Quay lại
-              </Button>
-            )}
           </div>
 
-          <div className="flex gap-4">
-            {currentStep < 3 ? (
+          {/* Events Column */}
+          <div className="content-section-col">
+            <div className="content-section-card-group">
+              {latestEvents.map((event) => {
+                // Add the progress calculation logic here
+                const availableSpots = event.capacity - event.registered;
+                const isAlmostFull = availableSpots <= event.capacity * 0.1 && availableSpots > 0;
+                const isFull = event.registered >= event.capacity;
+
+                return (
+                  <div className="content-section-card" key={event.id}>
+                    <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col">
+                      <div className="p-6 flex flex-col flex-grow">
+                        <div className="relative overflow-hidden mb-4">
+                          <img
+                            src={event.image}
+                            alt={event.title}
+                            className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-supportive-blue text-white rounded-full w-16 h-16 flex flex-col items-center justify-center text-center">
+                              <div className="text-caption font-bold">{event.date.split(',')[0]}</div>
+                              <div className="text-micro">{event.date.split(',')[1]?.trim()}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <h3 className="text-heading-3 text-deep-gray font-medium mb-2">
+                          {event.title}
+                        </h3>
+                        <div className="space-y-1 mb-4">
+                          <p className="text-body text-gentle-gray">📍 {event.location}</p>
+                          <p className="text-body text-gentle-gray">🕐 {event.time}</p>
+                        </div>
+
+                        {/* Capacity Info - Added from EventCard logic */}
+                        <div className="mb-4 mt-auto">
+                          <div className="flex items-center justify-between text-caption text-gentle-gray mb-1">
+                            <span>{isFull ? 'Registration Full' : 'Registration Progress'}</span>
+                            <span>{event.registered}/{event.capacity}</span>
+                          </div>
+                          <div className="w-full bg-warm-gray rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full transition-all duration-300 ${isFull ? 'bg-error-red' : (isAlmostFull ? 'bg-warning-yellow' : 'bg-harmony-green')
+                                }`}
+                              style={{ width: `${(event.registered / event.capacity) * 100}%` }}
+                            ></div>
+                          </div>
+                          {!isFull && isAlmostFull && (
+                            <p className="text-caption text-warning-yellow mt-1">
+                              Only {availableSpots} spots remaining!
+                            </p>
+                          )}
+                          {isFull && (
+                            <p className="text-caption text-error-red mt-1">
+                              This event is fully booked.
+                            </p>
+                          )}
+                        </div>
+
+                        <Link to={`/book/${event.id}`}>
+                          <Button
+                            size="sm"
+                            className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full"
+                            disabled={isFull} // Disable button if event is full
+                          >
+                            Register Now
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <Link to="/events">
               <Button
-                size="lg"
-                onClick={handleNext}
-                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                disabled={
-                  (currentStep === 1 && !Object.values(healthDeclaration).every(Boolean)) ||
-                  (currentStep === 2 && !selectedTimeSlot)
-                }
+                variant="outline"
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 w-full"
               >
-                Bước tiếp theo →
+                Explore All Events
               </Button>
-            ) : (
-              <Button
-                size="lg"
-                onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
-                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-              >
-                Xác nhận Đặt lịch
-              </Button>
-            )}
+            </Link>
+          </div>
+
+          {/* Testimonials Column */}
+          <div className="content-section-col">
+            <div className="content-section-card-group">
+              {testimonials.map((testimonial) => (
+                <div className="content-section-card" key={testimonial.id}>
+                  <div className="thought-cloud">
+                    <p className="text-body-large text-deep-gray italic mb-4 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center">
+                      <img
+                        src={testimonial.avatar}
+                        alt={testimonial.author}
+                        className="w-12 h-12 rounded-full object-cover mr-4"
+                      />
+                      <div>
+                        <div className="text-body text-deep-gray font-medium">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-caption text-gentle-gray">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Button
+              variant="outline"
+              className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
+            >
+              Share Your Story
+            </Button>
           </div>
         </div>
       </div>
-
-      <Footer />
-    </div>
+    </section>
   );
 };
 
-export default BookingPage;
+export default ContentSection;
