@@ -14,8 +14,10 @@ const Footer = () => {
       <div className="wave-pattern"></div>
       
       <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-l">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-l">
-          {/* Brand Section (No changes here) */}
+        {/* This is the main 3-column grid. It remains unchanged. */}
+        <div className="grid md:grid-cols-3 gap-l">
+
+          {/* Column 1: Brand Section (Unchanged) */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
               <svg className="w-8 h-8 mr-2" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
@@ -36,30 +38,43 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* New, Organized Quick Links Section */}
-          <div className="grid grid-cols-2 md:col-span-2 gap-l">
-            <div>
-                <h4 className="text-heading-3 font-medium mb-4">Về Giọt Máu Vàng</h4>
-                <ul className="space-y-2">
-                    <li><Link to="/about" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Our Mission</Link></li>
-                    <li><Link to="/stories" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Success Stories</Link></li>
-                    <li><Link to="/news" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">News & Updates</Link></li>
-                    <li><Link to="/partners" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">For Partners</Link></li>
-                </ul>
-            </div>
-            <div>
-                <h4 className="text-heading-3 font-medium mb-4">Dành Cho Người Hiến Máu</h4>
-                <ul className="space-y-2">
-                    <li><Link to="/process" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Donation Process</Link></li>
-                    <li><Link to="/login" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">My Account / Login</Link></li>
-                    <li><Link to="/eligibility" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Health Requirements</Link></li>
-                    <li><Link to="/privacy" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Privacy Policy</Link></li>
-                </ul>
+          {/* Column 2: Quick Links (This is the only section with updated content) */}
+          <div>
+            <h4 className="text-heading-3 font-medium mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><Link to="/about" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Our Mission</Link></li>
+              <li><Link to="/process" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Donation Process</Link></li>
+              <li><Link to="/stories" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Success Stories</Link></li>
+              <li><Link to="/login" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">My Account / Login</Link></li>
+              <li><Link to="/partners" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">For Partners</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Get in Touch (Restored and unchanged) */}
+          <div>
+            <h4 className="text-heading-3 font-medium mb-4">Get in Touch</h4>
+            <div className="space-y-3">
+              <div className="flex items-start space-x-3">
+                <span className="text-lg">📍</span>
+                <span className="text-body text-gentle-gray">123 Nguyen Hue Street, District 1, Ho Chi Minh City</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="text-lg">📞</span>
+                <span className="text-body text-gentle-gray">+84 28 1234 5678</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="text-lg">✉️</span>
+                <span className="text-body text-gentle-gray">hello@giotmauvang.vn</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="text-lg">🕐</span>
+                <span className="text-body text-gentle-gray">24/7 Emergency Support</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section (No changes here) */}
+        {/* Bottom Section (Unchanged) */}
         <div className="border-t border-supportive-blue/20 mt-l pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-micro text-gentle-gray">
