@@ -61,14 +61,8 @@ const BookingPage = () => {
     setHealthFormData(prev => ({ ...prev, [field]: value }));
   };
   
-  // Corrected and complete validation logic for the new combined first step
-  const isStep1Complete = useMemo(() => {
-    // Check if a time slot is selected
-    if (!selectedTimeSlot) {
-      return false;
-    }
-    
-    // Check if all radio questions are answered
+  // Corrected and complete validation logic
+  const isHealthFormComplete = useMemo(() => {
     const radioQuestions = [
       'everDonated', 'hasCurrentIllness', 'had12mDiseases', 'had12mTransfusion',
       'had12mRabiesVax', 'had6mWeightLoss', 'had6mCough', 'had6mDental', 'had6mTattoo',
@@ -80,23 +74,21 @@ const BookingPage = () => {
       if (healthFormData[q as keyof typeof healthFormData] === undefined) return false;
     }
 
-    // Check female-specific questions if applicable
     if (healthFormData.isFemale) {
       if (healthFormData.isPregnant === undefined || healthFormData.hadPeriod === undefined) {
         return false;
       }
     }
     
-    // Check the final consent box
     return healthFormData.agreesToHivTest;
-  }, [healthFormData, selectedTimeSlot]);
+  }, [healthFormData]);
 
   const selectedEvent = allEvents.find(event => event.id === parseInt(eventId || '0')) || allEvents[0];
 
-  // Updated to a 2-step process
   const processSteps = [
-    { id: 1, title: "Khai Báo & Chọn Lịch", status: currentStep === 1 ? "active" : "completed" },
-    { id: 2, title: "Xem Lại & Xác Nhận", status: currentStep === 2 ? "active" : "upcoming" }
+    { id: 1, title: "Khai Báo Y Tế", status: currentStep === 1 ? "active" : currentStep > 1 ? "completed" : "upcoming" },
+    { id: 2, title: "Chọn Lịch Hẹn", status: currentStep === 2 ? "active" : currentStep > 2 ? "completed" : "upcoming" },
+    { id: 3, title: "Xem Lại & Xác Nhận", status: currentStep === 3 ? "active" : "upcoming" }
   ];
 
   const timeSlots = [
@@ -105,7 +97,7 @@ const BookingPage = () => {
     "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM"
   ];
 
-  const handleNext = () => { if (currentStep < 2) setCurrentStep(currentStep + 1); };
+  const handleNext = () => { if (currentStep < 3) setCurrentStep(currentStep + 1); };
   const handlePrevious = () => { if (currentStep > 1) setCurrentStep(currentStep - 1); };
   const handleBack = () => navigate('/events');
 
@@ -129,7 +121,6 @@ const BookingPage = () => {
               </p>
             </CardHeader>
             <CardContent className="space-y-1">
-              {/* All questions are now included and correctly mapped */}
               <QuestionRow question="1. Anh/chị đã từng hiến máu chưa?"><RadioGroup onValueChange={(v) => handleFormChange('everDonated', v)} value={healthFormData.everDonated} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q1-yes" /><Label htmlFor="q1-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q1-no" /><Label htmlFor="q1-no">Không</Label></div></RadioGroup></QuestionRow>
               <QuestionRow question="2. Hiện tại, anh/chị có bị các bệnh: viêm khớp, đau dạ dày, viêm gan/vàng da, bệnh tim, huyết áp thấp/cao, hen, ho kéo dài, bệnh máu, lao?"><RadioGroup onValueChange={(v) => handleFormChange('hasCurrentIllness', v)} value={healthFormData.hasCurrentIllness} className="flex space-x-6"><div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q2-yes" /><Label htmlFor="q2-yes">Có</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q2-no" /><Label htmlFor="q2-no">Không</Label></div></RadioGroup></QuestionRow>
               {healthFormData.hasCurrentIllness === 'yes' && <Input placeholder="Bệnh khác (ghi cụ thể)..." className="mt-2" onChange={e => handleFormChange('currentIllnessOther', e.target.value)} />}
@@ -181,6 +172,44 @@ const BookingPage = () => {
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
             <CardHeader className="pb-6">
+              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
+                Chọn Khung Giờ
+              </CardTitle>
+              <p className="text-body text-gentle-gray">
+                Chọn khung giờ bạn muốn hiến máu vào ngày {selectedEvent.date}.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Khung giờ có sẵn</h3>
+                  <div className="space-y-2">
+                    {timeSlots.map((slot) => (
+                      <div key={slot} className="flex items-center space-x-2">
+                        <input type="radio" id={slot} name="timeSlot" value={slot} checked={selectedTimeSlot === slot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="text-compassion-red focus:ring-compassion-red" />
+                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">{slot}</Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Quy trình dự kiến</h3>
+                  <div className="space-y-3 text-body text-gentle-gray">
+                    <div className="flex items-start"><span className="mr-2 mt-1">⏱️</span><div><strong>Tổng thời gian:</strong> Khoảng 45-60 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">📋</span><div><strong>Sàng lọc sức khoẻ:</strong> 10-15 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">🩸</span><div><strong>Quá trình hiến máu:</strong> 8-10 phút</div></div>
+                    <div className="flex items-start"><span className="mr-2 mt-1">🍪</span><div><strong>Nghỉ ngơi & phục hồi:</strong> 10-15 phút</div></div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
+      case 3:
+        return (
+          <Card className="bg-white shadow-md-custom rounded-md-custom">
+            <CardHeader className="pb-6">
               <CardTitle className="text-heading-2 text-deep-gray font-semibold">Xem Lại & Xác Nhận</CardTitle>
               <p className="text-body text-gentle-gray">Vui lòng kiểm tra lại thông tin trước khi xác nhận lịch hẹn.</p>
             </CardHeader>
@@ -215,6 +244,7 @@ const BookingPage = () => {
             </CardContent>
           </Card>
         );
+
       default:
         return null;
     }
@@ -236,9 +266,14 @@ const BookingPage = () => {
         <div className="grid lg:grid-cols-3 gap-xl">
           <div className="lg:col-span-1 space-y-l">
             <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
-              <div className="relative h-32 lg:h-40"><img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div></div>
+              <div className="relative h-32 lg:h-40">
+                <img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              </div>
               <CardHeader className="pb-4">
-                <CardTitle className="text-heading-3 text-deep-gray font-medium line-clamp-2">{selectedEvent.title}</CardTitle>
+                <CardTitle className="text-heading-3 text-deep-gray font-medium line-clamp-2">
+                  {selectedEvent.title}
+                </CardTitle>
                 <div className="space-y-2">
                   <div className="flex items-center text-body text-gentle-gray"><span className="mr-2">📅</span><span>{selectedEvent.date}</span></div>
                   <div className="flex items-center text-body text-gentle-gray"><span className="mr-2">🕐</span><span>{selectedEvent.time}</span></div>
@@ -246,30 +281,43 @@ const BookingPage = () => {
                 </div>
               </CardHeader>
               {selectedEvent.urgentNeeds.length > 0 && (
-                <CardContent className="pt-0"><div className="p-3 bg-error-red/10 rounded-md-custom"><p className="text-caption font-medium text-error-red mb-1">Nhu cầu khẩn cấp:</p><div className="flex flex-wrap gap-1">{selectedEvent.urgentNeeds.map((bloodType) => (<Badge key={bloodType} variant="destructive" className="text-micro">{bloodType}</Badge>))}</div></div></CardContent>
+                <CardContent className="pt-0">
+                  <div className="p-3 bg-error-red/10 rounded-md-custom">
+                    <p className="text-caption font-medium text-error-red mb-1">Nhu cầu khẩn cấp:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {selectedEvent.urgentNeeds.map((bloodType) => (<Badge key={bloodType} variant="destructive" className="text-micro">{bloodType}</Badge>))}
+                    </div>
+                  </div>
+                </CardContent>
               )}
             </Card>
 
             <Card className="bg-white shadow-md-custom rounded-md-custom">
-              <CardHeader className="pb-4"><CardTitle className="text-heading-3 text-deep-gray font-medium">Tiến độ đăng ký</CardTitle></CardHeader>
-              <CardContent className="pt-0"><div className="space-y-4">{processSteps.map((step, index) => (<div key={step.id}><div className="flex items-center space-x-3">{getStepIcon(step)}<div className="flex-1"><p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' : step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'}`}>{step.title}</p></div>{step.status === 'active' && <Badge variant="default" className="bg-compassion-red text-white text-micro">Hiện tại</Badge>}{step.status === 'completed' && <Badge variant="default" className="bg-harmony-green text-white text-micro">Hoàn tất</Badge>}</div>{index < processSteps.length - 1 && (<div className="ml-4 mt-2 mb-2"><div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' : step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'}`}></div></div>)}</div>))}</div></CardContent>
-            </Card>
-
-            {currentStep === 1 && (
-              <Card className="bg-white shadow-md-custom rounded-md-custom">
-                <CardHeader className="pb-4"><CardTitle className="text-heading-3 text-deep-gray font-medium">Chọn Khung Giờ</CardTitle></CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {timeSlots.map((slot) => (
-                      <div key={slot} className="flex items-center space-x-2">
-                        <input type="radio" id={slot} name="timeSlot" value={slot} checked={selectedTimeSlot === slot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="text-compassion-red focus:ring-compassion-red" />
-                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">{slot}</Label>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-heading-3 text-deep-gray font-medium">Tiến độ đăng ký</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="space-y-4">
+                  {processSteps.map((step, index) => (
+                    <div key={step.id}>
+                      <div className="flex items-center space-x-3">
+                        {getStepIcon(step)}
+                        <div className="flex-1">
+                          <p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' : step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'}`}>
+                            {step.title}
+                          </p>
+                        </div>
+                        {step.status === 'active' && <Badge variant="default" className="bg-compassion-red text-white text-micro">Hiện tại</Badge>}
+                        {step.status === 'completed' && <Badge variant="default" className="bg-harmony-green text-white text-micro">Hoàn tất</Badge>}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+                      {index < processSteps.length - 1 && (
+                        <div className="ml-4 mt-2 mb-2"><div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' : step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'}`}></div></div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           <div className="lg:col-span-2">
@@ -279,17 +327,31 @@ const BookingPage = () => {
         
         <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex gap-4">
-                <Button variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">← Quay lại Sự kiện</Button>
-                {currentStep > 1 && (<Button variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">Quay lại</Button>)}
+                <Button variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">
+                    ← Quay lại Sự kiện
+                </Button>
+                {currentStep > 1 && (
+                    <Button variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">
+                        Quay lại
+                    </Button>
+                )}
             </div>
             <div className="flex gap-4">
-                {currentStep < 2 ? (
-                    <Button size="lg" onClick={handleNext} className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                        disabled={!isStep1Complete}>
+                {currentStep < 3 ? (
+                    <Button
+                        size="lg"
+                        onClick={handleNext}
+                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                        disabled={(currentStep === 1 && !isHealthFormComplete) || (currentStep === 2 && !selectedTimeSlot)}
+                    >
                         Bước tiếp theo →
                     </Button>
                 ) : (
-                    <Button size="lg" onClick={() => navigate(`/booking-success/${selectedEvent.id}`)} className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105">
+                    <Button
+                        size="lg"
+                        onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
+                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                    >
                         Xác nhận Đặt lịch
                     </Button>
                 )}
