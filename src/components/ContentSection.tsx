@@ -1,3 +1,5 @@
+// src/components/ContentSection.tsx
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -22,15 +24,21 @@ const ContentSection = () => {
     }
   ];
 
-  // Use the first 2 events from centralized data
-  const events = allEvents.slice(0, 2).map(event => ({
-    id: event.id,
-    title: event.title,
-    date: event.date.split(',')[0] + ' ' + event.date.split(',')[1]?.trim(), // Format date for display
-    location: event.location,
-    time: event.time,
-    image: event.image
-  }));
+  // Sort events by date to get the latest two, then map to the required format
+  const latestEvents = [...allEvents]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 2)
+    .map(event => ({
+      id: event.id,
+      title: event.title,
+      date: event.date.split(',')[0] + ' ' + event.date.split(',')[1]?.trim(), // Format date for display
+      location: event.location,
+      time: event.time,
+      image: event.image,
+      // Pass the original event object for the link
+      originalEvent: event
+    }));
+
 
   const testimonials = [
     {
@@ -122,7 +130,7 @@ const ContentSection = () => {
           {/* Events Column */}
           <div className="content-section-col">
             <div className="content-section-card-group">
-              {events.map((event) => (
+              {latestEvents.map((event) => (
                 <div className="content-section-card" key={event.id}>
                   <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
                     <div className="p-6">
@@ -146,12 +154,14 @@ const ContentSection = () => {
                         <p className="text-body text-gentle-gray">📍 {event.location}</p>
                         <p className="text-body text-gentle-gray">🕐 {event.time}</p>
                       </div>
-                      <Button
-                        size="sm"
-                        className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
-                      >
-                        Register Now
-                      </Button>
+                      <Link to={`/book/${event.id}`}>
+                        <Button
+                          size="sm"
+                          className="bg-supportive-blue hover:bg-supportive-blue/90 text-white rounded-md-custom w-full mt-auto"
+                        >
+                          Register Now
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
