@@ -15,7 +15,7 @@ import { allEvents } from '@/data/eventsData';
 const QuestionRow = ({ question, children }: { question: string, children: React.ReactNode }) => (
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-3 border-b border-warm-gray/60">
     <Label className="text-body text-deep-gray mb-2 sm:mb-0 sm:w-3/5 pr-4">{question}</Label>
-    <div className="sm:w-2/5 flex items-center space-x-6">{children}</div>
+    <div className="sm:w-2/5 flex items-center justify-end space-x-6">{children}</div>
   </div>
 );
 
