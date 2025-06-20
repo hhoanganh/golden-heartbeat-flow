@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -7,15 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/ui/calendar'; // Calendar is imported but not explicitly used in this snippet's render
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input'; // Input is imported but not explicitly used in this snippet's render
+import { allEvents } from '@/data/eventsData'; // Import allEvents from the new central file
 
 const BookingPage = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
+  // Start currentStep at 1 for "Health Declaration"
+  const [currentStep, setCurrentStep] = useState(1); 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
   const [healthDeclaration, setHealthDeclaration] = useState({
@@ -26,53 +27,15 @@ const BookingPage = () => {
     noAlcohol: false
   });
 
-  // Sample events data - in a real app, this would be fetched from an API
-  const events = [
-    {
-      id: 1,
-      title: "Weekend Blood Drive - District 3",
-      date: "Dec 28, 2024",
-      time: "8:00 AM - 5:00 PM",
-      location: "Tao Dan Park, District 3",
-      address: "123 Nguyen Du Street, District 3, Ho Chi Minh City",
-      image: "https://images.unsplash.com/photo-1652149590094-98093f08509f?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["O-", "AB+"],
-      capacity: 150,
-      registered: 150
-    },
-    {
-      id: 2,
-      title: "New Year Hope Campaign",
-      date: "Jan 2, 2025",
-      time: "9:00 AM - 6:00 PM",
-      location: "Nguyen Hue Walking Street",
-      address: "Nguyen Hue Walking Street, District 1, Ho Chi Minh City",
-      image: "https://images.unsplash.com/photo-1642697552227-ca21f326fe41?q=80&w=1562&auto=format&fit=crop",
-      urgentNeeds: ["A+", "O+"],
-      capacity: 200,
-      registered: 156
-    },
-    {
-      id: 3,
-      title: "University Blood Drive - HCMUS",
-      date: "Jan 5, 2025",
-      time: "10:00 AM - 4:00 PM",
-      location: "Ho Chi Minh City University of Science",
-      address: "227 Nguyen Van Cu Street, District 5, Ho Chi Minh City",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1170&auto=format&fit=crop",
-      urgentNeeds: ["B+", "AB-"],
-      capacity: 100,
-      registered: 45
-    }
-  ];
+  // Find the selected event from the centralized data
+  // Use allEvents to find the event
+  const selectedEvent = allEvents.find(event => event.id === parseInt(eventId || '0')) || allEvents[0]; 
 
-  const selectedEvent = events.find(event => event.id === parseInt(eventId || '1')) || events[0];
-
+  // Updated process steps for a logged-in user
   const processSteps = [
-    { id: 1, title: "Event Details", status: currentStep === 1 ? "active" : currentStep > 1 ? "completed" : "upcoming" },
-    { id: 2, title: "Health Declaration", status: currentStep === 2 ? "active" : currentStep > 2 ? "completed" : "upcoming" },
-    { id: 3, title: "Time Slot", status: currentStep === 3 ? "active" : currentStep > 3 ? "completed" : "upcoming" },
-    { id: 4, title: "Review & Confirm", status: currentStep === 4 ? "active" : "upcoming" }
+    { id: 1, title: "Health Declaration", status: currentStep === 1 ? "active" : currentStep > 1 ? "completed" : "upcoming" },
+    { id: 2, title: "Time Slot", status: currentStep === 2 ? "active" : currentStep > 2 ? "completed" : "upcoming" },
+    { id: 3, title: "Review & Confirm", status: currentStep === 3 ? "active" : "upcoming" }
   ];
 
   const timeSlots = [
@@ -87,7 +50,8 @@ const BookingPage = () => {
   ];
 
   const handleNext = () => {
-    if (currentStep < 4) {
+    // Total of 3 steps
+    if (currentStep < 3) { 
       setCurrentStep(currentStep + 1);
     }
   };
@@ -114,60 +78,8 @@ const BookingPage = () => {
 
   const renderStepContent = () => {
     switch (currentStep) {
+      // Step 1: Health Declaration (formerly case 2)
       case 1:
-        return (
-          <Card className="bg-white shadow-md-custom rounded-md-custom">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
-                Event Confirmation
-              </CardTitle>
-              <p className="text-body text-gentle-gray">
-                Please confirm the event details below before proceeding with your donation booking.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="p-4 bg-supportive-blue/5 rounded-md-custom border border-supportive-blue/20">
-                <h3 className="text-body-large font-semibold text-deep-gray mb-3">
-                  Event Information
-                </h3>
-                <div className="space-y-2 text-body text-gentle-gray">
-                  <div className="flex items-start">
-                    <span className="mr-2 mt-1">📅</span>
-                    <span>{selectedEvent.date}</span>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="mr-2 mt-1">🕐</span>
-                    <span>{selectedEvent.time}</span>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="mr-2 mt-1">📍</span>
-                    <div>
-                      <div>{selectedEvent.location}</div>
-                      <div className="text-caption text-gentle-gray">{selectedEvent.address}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {selectedEvent.urgentNeeds.length > 0 && (
-                <div className="p-4 bg-error-red/5 rounded-md-custom border border-error-red/20">
-                  <p className="text-body-large font-semibold text-error-red mb-2">
-                    Urgent Blood Types Needed
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedEvent.urgentNeeds.map((bloodType) => (
-                      <Badge key={bloodType} variant="destructive" className="text-body">
-                        {bloodType}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        );
-      
-      case 2:
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
             <CardHeader className="pb-6">
@@ -255,7 +167,8 @@ const BookingPage = () => {
           </Card>
         );
       
-      case 3:
+      // Step 2: Select Time Slot (formerly case 3)
+      case 2:
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
             <CardHeader className="pb-6">
@@ -324,7 +237,8 @@ const BookingPage = () => {
           </Card>
         );
       
-      case 4:
+      // Step 3: Review & Confirm (formerly case 4)
+      case 3:
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
             <CardHeader className="pb-6">
@@ -392,7 +306,7 @@ const BookingPage = () => {
         <div className="grid lg:grid-cols-3 gap-xl">
           {/* Left Column - Event Summary & Progress */}
           <div className="lg:col-span-1 space-y-l">
-            {/* Event Summary Card */}
+            {/* Event Summary Card (Always visible, replaces former "Event Details" step content) */}
             <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
               <div className="relative h-32 lg:h-40">
                 <img
@@ -516,22 +430,26 @@ const BookingPage = () => {
           </div>
           
           <div className="flex gap-4">
-            {currentStep < 4 ? (
+            {/* Conditional rendering for Next Step / Confirm Booking button */}
+            {currentStep < 3 ? ( // Changed from 4 to 3 steps
               <Button
                 size="lg"
                 onClick={handleNext}
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
                 disabled={
-                  (currentStep === 2 && !Object.values(healthDeclaration).every(Boolean)) ||
-                  (currentStep === 3 && !selectedTimeSlot)
+                  // Health declaration for step 1 (was step 2)
+                  (currentStep === 1 && !Object.values(healthDeclaration).every(Boolean)) ||
+                  // Time slot for step 2 (was step 3)
+                  (currentStep === 2 && !selectedTimeSlot)
                 }
               >
                 Next Step →
               </Button>
             ) : (
+              // Final step button
               <Button
                 size="lg"
-                onClick={() => alert('Booking confirmed! You will receive a confirmation email shortly.')}
+                onClick={() => navigate(`/booking-success/${selectedEvent.id}`)} // Navigate to QR code page
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
               >
                 Confirm Booking
