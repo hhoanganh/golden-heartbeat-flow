@@ -240,7 +240,7 @@ const BookingPage = () => {
             <div className="flex gap-4">
                 {/* Corrected Button Logic */}
                 {currentStep === 1 && <Button variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">← Quay lại Sự kiện</Button>}
-                {currentStep > 1 && (<Button variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">Quay lại</Button>)}
+                {currentStep > 1 && (<Button variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">← Quay lại</Button>)}
             </div>
             <div className="flex gap-4">
                 {currentStep < 2 ? (
