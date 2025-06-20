@@ -1,86 +1,34 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { allEvents } from '@/data/eventsData';
-
-// Helper component for layout consistency in the form
-const QuestionRow = ({ question, children }: { question: string, children: React.ReactNode }) => (
-  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 border-b border-warm-gray/60">
-    <Label className="text-body text-deep-gray mb-2 sm:mb-0 sm:w-3/5 pr-4">{question}</Label>
-    <div className="sm:w-2/5 flex items-center space-x-6">{children}</div>
-  </div>
-);
 
 const BookingPage = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
 
-  // New, more detailed state for the health form
-  const [healthFormData, setHealthFormData] = useState({
-    everDonated: undefined as string | undefined,
-    hasCurrentIllness: undefined as string | undefined,
-    currentIllnessOther: '',
-    had12mDiseases: undefined as string | undefined,
-    had12mTransfusion: undefined as string | undefined,
-    had12mRabiesVax: undefined as string | undefined,
-    had12mOther: '',
-    had6mWeightLoss: undefined as string | undefined,
-    had6mCough: undefined as string | undefined,
-    had6mDental: undefined as string | undefined,
-    had6mTattoo: undefined as string | undefined,
-    tattooOther: '',
-    had6mDrugs: undefined as string | undefined,
-    had6mHivRisk: undefined as string | undefined,
-    had6mSameSex: undefined as string | undefined,
-    had1mSickness: undefined as string | undefined,
-    sicknessOther: '',
-    had1mVax: undefined as string | undefined,
-    vaxOther: '',
-    inEpidemicZone: undefined as string | undefined,
-    had7dFlu: undefined as string | undefined,
-    had7dMeds: undefined as string | undefined,
-    had7dHepB: undefined as string | undefined,
-    hepbOther: '',
-    isFemale: false,
-    isPregnant: undefined as string | undefined,
-    hadPeriod: undefined as string | undefined,
+  // Updated healthDeclaration state to match the Vietnamese form
+  const [healthDeclaration, setHealthDeclaration] = useState({
+    noRecentIllness: false,
+    noHighRiskBehavior: false,
+    noRecentMedicalProcedures: false,
+    isFemaleAndEligible: true, // Default to true, will be checked if female
     agreesToHivTest: false,
+    feelingWell: false,
   });
-  
-  const handleFormChange = (field: keyof typeof healthFormData, value: any) => {
-    setHealthFormData(prev => ({ ...prev, [field]: value }));
-  };
 
-  const isHealthFormComplete = useMemo(() => {
-    const questionsToCheck = [
-      'everDonated', 'hasCurrentIllness', 'had12mDiseases', 'had12mTransfusion',
-      'had12mRabiesVax', 'had6mWeightLoss', 'had6mCough', 'had6mDental',
-      'had6mTattoo', 'had6mDrugs', 'had6mHivRisk', 'had6mSameSex', 'had1mSickness',
-      'had1mVax', 'inEpidemicZone', 'had7dFlu', 'had7dMeds', 'had7dHepB'
-    ];
-    
-    for (const q of questionsToCheck) {
-      if (healthFormData[q as keyof typeof healthFormData] === undefined) return false;
-    }
-
-    if (healthFormData.isFemale) {
-      if (healthFormData.isPregnant === undefined || healthFormData.hadPeriod === undefined) {
-        return false;
-      }
-    }
-    
-    return healthFormData.agreesToHivTest;
-  }, [healthFormData]);
 
   const selectedEvent = allEvents.find(event => event.id === parseInt(eventId || '0')) || allEvents[0];
 
@@ -91,14 +39,31 @@ const BookingPage = () => {
   ];
 
   const timeSlots = [
-    "8:00 AM - 9:00 AM", "9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM",
-    "11:00 AM - 12:00 PM", "1:00 PM - 2:00 PM", "2:00 PM - 3:00 PM",
-    "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM"
+    "8:00 AM - 9:00 AM",
+    "9:00 AM - 10:00 AM",
+    "10:00 AM - 11:00 AM",
+    "11:00 AM - 12:00 PM",
+    "1:00 PM - 2:00 PM",
+    "2:00 PM - 3:00 PM",
+    "3:00 PM - 4:00 PM",
+    "4:00 PM - 5:00 PM"
   ];
 
-  const handleNext = () => { if (currentStep < 3) setCurrentStep(currentStep + 1); };
-  const handlePrevious = () => { if (currentStep > 1) setCurrentStep(currentStep - 1); };
-  const handleBack = () => navigate('/events');
+  const handleNext = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleBack = () => {
+    navigate('/events');
+  };
 
   const getStepIcon = (step: typeof processSteps[0]) => {
     if (step.status === 'completed') {
@@ -115,118 +80,211 @@ const BookingPage = () => {
       case 1:
         return (
           <Card className="bg-white shadow-md-custom rounded-md-custom">
-            <CardHeader className="pb-4">
+            <CardHeader className="pb-6">
               <CardTitle className="text-heading-2 text-deep-gray font-semibold">
-                Tờ Khai Dành Cho Người Hiến Máu
+                Bảng câu hỏi dành cho người hiến máu
               </CardTitle>
               <p className="text-body text-gentle-gray">
-                Vui lòng trả lời tất cả các câu hỏi dưới đây. Thông tin của bạn sẽ được bảo mật.
+                Vui lòng xác nhận các thông tin dưới đây để đảm bảo an toàn cho việc hiến máu.
               </p>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <QuestionRow question="Anh/chị đã từng hiến máu chưa?">
-                <RadioGroup onValueChange={(v) => handleFormChange('everDonated', v)} value={healthFormData.everDonated} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q1-yes" /><Label htmlFor="q1-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q1-no" /><Label htmlFor="q1-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-
-              <QuestionRow question="Hiện tại, anh/chị có bị các bệnh: viêm khớp, đau dạ dày, viêm gan/vàng da, bệnh tim, huyết áp thấp/cao, hen, ho kéo dài, bệnh máu, lao?">
-                <RadioGroup onValueChange={(v) => handleFormChange('hasCurrentIllness', v)} value={healthFormData.hasCurrentIllness} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q2-yes" /><Label htmlFor="q2-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q2-no" /><Label htmlFor="q2-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              {healthFormData.hasCurrentIllness === 'yes' && <Input placeholder="Bệnh khác (ghi cụ thể)..." className="mt-2" onChange={e => handleFormChange('currentIllnessOther', e.target.value)} />}
-              
-              <div className="font-bold text-deep-gray pt-4 mt-4 border-t">Trong vòng 12 tháng gần đây:</div>
-              <QuestionRow question="Có mắc và đã điều trị khỏi các bệnh Sốt rét, Giang mai, Lao, Viêm gan, Phẫu thuật ngoại khoa?">
-                <RadioGroup onValueChange={(v) => handleFormChange('had12mDiseases', v)} value={healthFormData.had12mDiseases} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q3-yes" /><Label htmlFor="q3-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q3-no" /><Label htmlFor="q3-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              <QuestionRow question="Được truyền máu và các chế phẩm máu?">
-                <RadioGroup onValueChange={(v) => handleFormChange('had12mTransfusion', v)} value={healthFormData.had12mTransfusion} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q4-yes" /><Label htmlFor="q4-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q4-no" /><Label htmlFor="q4-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-               <QuestionRow question="Tiêm vắc xin bệnh dại?">
-                <RadioGroup onValueChange={(v) => handleFormChange('had12mRabiesVax', v)} value={healthFormData.had12mRabiesVax} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q4a-yes" /><Label htmlFor="q4a-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q4a-no" /><Label htmlFor="q4a-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-
-              <div className="font-bold text-deep-gray pt-4 mt-4 border-t">Trong vòng 06 tháng gần đây:</div>
-              <QuestionRow question="Sút cân nhanh không rõ nguyên nhân, ho kéo dài?">
-                <RadioGroup onValueChange={(v) => handleFormChange('had6mWeightLoss', v)} value={healthFormData.had6mWeightLoss} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q5-yes" /><Label htmlFor="q5-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q5-no" /><Label htmlFor="q5-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              <QuestionRow question="Chữa răng, châm cứu, nhổ răng, xăm mình, xỏ lỗ tai/mũi?">
-                <RadioGroup onValueChange={(v) => handleFormChange('had6mTattoo', v)} value={healthFormData.had6mTattoo} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q6-yes" /><Label htmlFor="q6-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q6-no" /><Label htmlFor="q6-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              <QuestionRow question="Sử dụng ma túy?">
-                 <RadioGroup onValueChange={(v) => handleFormChange('had6mDrugs', v)} value={healthFormData.had6mDrugs} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q7-yes" /><Label htmlFor="q7-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q7-no" /><Label htmlFor="q7-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              <QuestionRow question="Quan hệ tình dục với người nhiễm HIV hoặc người có hành vi nguy cơ lây nhiễm HIV?">
-                 <RadioGroup onValueChange={(v) => handleFormChange('had6mHivRisk', v)} value={healthFormData.had6mHivRisk} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q8-yes" /><Label htmlFor="q8-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q8-no" /><Label htmlFor="q8-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              <QuestionRow question="Quan hệ tình dục với người cùng giới?">
-                 <RadioGroup onValueChange={(v) => handleFormChange('had6mSameSex', v)} value={healthFormData.had6mSameSex} className="flex space-x-6">
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="q9-yes" /><Label htmlFor="q9-yes">Có</Label></div>
-                  <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="q9-no" /><Label htmlFor="q9-no">Không</Label></div>
-                </RadioGroup>
-              </QuestionRow>
-              
-              <div className="flex items-center space-x-2 py-4 mt-4 border-t">
-                  <Checkbox id="isFemale" onCheckedChange={(c) => handleFormChange('isFemale', c)} checked={healthFormData.isFemale} />
-                  <Label htmlFor="isFemale" className="font-bold text-deep-gray">Câu hỏi dành cho phụ nữ</Label>
-              </div>
-              {healthFormData.isFemale && (
-                <div className="pl-6 space-y-2">
-                   <QuestionRow question="Hiện có thai, hoặc nuôi con dưới 12 tháng tuổi?">
-                    <RadioGroup onValueChange={(v) => handleFormChange('isPregnant', v)} value={healthFormData.isPregnant} className="flex space-x-6">
-                      <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf1-yes" /><Label htmlFor="qf1-yes">Có</Label></div>
-                      <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf1-no" /><Label htmlFor="qf1-no">Không</Label></div>
-                    </RadioGroup>
-                  </QuestionRow>
-                  <QuestionRow question="Có kinh nguyệt trong vòng một tuần hay không?">
-                    <RadioGroup onValueChange={(v) => handleFormChange('hadPeriod', v)} value={healthFormData.hadPeriod} className="flex space-x-6">
-                      <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="qf2-yes" /><Label htmlFor="qf2-yes">Có</Label></div>
-                      <div className="flex items-center space-x-2"><RadioGroupItem value="no" id="qf2-no" /><Label htmlFor="qf2-no">Không</Label></div>
-                    </RadioGroup>
-                  </QuestionRow>
-                </div>
-              )}
-              
-              <div className="flex items-start space-x-3 pt-6 border-t mt-4">
-                  <Checkbox id="agreesToHivTest" onCheckedChange={(c) => handleFormChange('agreesToHivTest', c as boolean)} checked={healthFormData.agreesToHivTest} className="mt-1" />
-                  <Label htmlFor="agreesToHivTest" className="text-body text-deep-gray -mt-px">
-                  Anh/chị có đồng ý xét nghiệm HIV, nhận thông báo và được tư vấn khi kết quả xét nghiệm HIV nghi ngờ dương tính?
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                {/* Simplified questions from the provided image */}
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="feelingWell"
+                    checked={healthDeclaration.feelingWell}
+                    onCheckedChange={(checked) =>
+                      setHealthDeclaration(prev => ({ ...prev, feelingWell: checked as boolean }))
+                    }
+                    className="mt-1"
+                  />
+                  <Label htmlFor="feelingWell" className="text-body text-deep-gray -mt-px">
+                    Hiện tại, tôi cảm thấy khỏe mạnh, không có các triệu chứng như cúm, ho, nhức đầu, sốt.
                   </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="noRecentIllness"
+                    checked={healthDeclaration.noRecentIllness}
+                    onCheckedChange={(checked) =>
+                      setHealthDeclaration(prev => ({ ...prev, noRecentIllness: checked as boolean }))
+                    }
+                    className="mt-1"
+                  />
+                  <Label htmlFor="noRecentIllness" className="text-body text-deep-gray -mt-px">
+                    Trong vòng 1 tháng qua, tôi không mắc các bệnh về đường tiết niệu, viêm da, viêm phế quản, sởi, quai bị, và không tiêm vắc-xin.
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="noRecentMedicalProcedures"
+                    checked={healthDeclaration.noRecentMedicalProcedures}
+                    onCheckedChange={(checked) =>
+                      setHealthDeclaration(prev => ({ ...prev, noRecentMedicalProcedures: checked as boolean }))
+                    }
+                    className="mt-1"
+                  />
+                  <Label htmlFor="noRecentMedicalProcedures" className="text-body text-deep-gray -mt-px">
+                    Trong vòng 6 tháng qua, tôi không chữa răng, châm cứu, xăm mình, xỏ lỗ tai/mũi.
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="noHighRiskBehavior"
+                    checked={healthDeclaration.noHighRiskBehavior}
+                    onCheckedChange={(checked) =>
+                      setHealthDeclaration(prev => ({ ...prev, noHighRiskBehavior: checked as boolean }))
+                    }
+                    className="mt-1"
+                  />
+                  <Label htmlFor="noHighRiskBehavior" className="text-body text-deep-gray -mt-px">
+                    Trong vòng 6 tháng qua, tôi không sử dụng ma túy và không có hành vi tình dục nguy cơ cao.
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="agreesToHivTest"
+                    checked={healthDeclaration.agreesToHivTest}
+                    onCheckedChange={(checked) =>
+                      setHealthDeclaration(prev => ({ ...prev, agreesToHivTest: checked as boolean }))
+                    }
+                    className="mt-1"
+                  />
+                  <Label htmlFor="agreesToHivTest" className="text-body text-deep-gray -mt-px">
+                    Tôi đồng ý xét nghiệm HIV, nhận thông báo và được tư vấn khi kết quả xét nghiệm HIV nghi ngờ hoặc dương tính.
+                  </Label>
+                </div>
+              </div>
+
+              <div className="p-4 bg-warning-yellow/10 rounded-md-custom border border-warning-yellow/30">
+                <p className="text-caption text-gentle-gray">
+                  <strong>Lưu ý:</strong> Nhân viên y tế sẽ thực hiện sàng lọc sức khỏe nhanh trước khi hiến máu để đảm bảo an toàn cho bạn và người nhận máu.
+                </p>
               </div>
             </CardContent>
           </Card>
         );
 
-      // --- Cases 2 and 3 remain unchanged ---
       case 2:
-        return (/* ... Time Slot Selection JSX ... */);
+        return (
+          <Card className="bg-white shadow-md-custom rounded-md-custom">
+            <CardHeader className="pb-6">
+              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
+                Chọn Khung Giờ
+              </CardTitle>
+              <p className="text-body text-gentle-gray">
+                Chọn khung giờ bạn muốn hiến máu vào ngày {selectedEvent.date}.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Khung giờ có sẵn</h3>
+                  <div className="space-y-2">
+                    {timeSlots.map((slot) => (
+                      <div key={slot} className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id={slot}
+                          name="timeSlot"
+                          value={slot}
+                          checked={selectedTimeSlot === slot}
+                          onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                          className="text-compassion-red focus:ring-compassion-red"
+                        />
+                        <Label htmlFor={slot} className="text-body text-deep-gray cursor-pointer">
+                          {slot}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-4">Quy trình dự kiến</h3>
+                  <div className="space-y-3 text-body text-gentle-gray">
+                    <div className="flex items-start">
+                      <span className="mr-2 mt-1">⏱️</span>
+                      <div>
+                        <strong>Tổng thời gian:</strong> Khoảng 45-60 phút
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="mr-2 mt-1">📋</span>
+                      <div>
+                        <strong>Sàng lọc sức khoẻ:</strong> 10-15 phút
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="mr-2 mt-1">🩸</span>
+                      <div>
+                        <strong>Quá trình hiến máu:</strong> 8-10 phút
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="mr-2 mt-1">🍪</span>
+                      <div>
+                        <strong>Nghỉ ngơi & phục hồi:</strong> 10-15 phút
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
       case 3:
-        return (/* ... Review & Confirm JSX ... */);
+        return (
+          <Card className="bg-white shadow-md-custom rounded-md-custom">
+            <CardHeader className="pb-6">
+              <CardTitle className="text-heading-2 text-deep-gray font-semibold">
+                Xem Lại & Xác Nhận
+              </CardTitle>
+              <p className="text-body text-gentle-gray">
+                Vui lòng kiểm tra lại thông tin trước khi xác nhận lịch hẹn.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <div className="p-4 bg-supportive-blue/5 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Thông tin sự kiện</h3>
+                  <div className="space-y-2 text-body text-gentle-gray">
+                    <div><strong>Sự kiện:</strong> {selectedEvent.title}</div>
+                    <div><strong>Ngày:</strong> {selectedEvent.date}</div>
+                    <div><strong>Địa điểm:</strong> {selectedEvent.location}</div>
+                    <div><strong>Địa chỉ:</strong> {selectedEvent.address}</div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-harmony-green/5 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Lịch hẹn của bạn</h3>
+                  <div className="space-y-2 text-body text-gentle-gray">
+                    <div><strong>Khung giờ:</strong> {selectedTimeSlot || "Chưa chọn"}</div>
+                    <div><strong>Thời gian dự kiến:</strong> 45-60 phút</div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-warning-yellow/10 rounded-md-custom">
+                  <h3 className="text-body-large font-semibold text-deep-gray mb-3">Nhắc nhở quan trọng</h3>
+                  <ul className="space-y-2 text-body text-gentle-gray">
+                    <li>• Mang theo giấy tờ tùy thân có ảnh</li>
+                    <li>• Ăn nhẹ trước khi hiến máu</li>
+                    <li>• Uống nhiều nước</li>
+                    <li>• Mặc trang phục thoải mái, tay áo có thể xắn lên</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
       default:
         return null;
     }
@@ -235,7 +293,9 @@ const BookingPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+
       <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
+        {/* Hero/Introduction Section */}
         <section className="mb-xl">
           <h1 className="text-display text-deep-gray font-bold mb-4 text-center lg:text-left">
             Đặt Lịch Hiến Máu
@@ -246,14 +306,18 @@ const BookingPage = () => {
         </section>
 
         <div className="grid lg:grid-cols-3 gap-xl">
-          {/* --- LEFT COLUMN --- */}
+          {/* Left Column - Event Summary & Progress */}
           <div className="lg:col-span-1 space-y-l">
-            {/* Event Summary Card */}
             <Card className="bg-white shadow-md-custom rounded-md-custom overflow-hidden">
               <div className="relative h-32 lg:h-40">
-                <img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" />
+                <img
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
+
               <CardHeader className="pb-4">
                 <CardTitle className="text-heading-3 text-deep-gray font-medium line-clamp-2">
                   {selectedEvent.title}
@@ -273,13 +337,18 @@ const BookingPage = () => {
                   </div>
                 </div>
               </CardHeader>
+
               {selectedEvent.urgentNeeds.length > 0 && (
                 <CardContent className="pt-0">
                   <div className="p-3 bg-error-red/10 rounded-md-custom">
-                    <p className="text-caption font-medium text-error-red mb-1">Nhu cầu khẩn cấp:</p>
+                    <p className="text-caption font-medium text-error-red mb-1">
+                      Nhu cầu khẩn cấp:
+                    </p>
                     <div className="flex flex-wrap gap-1">
                       {selectedEvent.urgentNeeds.map((bloodType) => (
-                        <Badge key={bloodType} variant="destructive" className="text-micro">{bloodType}</Badge>
+                        <Badge key={bloodType} variant="destructive" className="text-micro">
+                          {bloodType}
+                        </Badge>
                       ))}
                     </div>
                   </div>
@@ -287,10 +356,11 @@ const BookingPage = () => {
               )}
             </Card>
 
-            {/* Booking Progress Card */}
             <Card className="bg-white shadow-md-custom rounded-md-custom">
               <CardHeader className="pb-4">
-                <CardTitle className="text-heading-3 text-deep-gray font-medium">Tiến độ đăng ký</CardTitle>
+                <CardTitle className="text-heading-3 text-deep-gray font-medium">
+                  Tiến độ đăng ký
+                </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="space-y-4">
@@ -299,16 +369,28 @@ const BookingPage = () => {
                       <div className="flex items-center space-x-3">
                         {getStepIcon(step)}
                         <div className="flex-1">
-                          <p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' : step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'}`}>
+                          <p className={`text-body font-medium ${step.status === 'active' ? 'text-compassion-red' :
+                            step.status === 'completed' ? 'text-harmony-green' : 'text-gentle-gray'
+                            }`}>
                             {step.title}
                           </p>
                         </div>
-                        {step.status === 'active' && <Badge variant="default" className="bg-compassion-red text-white text-micro">Hiện tại</Badge>}
-                        {step.status === 'completed' && <Badge variant="default" className="bg-harmony-green text-white text-micro">Hoàn tất</Badge>}
+                        {step.status === 'active' && (
+                          <Badge variant="default" className="bg-compassion-red text-white text-micro">
+                            Hiện tại
+                          </Badge>
+                        )}
+                        {step.status === 'completed' && (
+                          <Badge variant="default" className="bg-harmony-green text-white text-micro">
+                            Hoàn tất
+                          </Badge>
+                        )}
                       </div>
                       {index < processSteps.length - 1 && (
                         <div className="ml-4 mt-2 mb-2">
-                          <div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' : step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'}`}></div>
+                          <div className={`w-0.5 h-4 ${step.status === 'completed' ? 'bg-harmony-green' :
+                            step.status === 'active' ? 'bg-compassion-red' : 'bg-warm-gray'
+                            }`}></div>
                         </div>
                       )}
                     </div>
@@ -318,50 +400,59 @@ const BookingPage = () => {
             </Card>
           </div>
 
-          {/* --- RIGHT COLUMN --- */}
+          {/* Right Column - Dynamic Content/Form Section */}
           <div className="lg:col-span-2">
             {renderStepContent()}
           </div>
         </div>
-        
-        {/* Bottom navigation buttons */}
-        <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex gap-4">
-                <Button variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">
-                    ← Quay lại Sự kiện
-                </Button>
-                {currentStep > 1 && (
-                    <Button variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">
-                        Quay lại
-                    </Button>
-                )}
-            </div>
 
-            <div className="flex gap-4">
-                {currentStep < 3 ? (
-                    <Button
-                        size="lg"
-                        onClick={handleNext}
-                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                        disabled={
-                            (currentStep === 1 && !isHealthFormComplete) ||
-                            (currentStep === 2 && !selectedTimeSlot)
-                        }
-                    >
-                        Bước tiếp theo →
-                    </Button>
-                ) : (
-                    <Button
-                        size="lg"
-                        onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
-                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                    >
-                        Xác nhận Đặt lịch
-                    </Button>
-                )}
-            </div>
+        {/* Navigation & Action Buttons Section */}
+        <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              onClick={handleBack}
+              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
+            >
+              ← Quay lại Sự kiện
+            </Button>
+            {currentStep > 1 && (
+              <Button
+                variant="outline"
+                onClick={handlePrevious}
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
+              >
+                Quay lại
+              </Button>
+            )}
+          </div>
+
+          <div className="flex gap-4">
+            {currentStep < 3 ? (
+              <Button
+                size="lg"
+                onClick={handleNext}
+                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                disabled={
+                  (currentStep === 1 && !Object.values(healthDeclaration).every(Boolean)) ||
+                  (currentStep === 2 && !selectedTimeSlot)
+                }
+              >
+                Bước tiếp theo →
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
+                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+              >
+                Xác nhận Đặt lịch
+              </Button>
+            )}
+          </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );
