@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -40,10 +41,10 @@ const Header = () => {
               Find Events
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </Link>
-            <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+            <Link to="/faqs" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               FAQs
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </a>
+            </Link>
             {/* Updated 'Contact Us' link for desktop navigation */}
             <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Contact Us
@@ -82,7 +83,7 @@ const Header = () => {
             <nav className="flex flex-col space-y-4 p-4">
               <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</Link>
               <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</Link>
-              <a href="#" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</a>
+              <Link to="/faqs" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</Link>
               {/* Updated 'Contact Us' link for mobile navigation */}
               <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
               <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
