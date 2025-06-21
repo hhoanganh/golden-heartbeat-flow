@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Heart, Users, Calendar, TrendingUp } from 'lucide-react';
+import { Heart, Users, TrendingUp } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const ImpactStories = () => {
   const [visibleBlocks, setVisibleBlocks] = useState(new Set());
@@ -27,9 +29,37 @@ const ImpactStories = () => {
   }, []);
 
   const isVisible = (blockId: string) => visibleBlocks.has(blockId);
+  // Data for the gallery section
+  const galleryImages = [
+    { id: 1, src: "https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?q=80&w=800&auto=format&fit=crop", alt: "A smiling blood donor" },
+    { id: 2, src: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800&auto=format&fit=crop", alt: "Medical staff handling blood bags" },
+    { id: 3, src: "https://images.unsplash.com/photo-1582719478212-c857e540b691?q=80&w=800&auto=format&fit=crop", alt: "A grateful recipient" },
+    { id: 4, src: "https://images.unsplash.com/photo-1518398046578-82877546544a?q=80&w=800&auto=format&fit=crop", alt: "Community event for blood donation" },
+    { id: 5, src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop", alt: "Doctor checking a patient" },
+    { id: 6, src: "https://images.unsplash.com/photo-1542830239-2a414d502372?q=80&w=800&auto=format&fit=crop", alt: "Close-up of a blood bag" },
+  ];
 
+  // Data for the news section, mimicking ContentSection
+  const newsArticles = [
+    {
+      id: 1,
+      title: "Local Hospital Reports 40% Increase in Emergency Blood Needs",
+      snippet: "District 1 General Hospital sees unprecedented demand as community responds with overwhelming support...",
+      image: "https://images.unsplash.com/photo-1686797366685-6420f4bd9c2f?q=80&w=1170&auto=format&fit=crop",
+      type: "news"
+    },
+    {
+      id: 2,
+      title: "Community Blood Drive Saves 150 Lives This Month",
+      snippet: "Thanks to generous donors across Ho Chi Minh City, our latest campaign exceeded all expectations...",
+      image: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1583&auto=format&fit=crop",
+      type: "impact"
+    }
+  ];
   return (
-    <div className="min-h-screen bg-white">
+      <div className="bg-white">
+      <Header />
+
       {/* Full-Screen Hero Container */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Hero Background */}
@@ -114,12 +144,13 @@ const ImpactStories = () => {
             Khoảnh Khắc Ý Nghĩa
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div 
-                key={i} 
-                className="aspect-square bg-gradient-to-br from-compassion-red/20 to-supportive-blue/20 rounded-lg flex items-center justify-center hover:scale-105 transition-transform duration-300"
+            {galleryImages.map((image) => (
+              <div  
+                key={image.id} 
+                className="aspect-square bg-warm-gray/30 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
               >
-                <Heart className="w-8 h-8 text-compassion-red/60" />
+                            
+                <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
@@ -156,26 +187,35 @@ const ImpactStories = () => {
             Tin Tức Mới Nhất
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                title: "Chương trình hiến máu cộng đồng tại Quận 1",
-                date: "15 tháng 12, 2024",
-                excerpt: "Hơn 500 đơn vị máu đã được thu thập trong sự kiện..."
-              },
-              {
-                title: "Câu chuyện cảm động của gia đình Minh",
-                date: "12 tháng 12, 2024", 
-                excerpt: "Sau tai nạn giao thông, Minh đã được cứu sống..."
-              }
-            ].map((article, i) => (
-              <div key={i} className="bg-white border border-warm-gray/30 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
-                <h4 className="text-xl font-semibold text-deep-gray mb-2">
-                  {article.title}
-                </h4>
-                <p className="text-sm text-gentle-gray mb-3">{article.date}</p>
-                <p className="text-gentle-gray leading-relaxed">
-                  {article.excerpt}
-                </p>
+            {newsArticles.map((article) => (
+              <div className="bg-white rounded-md-custom shadow-md-custom overflow-hidden hover:shadow-lg transition-shadow duration-300 group" key={article.id}>
+                <div className="p-6">
+                  <div className="relative overflow-hidden mb-4">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-48 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-compassion-red text-white px-3 py-1 rounded-full text-caption font-medium">
+                        {article.type === 'news' ? 'News' : 'Impact Story'}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="text-heading-3 text-deep-gray font-medium mb-3 line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-body text-gentle-gray mb-4 line-clamp-3">
+                    {article.snippet}
+                  </p>
+                  <Button
+                    variant="ghost"
+                    className="text-compassion-red hover:text-compassion-red/80 p-0 h-auto font-medium text-body group mt-auto self-start"
+                  >
+                    Read More
+                    <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -243,9 +283,9 @@ const ImpactStories = () => {
               </Button>
             </Link>
             <Link to="/">
-              <Button 
-                variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-compassion-red text-lg px-8 py-4 rounded-full w-full md:w-auto"
+               <Button
+                className="bg-supportive-blue hover:bg-supportive-blue/90 text-white text-lg px-8 py-4 rounded-full w-full md:w-auto"
+
               >
                 Quay Về Trang Chủ
               </Button>
