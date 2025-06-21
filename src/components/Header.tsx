@@ -125,7 +125,7 @@ const Header = () => {
                         <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Bookings & Details</DropdownMenuItem></Link>
                         <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Status Updates</DropdownMenuItem></Link>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <Link to="/staff-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -147,7 +147,7 @@ const Header = () => {
                         <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Screening Outcome Input</DropdownMenuItem></Link>
                         <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Donor Medical History</DropdownMenuItem></Link>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -170,7 +170,7 @@ const Header = () => {
                         <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>User Management</DropdownMenuItem></Link>
                         <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Reporting</DropdownMenuItem></Link>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <Link to="/admin-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
