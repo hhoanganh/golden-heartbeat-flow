@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -47,11 +46,23 @@ const BookingConfirmation = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+
+      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-l">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
+          <div className="text-center">
+            <h1 className="text-display text-deep-gray font-bold mb-4">
+              Lịch Hẹn Đã Được Xác Nhận
+            </h1>
+            <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
+              Cảm ơn bạn đã tham gia cứu người. Dưới đây là thông tin chi tiết về lịch hẹn của bạn.
+            </p>
+          </div>
+        </div>
+      </section>
       
       <div className="max-w-4xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
         {/* Mobile Layout */}
         <div className="lg:hidden space-y-xl">
-          {/* Confirmation Header Container */}
           <div className="text-center space-y-4">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-harmony-green/10 rounded-full mb-4">
               <Check className="w-8 h-8 text-harmony-green" />
@@ -296,7 +307,6 @@ const BookingConfirmation = () => {
 
           {/* Right Column */}
           <div className="space-y-xl">
-            {/* Confirmation Header Container */}
             <div className="text-center space-y-6">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-harmony-green/10 rounded-full">
                 <Check className="w-10 h-10 text-harmony-green" />
