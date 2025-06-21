@@ -11,6 +11,7 @@ import LoginRegister from "./pages/LoginRegister";
 import FAQs from "./pages/FAQs";
 import BookingPage from "./pages/BookingPage";
 import BookingConfirmation from "./pages/BookingConfirmation";
+import FindCenters from "./pages/FindCenters";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/events" element={<Events />} />
             <Route path="/book/:eventId" element={<BookingPage />} />
             <Route path="/booking-confirmation/:eventId" element={<BookingConfirmation />} />
+            <Route path="/centers" element={<FindCenters />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
