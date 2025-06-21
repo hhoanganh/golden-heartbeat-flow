@@ -33,10 +33,10 @@ const ImpactStories = () => {
   const galleryImages = [
     { id: 1, src: "https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?q=80&w=800&auto=format&fit=crop", alt: "A smiling blood donor" },
     { id: 2, src: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800&auto=format&fit=crop", alt: "Medical staff handling blood bags" },
-    { id: 3, src: "https://images.unsplash.com/photo-1582719478212-c857e540b691?q=80&w=800&auto=format&fit=crop", alt: "A grateful recipient" },
-    { id: 4, src: "https://images.unsplash.com/photo-1518398046578-82877546544a?q=80&w=800&auto=format&fit=crop", alt: "Community event for blood donation" },
+    { id: 3, src: "https://plus.unsplash.com/premium_photo-1678310820282-65bc8f98839d?q=80&w=687&auto=format&fit=crop", alt: "A grateful recipient" },
+    { id: 4, src: "https://images.unsplash.com/photo-1542868727-2666cd25399c?q=80&w=1170&auto=format&fit=crop", alt: "Community event for blood donation" },
     { id: 5, src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop", alt: "Doctor checking a patient" },
-    { id: 6, src: "https://images.unsplash.com/photo-1542830239-2a414d502372?q=80&w=800&auto=format&fit=crop", alt: "Close-up of a blood bag" },
+    { id: 6, src: "https://plus.unsplash.com/premium_photo-1723114841540-0189f6449713?q=80&w=1170&auto=format&fit=crop", alt: "Close-up of a blood bag" },
   ];
 
   // Data for the news section, mimicking ContentSection
