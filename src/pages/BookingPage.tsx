@@ -261,12 +261,12 @@ const BookingPage = () => {
             )}
           </div>
           <div className="flex gap-4">
-            {currentStep < 4 ? (
+            {currentStep < 2 ? (
               <Button
                 size="lg"
                 onClick={handleNext}
                 className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                disabled={!isStepComplete()}
+                disabled={!isStepComplete}
               >
                 Bước tiếp theo →
               </Button>
