@@ -180,19 +180,22 @@ const BookingPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
-        <section className="mb-xl">
-          <h1 className="text-display text-deep-gray font-bold mb-4 text-center lg:text-left">
-            Đặt Lịch Hiến Máu
-          </h1>
-          <p className="text-body-large text-gentle-gray text-center lg:text-left max-w-2xl">
-            Hoàn thành các bước để giữ chỗ của bạn tại sự kiện cứu người này.
-          </p>
-        </section>
+      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-l">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
+          <div className="text-center">
+            <h1 className="text-display text-deep-gray font-bold mb-4">
+              Đặt Lịch Hiến Máu
+            </h1>
+            <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
+              Hoàn thành các bước để giữ chỗ của bạn tại sự kiện cứu người này.
+            </p>
+          </div>
+        </div>
+      </section>
 
+      <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
         <div className="grid lg:grid-cols-3 gap-xl">
           <div className="lg:col-span-1 space-y-l">
-            {/* Logic to hide the time slot card on step 2 */}
             {currentStep === 1 && (
               <Card className="bg-white shadow-md-custom rounded-md-custom">
                 <CardHeader className="pb-4">
