@@ -31,7 +31,7 @@ const ImpactStories = () => {
   const isVisible = (blockId: string) => visibleBlocks.has(blockId);
   // Data for the gallery section
   const galleryImages = [
-    { id: 1, src: "https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?q=80&w=800&auto=format&fit=crop", alt: "A smiling blood donor" },
+    { id: 1, src: "https://images.unsplash.com/photo-1643981893323-d8e2b14b1d82?q=80&w=687&auto=format&fit=crop", alt: "A smiling blood donor" },
     { id: 2, src: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800&auto=format&fit=crop", alt: "Medical staff handling blood bags" },
     { id: 3, src: "https://plus.unsplash.com/premium_photo-1678310820282-65bc8f98839d?q=80&w=687&auto=format&fit=crop", alt: "A grateful recipient" },
     { id: 4, src: "https://images.unsplash.com/photo-1542868727-2666cd25399c?q=80&w=1170&auto=format&fit=crop", alt: "Community event for blood donation" },
