@@ -75,111 +75,9 @@ const Header = () => {
           </nav>
 
           {/* Right side - Login/Register and Language */}
-                    <div className="flex items-center space-x-4">
-            <Link to="/login">
-              <Button
-                variant="outline"
-                className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
-              >
-                Login / Register
-              </Button>
-            </Link>
-          
-          <div className="flex items-center space-x-4">            
-            {/* Desktop Login/Role Icons */}
-            <div className="hidden md:flex items-center space-x-1">
-              {/* Donor Icon */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon"><User className="h-5 w-5 text-deep-gray" /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Registered Donor</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Profile</DropdownMenuItem></Link>
-                      <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Appointments</DropdownMenuItem></Link>
-                      <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Donation Journey</DropdownMenuItem></Link>
-                      <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My QR Code</DropdownMenuItem></Link>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Logout</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TooltipTrigger>
-                <TooltipContent><p>Registered Donor</p></TooltipContent>
-              </Tooltip>
-
-              {/* Center Staff Icon */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon"><ClipboardList className="h-5 w-5 text-deep-gray" /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Check-in</DropdownMenuItem></Link>
-                      <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Bookings & Details</DropdownMenuItem></Link>
-                      <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Status Updates</DropdownMenuItem></Link>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>My Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Logout</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TooltipTrigger>
-                <TooltipContent><p>Center Staff</p></TooltipContent>
-              </Tooltip>
-
-              {/* Medical Professional Icon */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon"><Stethoscope className="h-5 w-5 text-deep-gray" /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Health Declaration Review</DropdownMenuItem></Link>
-                      <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Screening Outcome Input</DropdownMenuItem></Link>
-                      <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Donor Medical History</DropdownMenuItem></Link>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>My Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Logout</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TooltipTrigger>
-                <TooltipContent><p>Medical Professional</p></TooltipContent>
-              </Tooltip>
-
-              {/* System Admin Icon */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon"><SlidersHorizontal className="h-5 w-5 text-deep-gray" /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Content Management</DropdownMenuItem></Link>
-                      <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Event Management</DropdownMenuItem></Link>
-                      <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>User Management</DropdownMenuItem></Link>
-                      <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Reporting</DropdownMenuItem></Link>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>My Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Logout</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TooltipTrigger>
-                <TooltipContent><p>System Administrator</p></TooltipContent>
-              </Tooltip>
-            </div>
-            
-            {/* Original Login/Register button (only visible on mobile) */}
-            <div className="md:hidden">
+          <div className="flex items-center space-x-4">
+            {/* Desktop Items */}
+            <div className="hidden md:flex items-center space-x-4">
               <Link to="/login">
                 <Button
                   variant="outline"
@@ -188,9 +86,99 @@ const Header = () => {
                   Login / Register
                 </Button>
               </Link>
-            </div>
+              
+              {/* Role Icons */}
+              <div className="flex items-center space-x-1">
+                {/* Donor Icon */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon"><User className="h-5 w-5 text-deep-gray" /></Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Registered Donor</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Profile</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Appointments</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Donation Journey</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My QR Code</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TooltipTrigger>
+                  <TooltipContent><p>Registered Donor</p></TooltipContent>
+                </Tooltip>
 
-           
+                {/* Center Staff Icon */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon"><ClipboardList className="h-5 w-5 text-deep-gray" /></Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Check-in</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Bookings & Details</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Status Updates</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TooltipTrigger>
+                  <TooltipContent><p>Center Staff</p></TooltipContent>
+                </Tooltip>
+
+                {/* Medical Professional Icon */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon"><Stethoscope className="h-5 w-5 text-deep-gray" /></Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Health Declaration Review</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Screening Outcome Input</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Donor Medical History</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TooltipTrigger>
+                  <TooltipContent><p>Medical Professional</p></TooltipContent>
+                </Tooltip>
+
+                {/* System Admin Icon */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon"><SlidersHorizontal className="h-5 w-5 text-deep-gray" /></Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Content Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Event Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>User Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Reporting</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>My Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TooltipTrigger>
+                  <TooltipContent><p>System Administrator</p></TooltipContent>
+                </Tooltip>
+              </div>
+            </div>
             
             {/* Mobile menu button */}
             <button
