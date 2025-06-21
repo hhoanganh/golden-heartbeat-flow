@@ -99,11 +99,11 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Registered Donor</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Profile</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Appointments</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My Donation Journey</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem style={{ color: '#E23E57' }}>My QR Code</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
+                        <Link to="/donor-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem>My Appointments</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem>My Donation Journey</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard"><DropdownMenuItem>My QR Code</DropdownMenuItem></Link>
+                  <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -121,11 +121,12 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Check-in</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Bookings & Details</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem style={{ color: '#4A6B8A' }}>Donor Status Updates</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
                         <Link to="/staff-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Bookings & Details</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
+                    <DropdownMenuSeparator />
+                        
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -143,11 +144,12 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Health Declaration Review</DropdownMenuItem></Link>
-                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Screening Outcome Input</DropdownMenuItem></Link>
-                        <Link to="/medical-dashboard"><DropdownMenuItem style={{ color: '#5CB85C' }}>Donor Medical History</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
                         <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard"><DropdownMenuItem>Screening Outcome Input</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                       
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -165,12 +167,13 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Content Management</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Event Management</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>User Management</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem style={{ color: '#FF9800' }}>Reporting</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
                         <Link to="/admin-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem>Content Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem>Event Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem>User Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard"><DropdownMenuItem>Reporting</DropdownMenuItem></Link>
+
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
