@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,15 +86,6 @@ const FindCenters = () => {
     );
   }, [searchQuery]);
 
-  const getDemandColor = (demand: string) => {
-    switch (demand) {
-      case 'high': return 'text-error-red';
-      case 'medium': return 'text-warning-yellow';
-      case 'low': return 'text-success-green';
-      default: return 'text-gentle-gray';
-    }
-  };
-
   const getDemandBadgeColor = (demand: string) => {
     switch (demand) {
       case 'high': return 'bg-error-red/10 text-error-red border-error-red/20';
@@ -118,21 +108,23 @@ const FindCenters = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="pt-20">
-        {/* Page Title */}
-        <div className="bg-warm-gray/60 py-l">
-          <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
-            <h1 className="text-heading-1 text-deep-gray font-semibold mb-2">
+      {/* Hero/Page Title Section */}
+      <section className="bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5 py-l">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
+          <div className="text-center">
+            <h1 className="text-display font-bold text-deep-gray mb-4">
               Tìm Trung Tâm Hiến Máu
             </h1>
-            <p className="text-body text-gentle-gray">
-              Khám phá các trung tâm hiến máu gần bạn nhất
+            <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
+              Khám phá các trung tâm hiến máu cố định gần bạn, xem giờ hoạt động và nhu cầu máu theo thời gian thực.
             </p>
           </div>
         </div>
+      </section>
 
+      <main>
         {/* Search Bar */}
-        <div className="bg-white border-b border-warm-gray sticky top-20 z-10">
+        <div className="bg-white border-b border-warm-gray sticky top-16 z-10">
           <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gentle-gray w-5 h-5" />
