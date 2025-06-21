@@ -14,6 +14,10 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import FindCenters from "./pages/FindCenters";
 import EligibilityCheck from "./pages/EligibilityCheck";
 import ImpactStories from "./pages/ImpactStories";
+import DonorDashboard from "./pages/DonorDashboard";
+import CenterStaffDashboard from "./pages/CenterStaffDashboard";
+import MedicalProfessionalDashboard from "./pages/MedicalProfessionalDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +50,10 @@ const App = () => (
             <Route path="/impact-stories" element={<ImpactStories />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
+            <Route path="/donor-dashboard" element={<DonorDashboard />} />
+            <Route path="/staff-dashboard" element={<CenterStaffDashboard />} />
+            <Route path="/medical-dashboard" element={<MedicalProfessionalDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
