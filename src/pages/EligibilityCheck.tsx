@@ -120,7 +120,7 @@ const EligibilityCheck = () => {
             content: empathyMessage,
             isEmpathy: true
           }]);
-        }, 1000);
+        }, 2000);
       }
 
       // Determine result
@@ -137,7 +137,7 @@ const EligibilityCheck = () => {
         setResult(finalResult);
         setShowResult(true);
         setIsAnimating(false);
-      }, empathyMessage ? 3000 : 2000);
+      }, empathyMessage ? 4000 : 2000);
     } else {
       // Continue to next question
       setTimeout(() => {
