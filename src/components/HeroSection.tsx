@@ -43,13 +43,15 @@ const HeroSection = () => {
                 </Button>
               </Link>
               
-              <Button 
-                size="lg"
-                variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-supportive-blue rounded-md-custom px-l py-4 text-body-large font-medium transition-all duration-300 hover:scale-105"
-              >
-                See Our Impact
-              </Button>
+              <Link to="/impact-stories">
+                <Button 
+                  size="lg"
+                  variant="outline" 
+                  className="border-2 border-white text-white hover:bg-white hover:text-supportive-blue rounded-md-custom px-l py-4 text-body-large font-medium transition-all duration-300 hover:scale-105"
+                >
+                  See Our Impact
+                </Button>
+              </Link>
             </div>
             
           </div>
