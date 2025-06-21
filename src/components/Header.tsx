@@ -75,6 +75,16 @@ const Header = () => {
           </nav>
 
           {/* Right side - Login/Register and Language */}
+                    <div className="flex items-center space-x-4">
+            <Link to="/login">
+              <Button
+                variant="outline"
+                className="bg-warm-gray text-deep-gray border-0 rounded-md-custom hover:bg-compassion-red hover:text-white transition-all duration-300 hover:scale-105 px-l py-s text-body"
+              >
+                Login / Register
+              </Button>
+            </Link>
+          
           <div className="flex items-center space-x-4">            
             {/* Desktop Login/Role Icons */}
             <div className="hidden md:flex items-center space-x-1">
