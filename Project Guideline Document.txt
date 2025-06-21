@@ -946,6 +946,126 @@ Breakpoints:
 --shadow-lg: 0 14px 28px rgba(0,0,0,0.18)
 --focus-outline: 2px solid #FF9800 (Kindness Orange for clear, friendly focus)
 
+3.1.5 Theme Semantic Tokens (Contextual Usage)
+This layer defines tokens based on their specific usage within the user interface, aliasing from the Base Semantic Tokens (3.1.4 Style Tokens). This allows for flexible theming and easy adaptation to different contexts (e.g., light/dark modes, sub-brands) without altering the foundational color or typography definitions.
+
+Naming Convention: We will use a [component/purpose]-[element]-[state] or [category]-[purpose] convention to indicate the specific context.
+
+Color Theme Semantic Tokens
+These tokens define the specific colors for UI elements, ensuring consistency and easy theme switching.
+
+Global / Page Backgrounds
+
+--color-surface-background-default: var(--color-neutral-white) (Default page/card background)
+--color-surface-background-light: var(--color-neutral-light) (Subtle background variations, e.g., section background)
+Text Colors
+
+--color-text-body-primary: var(--color-neutral-dark) (Main body text, strong contrast)
+--color-text-body-secondary: var(--color-neutral-medium) (Secondary text, labels, helper text)
+--color-text-link-default: var(--color-brand-accent) (Default link color)
+--color-text-button-primary: var(--color-neutral-white) (Text on primary buttons)
+--color-text-button-secondary: var(--color-brand-accent) (Text on secondary buttons)
+--color-text-on-brand-primary: var(--color-neutral-white) (Text used on Brand Primary color backgrounds)
+--color-text-error: var(--color-error) (Text for error messages)
+--color-text-success: var(--color-success) (Text for success messages)
+Button Colors
+
+--button-primary-background-default: var(--color-brand-primary)
+--button-primary-background-hover: (A slightly darker shade of Brand Primary or var(--color-brand-primary) with reduced opacity for hover effect)
+--button-primary-background-active: (A slightly darker shade of Brand Primary or var(--color-brand-primary) with increased opacity for active state)
+--button-primary-background-disabled: var(--color-neutral-light)
+--button-primary-text-default: var(--color-neutral-white)
+--button-secondary-background-default: var(--color-neutral-white)
+--button-secondary-border-default: var(--color-brand-accent)
+--button-secondary-text-default: var(--color-brand-accent)
+--button-tertiary-text-default: var(--color-brand-accent) (For text-only buttons)
+--button-tertiary-text-hover: (A slightly darker shade of Brand Accent)
+Input Field Colors
+
+--input-border-default: var(--color-neutral-medium)
+--input-border-focused: var(--color-brand-accent)
+--input-border-error: var(--color-error)
+--input-background-default: var(--color-neutral-white)
+--input-text-default: var(--color-text-body-primary)
+--input-placeholder-text: var(--color-text-body-secondary)
+Card Colors
+
+--card-background-default: var(--color-surface-background-default)
+--card-border-default: var(--color-neutral-light)
+--card-header-background: var(--color-surface-background-light) (For distinct card headers)
+Semantic Feedback Colors (UI specific)
+
+--feedback-success-background: var(--color-success) (For toast/banner background)
+--feedback-success-text: var(--color-neutral-white) (Text on success feedback)
+--feedback-warning-background: var(--color-warning)
+--feedback-warning-text: var(--color-neutral-dark) (Adjust for contrast on yellow)
+--feedback-error-background: var(--color-error)
+--feedback-error-text: var(--color-neutral-white)
+--feedback-info-background: var(--color-info)
+--feedback-info-text: var(--color-neutral-white)
+Focus & Accent
+
+--focus-outline-color: var(--color-kindness-orange) (Directly from your kindness orange)
+--divider-color: var(--color-neutral-light)
+Typography Theme Semantic Tokens
+These tokens define the specific font styles for various text elements in the UI.
+
+Headings
+
+--font-heading-display: var(--font-family-base) var(--font-size-display) var(--font-weight-bold) var(--line-height-tight)
+--font-heading-h1: var(--font-family-base) var(--font-size-h1) var(--font-weight-semi-bold) var(--line-height-tight)
+--font-heading-h2: var(--font-family-base) var(--font-size-h2) var(--font-weight-semi-bold) var(--line-height-tight)
+--font-heading-h3: var(--font-family-base) var(--font-size-h3) var(--font-weight-medium) var(--line-height-normal)
+--font-heading-h4: var(--font-family-base) var(--font-size-h4) var(--font-weight-medium) var(--line-height-normal)
+--font-heading-h5: var(--font-family-base) var(--font-size-h5) var(--font-weight-medium) var(--line-height-normal)
+Body Text
+
+--font-body-large: var(--font-family-base) var(--font-size-body-large) var(--font-weight-regular) var(--line-height-base)
+--font-body-default: var(--font-family-base) var(--font-size-body) var(--font-weight-regular) var(--line-height-base)
+Caption / Small Text
+
+--font-caption: var(--font-family-base) var(--font-size-caption) var(--font-weight-regular) var(--line-height-base)
+--font-micro: var(--font-family-base) var(--font-size-micro) var(--font-weight-regular) var(--line-height-base)
+Button Typography
+
+--font-button-primary: var(--font-family-base) var(--font-size-body) var(--font-weight-bold) (Example: adjust weight for buttons)
+--font-button-secondary: var(--font-family-base) var(--font-size-body) var(--font-weight-semi-bold)
+Spacing Theme Semantic Tokens
+These tokens define common spacing patterns for UI elements, ensuring consistent layout and rhythm.
+
+--spacing-stack-xxs: var(--spacing-xs) (Tiny vertical space between elements)
+
+--spacing-stack-xs: var(--spacing-s) (Small vertical space, e.g., between form fields)
+
+--spacing-stack-s: var(--spacing-m) (Medium vertical space, e.g., between sections)
+
+--spacing-stack-m: var(--spacing-l) (Larger vertical space)
+
+--spacing-stack-l: var(--spacing-xl) (Largest vertical space)
+
+--spacing-inline-xxs: var(--spacing-xs) (Tiny horizontal space)
+
+--spacing-inline-xs: var(--spacing-s) (Small horizontal space, e.g., icon and text)
+
+--spacing-inline-s: var(--spacing-m) (Medium horizontal space, e.g., between buttons)
+
+--spacing-padding-xs: var(--spacing-s) (Small internal padding, e.g., button padding)
+
+--spacing-padding-s: var(--spacing-m)
+
+--spacing-padding-m: var(--spacing-l)
+
+--spacing-padding-l: var(--spacing-xl)
+
+Border Radius Theme Semantic Tokens
+--radius-component-default: var(--border-radius-md) (Default radius for most components like cards, buttons)
+--radius-input-field: var(--border-radius-sm) (Slightly smaller radius for inputs)
+--radius-full-pill: 9999px (For completely rounded elements like tags or avatars)
+Shadow Theme Semantic Tokens
+--shadow-elevation-1: var(--shadow-sm) (Subtle shadow for general components)
+--shadow-elevation-2: var(--shadow-md) (More pronounced shadow for modals, active cards)
+--shadow-elevation-3: var(--shadow-lg) (Deepest shadow for floating elements, important dialogs)
+
 
 3.2 Voice and Content
 The voice and content strategy will align with the Brand Personality, fostering a supportive and engaging user experience.
