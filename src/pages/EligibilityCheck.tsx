@@ -137,7 +137,7 @@ const EligibilityCheck = () => {
         setResult(finalResult);
         setShowResult(true);
         setIsAnimating(false);
-      }, empathyMessage ? 4000 : 1000);
+      }, empathyMessage ? 4000 : 2000);
     } else {
       // Continue to next question
       setTimeout(() => {
