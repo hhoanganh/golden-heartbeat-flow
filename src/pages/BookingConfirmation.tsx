@@ -173,7 +173,7 @@ const BookingConfirmation = () => {
                 className="text-supportive-blue hover:text-supportive-blue/80"
               >
                 <Eye className="w-4 h-4 mr-1" />
-                Xem tất cả lịch hẹn
+                Lịch hẹn của tôi
               </Button>
               
               <Button
