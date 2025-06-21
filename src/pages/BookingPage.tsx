@@ -62,7 +62,7 @@ const BookingPage = () => {
   };
   
   // Corrected validation logic for the combined Step 1
-  const isStep1Complete = useMemo(() => {
+  const isStepComplete = useMemo(() => {
     if (!selectedTimeSlot) {
       return false;
     }
@@ -179,6 +179,7 @@ const BookingPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      
       <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-xl">
         <section className="mb-xl">
           <h1 className="text-display text-deep-gray font-bold mb-4 text-center lg:text-left">
@@ -237,31 +238,48 @@ const BookingPage = () => {
         </div>
         
         <div className="mt-xl flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex gap-4">
-                {/* Corrected Button Logic */}
-                {currentStep === 1 && <Button size="lg" variant="outline" onClick={handleBack} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">← Quay lại Sự kiện</Button>}
-                {currentStep > 1 && (<Button size="lg" variant="outline" onClick={handlePrevious} className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom">← Quay lại</Button>)}
-            </div>
-            <div className="flex gap-4">
-                {currentStep < 2 ? (
-                    <Button
-                        size="lg"
-                        onClick={handleNext}
-                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                        disabled={!isStep1Complete}
-                    >
-                        Bước tiếp theo →
-                    </Button>
-                ) : (
-                    <Button
-                        size="lg"
-                        onClick={() => navigate(`/booking-success/${selectedEvent.id}`)}
-                        className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
-                    >
-                        Xác nhận Đặt lịch
-                    </Button>
-                )}
-            </div>
+          <div className="flex gap-4">
+            {currentStep === 1 && (
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={handleBack}
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
+              >
+                ← Quay lại Sự kiện
+              </Button>
+            )}
+            {currentStep > 1 && (
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={handlePrevious}
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom"
+              >
+                ← Quay lại
+              </Button>
+            )}
+          </div>
+          <div className="flex gap-4">
+            {currentStep < 4 ? (
+              <Button
+                size="lg"
+                onClick={handleNext}
+                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+                disabled={!isStepComplete()}
+              >
+                Bước tiếp theo →
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                onClick={() => navigate(`/booking-confirmation/${selectedEvent.id}`)}
+                className="bg-compassion-red hover:bg-compassion-red/90 text-white rounded-md-custom transition-all duration-300 hover:scale-105"
+              >
+                Xác nhận Đặt lịch
+              </Button>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

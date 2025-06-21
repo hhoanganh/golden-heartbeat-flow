@@ -10,6 +10,7 @@ import Events from "./pages/Events";
 import LoginRegister from "./pages/LoginRegister";
 import FAQs from "./pages/FAQs";
 import BookingPage from "./pages/BookingPage";
+import BookingConfirmation from "./pages/BookingConfirmation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,12 +32,12 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        {/* Wrap the Routes component with ScrollToTop */}
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/events" element={<Events />} />
             <Route path="/book/:eventId" element={<BookingPage />} />
+            <Route path="/booking-confirmation/:eventId" element={<BookingConfirmation />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
