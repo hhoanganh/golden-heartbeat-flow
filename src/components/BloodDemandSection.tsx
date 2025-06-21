@@ -91,7 +91,7 @@ const BloodDemandSection = () => {
               
               {/* Content positioned over the SVG */}
               <div className="relative z-10 h-full flex flex-col items-center justify-center space-y-1">
-                <div className="text-lg md:text-heading-3 font-medium text-deep-gray mb-2">
+                <div className="text-xl md:text-heading-3 font-medium text-deep-gray mb-2">
                   {blood.type}
                 </div>
                 <div className="text-xl md:text-2xl">
