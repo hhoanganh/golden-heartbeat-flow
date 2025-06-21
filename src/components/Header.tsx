@@ -36,6 +36,10 @@ const Header = () => {
               Home
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </Link>
+              <Link to="/impact-stories" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+              Our Impact
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </Link>
             <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Find Events
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -86,6 +90,7 @@ const Header = () => {
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-warm-gray/30 shadow-md-custom">
             <nav className="flex flex-col space-y-4 p-4">
               <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</Link>
+              <Link to="/impact-stories" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Our Impact</Link>
               <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</Link>
               {/* New "Find Centers" link added here */}
               <Link to="/centers" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Centers</Link>
