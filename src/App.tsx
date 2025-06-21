@@ -13,6 +13,7 @@ import BookingPage from "./pages/BookingPage";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import FindCenters from "./pages/FindCenters";
 import EligibilityCheck from "./pages/EligibilityCheck";
+import ImpactStories from "./pages/ImpactStories";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/booking-confirmation/:eventId" element={<BookingConfirmation />} />
             <Route path="/centers" element={<FindCenters />} />
             <Route path="/eligibility-check" element={<EligibilityCheck />} />
+            <Route path="/impact-stories" element={<ImpactStories />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
