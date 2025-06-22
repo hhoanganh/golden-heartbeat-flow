@@ -14,7 +14,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { User, ClipboardList, Stethoscope, SlidersHorizontal } from 'lucide-react';
+import { User, ClipboardList, Stethoscope, LayoutDashboard } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -168,7 +168,7 @@ const Header = () => {
                   <TooltipTrigger asChild>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon"><SlidersHorizontal className="h-5 w-5 text-deep-gray" /></Button>
+                        <Button variant="ghost" size="icon"><LayoutDashboard className="h-5 w-5 text-deep-gray" /></Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
