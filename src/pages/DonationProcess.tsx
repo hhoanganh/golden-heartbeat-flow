@@ -29,14 +29,14 @@ const DonationProcess = () => {
       title: "Check-in & Preliminary Screening",
       icon: UserCheck,
       description: "At the center, present your QR code and ID to our staff. They will verify your online declaration, print a copy for the medical review, and perform a quick preliminary health check (blood pressure, hemoglobin test).",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1000&auto=format&fit=crop"
+      image: "https://plus.unsplash.com/premium_photo-1664475545554-9d9ef5e8fbe7?w=600&auto=format&fit=crop"
     },
     {
       number: 3,
       title: "Medical Consultation & Final Approval",
       icon: Stethoscope,
       description: "You'll meet with a medical doctor who will review your printed declaration and the initial test results. After a brief consultation, the doctor will give the final confirmation in our system for you to proceed.",
-      image: "https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?q=80&w=1000&auto=format&fit=crop"
+      image: "https://plus.unsplash.com/premium_photo-1661770160867-2c3a5092ec3b?q=80&w=1170&auto=format&fit=crop"
     },
     {
       number: 4,
@@ -50,7 +50,7 @@ const DonationProcess = () => {
       title: "Rest & Receive Your Benefits",
       icon: Gift,
       description: "After your donation, relax for 10-15 minutes and enjoy refreshments. You will receive your official Certificate of Donation and other thank-you gifts from us.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=1000&auto=format&fit=crop"
+      image: "https://plus.unsplash.com/premium_photo-1664476255015-26ac84c3dfbc?q=80&w=1172&auto=format&fit=crop"
     },
     {
       number: 6,
