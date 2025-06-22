@@ -113,10 +113,10 @@ const FindCenters = () => {
         <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10">
           <div className="text-center">
             <h1 className="text-display font-bold text-deep-gray mb-4">
-              Tìm Trung Tâm Hiến Máu
+              Find Blood Donation Centers
             </h1>
             <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
-              Khám phá các trung tâm hiến máu cố định gần bạn, xem giờ hoạt động và nhu cầu máu theo thời gian thực.
+              Explore blood donation centers near you, view operating hours, and real-time blood demand.
             </p>
           </div>
         </div>
