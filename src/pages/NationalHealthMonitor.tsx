@@ -102,36 +102,25 @@ const NationalHealthMonitor = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-8 md:py-12">
-        {/* Location Selector Container */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-4 bg-warm-gray/30 rounded-lg p-4">
-            <label htmlFor="location-select" className="text-body font-medium text-deep-gray">
-              Xem nhu cầu tại:
-            </label>
-            <Select value={selectedLocation} onValueChange={handleLocationChange}>
-              <SelectTrigger className="w-64">
-                <SelectValue placeholder="Chọn địa điểm" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="toan-quoc">Toàn quốc</SelectItem>
-                <SelectItem value="ho-chi-minh">TP. Hồ Chí Minh</SelectItem>
-                <SelectItem value="ha-noi">Hà Nội</SelectItem>
-                <SelectItem value="da-nang">Đà Nẵng</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        {/* Dynamic Hero Status Container */}
-        <div className="text-center mb-12">
-          <h1 className="text-heading-1 md:text-display font-bold text-deep-gray mb-4">
+     {/* Page Title Section - Consistent with other pages */}
+      <section className="py-l bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 text-center">
+          <h1 className="text-display font-bold text-deep-gray mb-4">
             Bản Đồ Nhu Cầu Máu Quốc Gia
           </h1>
-          <p className="text-body-large text-gentle-gray mb-6">
+          <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
             Theo dõi tình hình cung cấp máu trên toàn quốc theo thời gian thực
           </p>
-          <Card className="max-w-md mx-auto">
+        </div>
+
+      </section>
+      
+      <main className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 py-8 md:py-12">
+        {/* Container for Overall Status Card and Location Selector */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
+          {/* Overall Status Card (Left on Desktop, Top on Mobile) */}
+          <div className="w-full md:w-auto flex-grow order-1 md:order-1"> {/* This div will contain the status card */}
+            <Card className="bg-white w-full"> {/* Removed max-w-md and mx-auto */}
             <CardContent className="pt-6">
               <div className="flex items-center justify-center gap-4 mb-4">
                 <Droplets className="h-6 w-6 text-compassion-red" />
@@ -148,7 +137,26 @@ const NationalHealthMonitor = () => {
             </CardContent>
           </Card>
         </div>
-
+          {/* Location Selector (Right on Desktop, Bottom on Mobile) */}
+          <div className="flex-shrink-0 w-full md:w-auto order-2 md:order-2"> {/* This div will contain the dropdown */}
+            <div className="inline-flex items-center gap-4 bg-warm-gray/30 rounded-lg p-4 w-full justify-center md:justify-start">
+              <label htmlFor="location-select" className="text-body font-medium text-deep-gray">
+                Xem nhu cầu tại:
+              </label>
+              <Select value={selectedLocation} onValueChange={handleLocationChange}>
+                <SelectTrigger className="w-full md:w-64">
+                  <SelectValue placeholder="Chọn địa điểm" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="toan-quoc">Toàn quốc</SelectItem>
+                  <SelectItem value="ho-chi-minh">TP. Hồ Chí Minh</SelectItem>
+                  <SelectItem value="ha-noi">Hà Nội</SelectItem>
+                  <SelectItem value="da-nang">Đà Nẵng</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
         {/* Dynamic Blood Type Grid Container */}
         <div className="mb-12">
           <h2 className="text-heading-2 font-bold text-deep-gray text-center mb-8">
