@@ -135,14 +135,13 @@ const ContactUs = () => {
       <Header />
       
       {/* Hero Container */}
-      <section className="py-12 bg-gradient-to-b from-warm-gray/20 to-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-deep-gray mb-4">
+      <section className="py-l bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 text-center">
+          <h1 className="text-display font-bold text-deep-gray mb-4">
             How Can We Help?
           </h1>
-          <p className="text-lg text-gentle-gray max-w-2xl mx-auto">
-            Our virtual assistant is ready to help you, or you can connect with our human support team.
-          </p>
+          <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
+            Our virtual assistant is ready to help you, or you can connect with our human support team.          </p>
         </div>
       </section>
 
