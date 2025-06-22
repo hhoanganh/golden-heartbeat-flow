@@ -121,12 +121,16 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/staff-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Bookings & Details</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
-                    <DropdownMenuSeparator />
                         
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
+                        
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Live Donor List</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
+  
+                        
+                        <Link to="/staff-dashboard"><DropdownMenuItem>Staff Alerts & Broadcasts</DropdownMenuItem></Link>
+                        <DropdownMenuSeparator />
+                        <Link to="/staff-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
