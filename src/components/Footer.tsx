@@ -40,7 +40,7 @@ const Footer = () => {
 
           {/* Column 2: About Links (New) */}
           <div>
-            <h4 className="text-heading-3 font-medium mb-4">Về Chúng Tôi</h4>
+            <h4 className="text-heading-3 font-medium mb-4">About Us</h4>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Our Mission</Link></li>
               <li><Link to="/news" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">News & Updates</Link></li>
@@ -51,7 +51,7 @@ const Footer = () => {
 
           {/* Column 3: Support & Legal Links (New) */}
           <div>
-            <h4 className="text-heading-3 font-medium mb-4">Hỗ Trợ & Pháp Lý</h4>
+            <h4 className="text-heading-3 font-medium mb-4">Support & Legal</h4>
             <ul className="space-y-2">
                 <li><Link to="/faqs" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">FAQs</Link></li>
                 <li><Link to="/process" className="text-body text-gentle-gray hover:text-white transition-colors duration-200">Donation Process</Link></li>
