@@ -1,23 +1,38 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { QrCode, ClipboardList, CheckCircle, FileText, LogOut } from 'lucide-react'; // Added QrCode
+import { QrCode, ClipboardList, CheckCircle, FileText, LogOut, User } from 'lucide-react';
 import Header from '@/components/Header';
 
 const MedicalProfessionalDashboard = () => {
   const [activeSection, setActiveSection] = useState('verifyDonor'); // Default to new top-level function
+  const location = useLocation();
 
+  useEffect(() => {
+    const hash = location.hash.substring(1);
+    if (hash) {
+      const validSection = menuItems.find(item => item.id === hash);
+      if (validSection) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection('verifyDonor');
+      }
+    }
+  }, [location.hash]);
   const menuItems = [
     { id: 'verifyDonor', label: 'Verify Donor for Consultation', icon: QrCode }, // NEW
     { id: 'review', label: 'Health Declaration Review', icon: ClipboardList }, // UPDATED
     { id: 'history', label: 'Donor Medical History', icon: FileText },
+    { id: 'profile', label: 'My Profile', icon: User },
   ];
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'review':
+      case 'verifyDonor':
         return (
           <Card>
             <CardHeader>
@@ -28,10 +43,9 @@ const MedicalProfessionalDashboard = () => {
             </CardContent>
           </Card>
         );
-      case 'verifyDonor': // This case was missing, now added and moved to top
+      case 'review':
         return (
-          
-          <Card>
+           <Card>
             <CardHeader>
               <CardTitle>Health Declaration Review</CardTitle>
             </CardHeader>
@@ -40,17 +54,7 @@ const MedicalProfessionalDashboard = () => {
             </CardContent>
           </Card>
         );
-      case 'screening':
-        return ( // Renamed from 'screening' to 'confirmation'
-          <Card>
-            <CardHeader>
-              <CardTitle>Final Eligibility Confirmation</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Approve or defer donor for blood donation based on medical assessment.</p>
-            </CardContent>
-          </Card>
-        );
+
       case 'history':
         return (
           <Card>
@@ -59,6 +63,17 @@ const MedicalProfessionalDashboard = () => {
             </CardHeader>
             <CardContent>
               <p>Access comprehensive medical history and donation records.</p>
+            </CardContent>
+          </Card>
+        );
+              case 'profile':
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>My Profile</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Manage your personal medical professional profile and account settings.</p>
             </CardContent>
           </Card>
         );

@@ -1,19 +1,34 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { UserCheck, Calendar, UserCog, Megaphone, LogOut } from 'lucide-react';
+import { UserCheck, Calendar, UserCog, Megaphone, LogOut, User } from 'lucide-react';
 import Header from '@/components/Header';
 
 const CenterStaffDashboard = () => {
   const [activeSection, setActiveSection] = useState('checkin');
+  const location = useLocation();
 
+  useEffect(() => {
+    const hash = location.hash.substring(1);
+    if (hash) {
+      const validSection = menuItems.find(item => item.id === hash);
+      if (validSection) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection('checkin');
+      }
+    }
+  }, [location.hash]);
   const menuItems = [
     { id: 'checkin', label: 'Donor Check-in', icon: UserCheck }, // KEEP
     { id: 'liveList', label: 'Live Donor List', icon: Calendar }, // UPDATE from "Donor Bookings & Details"
     { id: 'status', label: 'Donor Status Updates', icon: UserCog }, // KEEP
     { id: 'alerts', label: 'Staff Alerts & Broadcasts', icon: Megaphone },
+      { id: 'profile', label: 'My Profile', icon: User },
   ];
 
   const renderContent = () => {
@@ -59,6 +74,17 @@ const CenterStaffDashboard = () => {
             </CardHeader>
             <CardContent>
               <p>Important announcements and alerts for center staff.</p>
+            </CardContent>
+          </Card>
+        );
+              case 'profile':
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>My Profile</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Manage your personal staff profile and account settings.</p>
             </CardContent>
           </Card>
         );

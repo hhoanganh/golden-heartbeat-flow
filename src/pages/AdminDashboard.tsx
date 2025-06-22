@@ -1,19 +1,31 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen } from 'lucide-react';
+import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen, User } from 'lucide-react';
 import Header from '@/components/Header';
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('content');
+  const location = useLocation();
 
+  useEffect(() => {
+    const hash = location.hash.substring(1);
+    if (hash) {
+      const validSection = menuItems.find(item => item.id === hash);
+      if (validSection) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection('content');
+      }
+    }
+  }, [location.hash]);
   const menuItems = [
     { id: 'content', label: 'Public Content Management', icon: FileText },
     { id: 'events', label: 'Event & Schedule Management', icon: Calendar },
     { id: 'users', label: 'User & Role Management', icon: Users },
-    
     { id: 'documents', label: 'Document Management', icon: FolderOpen }, // NEW: Document Management
     { id: 'reporting', label: 'Basic Operational Reporting', icon: BarChart },
   ];
@@ -72,6 +84,17 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <p>Manage scanned paper forms and other digital documents.</p>
+            </CardContent>
+          </Card>
+        );
+          case 'profile':
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>My Profile</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Manage your personal administrator profile and account settings.</p>
             </CardContent>
           </Card>
         );

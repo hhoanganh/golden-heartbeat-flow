@@ -99,10 +99,12 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Registered Donor</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/donor-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem>My Appointments</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem>My Donation Journey</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard"><DropdownMenuItem>My QR Code</DropdownMenuItem></Link>
+                        
+                        <Link to="/donor-dashboard#appointments"><DropdownMenuItem>My Appointments</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard#journey"><DropdownMenuItem>My Donation Journey</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard#qrcode"><DropdownMenuItem>My QR Code</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard#notifications"><DropdownMenuItem>Notifications / Alerts</DropdownMenuItem></Link>
+                        <Link to="/donor-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                   <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
@@ -122,15 +124,14 @@ const Header = () => {
                         <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard#checkin"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard#liveList"><DropdownMenuItem>Live Donor List</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard#status"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
+                        <Link to="/staff-dashboard#alerts"><DropdownMenuItem>Staff Alerts & Broadcasts</DropdownMenuItem></Link>
                         
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Live Donor List</DropdownMenuItem></Link>
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
-  
-                        
-                        <Link to="/staff-dashboard"><DropdownMenuItem>Staff Alerts & Broadcasts</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
+                       
                         <Link to="/staff-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -148,14 +149,13 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                      <Link to="/medical-dashboard"><DropdownMenuItem>Verify Donor for Consultation</DropdownMenuItem></Link>
-                      <Link to="/medical-dashboard"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard#verifyDonor"><DropdownMenuItem>Verify Donor for Consultation</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard#review"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard#history"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
                         
-                        <Link to="/medical-dashboard"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
-                        <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        <Link to="/medical-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         
-                      <DropdownMenuSeparator />
-                       
+                       <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -173,14 +173,14 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
                         <DropdownMenuSeparator />
+                        <Link to="/admin-dashboard#content"><DropdownMenuItem>Content Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard#events"><DropdownMenuItem>Event Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard#users"><DropdownMenuItem>User Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard#documents"><DropdownMenuItem>Document Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard#reporting"><DropdownMenuItem>Reporting</DropdownMenuItem></Link>
                         
-                        <Link to="/admin-dashboard"><DropdownMenuItem>Content Management</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem>Event Management</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem>User Management</DropdownMenuItem></Link>
+                        <Link to="/admin-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         
-                        <Link to="/admin-dashboard"><DropdownMenuItem>Document Management</DropdownMenuItem></Link> {/* NEW: Document Management */}
-                        <Link to="/admin-dashboard"><DropdownMenuItem>Reporting</DropdownMenuItem></Link>
-                        <Link to="/admin-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
