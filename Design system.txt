@@ -1,0 +1,389 @@
+Part III: Design System
+
+This section outlines the foundational elements of the design system, informed by the project's core mission, vision, and brand personality, as detailed in Part I of the Project Guideline Document.
+
+Idea 2: Warm & Empathetic (Soft & Inviting)
+This idea emphasizes "Empathetic & Caring" and "Community-Oriented & Inspiring," using a softer, warmer palette with rounded elements and a friendly typeface.
+
+3.1 Visual Language
+3.1.1 Color Palette
+Primary Colors:
+Brand Primary (#E23E57 - Compassion Red): A warmer, slightly softer red, evoking care and life.
+Brand Accent (#4A6B8A - Supportive Blue): A muted, calming blue for secondary elements and a sense of support.
+Secondary/Supportive Colors:
+#5CB85C - Harmony Green: For positive feedback and growth.
+#FF9800 - Kindness Orange: For friendly alerts, subtle emphasis.
+Neutral Colors:
+#FFFFFF - White: Clean, soft backgrounds.
+#F0F2F5 - Warm Gray: Light backgrounds, separators.
+#9CA3AF - Gentle Gray: Secondary text, placeholders.
+#374151 - Deep Gray: Primary text, strong contrast.
+Semantic Colors:
+Success: #5CB85C - Success Green
+Warning: #F4D03F - Warning Yellow
+Error: #EF5350 - Error Red
+Information: #5BC0DE - Info Blue
+3.1.2 Typography Scale
+Font Family:
+Primary Font: 'Nunito Sans', sans-serif (Chosen for its friendly, rounded terminals and excellent readability, conveying warmth.)
+Heading Scale:
+Display (40px, bold): For emotive hero sections.
+Heading 1 (30px, semi-bold): Main page titles, prominent sections.
+Heading 2 (24px, semi-bold): Sub-headings, component titles.
+Heading 3 (20px, medium): Card titles.
+Heading 4 (17px, medium): Smaller section titles.
+Heading 5 (15px, medium): Smallest headings.
+Body Text:
+Body Large (17px, regular): Long-form content.
+Body (15px, regular): Default UI text.
+Caption/Small Text:
+Caption (13px, regular): Labels, helper text.
+Micro (11px, regular): Tooltips, disclaimers.
+Line Height & Letter Spacing:
+--line-height-base: 1.6
+--letter-spacing-tight: -0.01em (for headings)
+--letter-spacing-normal: 0em (for body)
+3.1.3 Responsive Grid System
+Columns: 12-column fluid grid.
+Gutters:
+Mobile (≤ 600px): 12px
+Tablet (≤ 900px): 20px
+Desktop (≥ 900px): 28px
+Margins:
+Mobile (≤ 600px): 12px
+Tablet (≤ 900px): 20px
+Desktop (≥ 900px): 40px, Max content width 1360px.
+Breakpoints:
+--breakpoint-sm: 600px
+--breakpoint-md: 900px
+--breakpoint-lg: 1200px
+Here's the updated and optimized version of your 3.1.4 and 3.1.5 sections, incorporating the three-tiered design token philosophy to prevent duplication and maximize flexibility.
+
+3.1.4 Base Semantic Tokens
+This section defines the foundational, context-agnostic design tokens. These tokens alias directly from the raw primitive values (e.g., hex codes, pixel values) defined in the Visual Language sections (3.1.1 Color Palette, 3.1.2 Typography Scale, 3.1.3 Responsive Grid System). They represent the abstract "meaning" or "intent" of a design attribute.
+
+Color Base Tokens
+
+--color-brand-primary: #E23E57
+--color-brand-accent: #4A6B8A
+--color-neutral-white: #FFFFFF
+--color-neutral-light: #F0F2F5
+--color-neutral-medium: #9CA3AF
+--color-neutral-dark: #374151
+--color-semantic-success: #5CB85C (Renamed from --color-success for consistency)
+--color-semantic-warning: #F4D03F (Renamed from --color-warning for consistency)
+--color-semantic-error: #EF5350 (Renamed from --color-error for consistency)
+--color-semantic-info: #5BC0DE (Renamed from --color-info for consistency)
+--color-kindness-orange-raw: #FF9800 (Extracted from focus-outline for explicit base token)
+Typography Base Tokens
+
+--font-family-base: 'Nunito Sans', sans-serif
+--font-size-display: 40px
+--font-size-h1: 30px
+--font-size-h2: 24px
+--font-size-h3: 20px
+--font-size-h4: 17px
+--font-size-h5: 15px
+--font-size-body-large: 17px
+--font-size-body-default: 15px (Renamed from --font-size-body)
+--font-size-caption: 13px
+--font-size-micro: 11px
+--font-weight-regular: 400
+--font-weight-medium: 500
+--font-weight-semi-bold: 600
+--font-weight-bold: 800
+--line-height-base: 1.6
+--line-height-tight: 1.2 (Inferred from heading line heights in 3.1.2)
+--letter-spacing-tight: -0.01em
+--letter-spacing-normal: 0em
+Spacing Base Tokens
+
+--spacing-xs: 6px
+--spacing-s: 10px
+--spacing-m: 18px
+--spacing-l: 28px
+--spacing-xl: 36px
+Border Radius Base Tokens
+
+--border-radius-sm: 6px
+--border-radius-md: 10px
+--border-radius-lg: 16px
+Shadow Base Tokens
+
+--shadow-sm: 0 2px 4px rgba(0,0,0,0.08)
+--shadow-md: 0 6px 12px rgba(0,0,0,0.12)
+--shadow-lg: 0 14px 28px rgba(0,0,0,0.18)
+Focus Base Tokens
+
+--focus-outline-width: 2px
+--focus-outline-style: solid
+3.1.5 Theme Semantic Tokens (Contextual Usage)
+This layer defines tokens based on their specific usage within the user interface, aliasing from the Base Semantic Tokens (3.1.4). These tokens provide the contextual meaning for UI elements (e.g., "button background," "primary text color"). This structure allows for flexible theming (e.g., light/dark modes, sub-brands) by only changing the underlying Base Semantic token values, without altering the Theme Semantic token names or their references.
+
+Naming Convention: We use a [category]-[purpose]-[state] or [component]-[element]-[state] convention to indicate the specific context.
+
+Color Theme Semantic Tokens
+These tokens define the specific colors for UI elements, ensuring consistency and easy theme switching.
+
+Global / Surface Colors
+
+--color-surface-background-default: var(--color-neutral-white) (Default page/card background)
+--color-surface-background-light: var(--color-neutral-light) (Subtle background variations, e.g., section background)
+--color-border-default: var(--color-neutral-light) (Default border color for subtle dividers/separators)
+Text Colors
+
+--color-text-body-primary: var(--color-neutral-dark) (Main body text, strong contrast)
+--color-text-body-secondary: var(--color-neutral-medium) (Secondary text, labels, helper text)
+--color-text-link-default: var(--color-brand-accent) (Default link color)
+--color-text-button-primary: var(--color-neutral-white) (Text on primary buttons)
+--color-text-button-secondary: var(--color-brand-accent) (Text on secondary buttons)
+--color-text-on-brand-primary: var(--color-neutral-white) (Text used on Brand Primary color backgrounds)
+--color-text-error: var(--color-semantic-error) (Text for error messages)
+--color-text-success: var(--color-semantic-success) (Text for success messages)
+Button Colors
+
+--button-primary-background-default: var(--color-brand-primary)
+--button-primary-background-hover: color-mix(in srgb, var(--color-brand-primary) 90%, black)
+--button-primary-background-active: color-mix(in srgb, var(--color-brand-primary) 80%, black)
+--button-primary-background-disabled: var(--color-neutral-light)
+--button-primary-text-default: var(--color-neutral-white)
+--button-secondary-background-default: var(--color-neutral-white)
+--button-secondary-border-default: var(--color-brand-accent)
+--button-secondary-text-default: var(--color-brand-accent)
+--button-tertiary-text-default: var(--color-brand-accent)
+--button-tertiary-text-hover: color-mix(in srgb, var(--color-brand-accent) 90%, black)
+Input Field Colors
+
+--input-border-default: var(--color-neutral-medium)
+--input-border-focused: var(--color-brand-accent)
+--input-border-error: var(--color-semantic-error)
+--input-background-default: var(--color-neutral-white)
+--input-text-default: var(--color-text-body-primary)
+--input-placeholder-text: var(--color-text-body-secondary)
+Card Colors
+
+--card-background-default: var(--color-surface-background-default)
+--card-border-default: var(--color-neutral-light)
+--card-header-background: var(--color-surface-background-light)
+Semantic Feedback Colors (UI specific)
+
+--feedback-success-background: var(--color-semantic-success)
+--feedback-success-text: var(--color-neutral-white)
+--feedback-warning-background: var(--color-semantic-warning)
+--feedback-warning-text: var(--color-neutral-dark) (Ensuring contrast on yellow)
+--feedback-error-background: var(--color-semantic-error)
+--feedback-error-text: var(--color-neutral-white)
+--feedback-info-background: var(--color-semantic-info)
+--feedback-info-text: var(--color-neutral-white)
+Focus & Accent
+
+--focus-outline-color: var(--color-kindness-orange-raw)
+--focus-outline-style: var(--focus-outline-style)
+--focus-outline-width: var(--focus-outline-width)
+Typography Theme Semantic Tokens
+These tokens define the specific font styles for various text elements in the UI, combining multiple typography base tokens for a complete style.
+
+Headings
+
+--font-style-heading-display: var(--font-weight-bold) var(--font-size-display) / var(--line-height-tight) var(--font-family-base)
+--font-style-heading-h1: var(--font-weight-semi-bold) var(--font-size-h1) / var(--line-height-tight) var(--font-family-base)
+--font-style-heading-h2: var(--font-weight-semi-bold) var(--font-size-h2) / var(--line-height-tight) var(--font-family-base)
+--font-style-heading-h3: var(--font-weight-medium) var(--font-size-h3) / var(--line-height-normal) var(--font-family-base)
+--font-style-heading-h4: var(--font-weight-medium) var(--font-size-h4) / var(--line-height-normal) var(--font-family-base)
+--font-style-heading-h5: var(--font-weight-medium) var(--font-size-h5) / var(--line-height-normal) var(--font-family-base)
+Body Text
+
+--font-style-body-large: var(--font-weight-regular) var(--font-size-body-large) / var(--line-height-base) var(--font-family-base)
+--font-style-body-default: var(--font-weight-regular) var(--font-size-body-default) / var(--line-height-base) var(--font-family-base)
+Caption / Small Text
+
+--font-style-caption: var(--font-weight-regular) var(--font-size-caption) / var(--line-height-base) var(--font-family-base)
+--font-style-micro: var(--font-weight-regular) var(--font-size-micro) / var(--line-height-base) var(--font-family-base)
+Button Typography
+
+--font-style-button-primary: var(--font-weight-bold) var(--font-size-body-default) / var(--line-height-base) var(--font-family-base)
+--font-style-button-secondary: var(--font-weight-semi-bold) var(--font-size-body-default) / var(--line-height-base) var(--font-family-base)
+Spacing Theme Semantic Tokens
+These tokens define common spacing patterns for UI elements, ensuring consistent layout and rhythm based on contextual usage (e.g., stacking, inline, padding).
+
+Stack Spacing (Vertical)
+
+--spacing-stack-xxs: var(--spacing-xs)
+--spacing-stack-xs: var(--spacing-s)
+--spacing-stack-s: var(--spacing-m)
+--spacing-stack-m: var(--spacing-l)
+--spacing-stack-l: var(--spacing-xl)
+Inline Spacing (Horizontal)
+
+--spacing-inline-xxs: var(--spacing-xs)
+--spacing-inline-xs: var(--spacing-s)
+--spacing-inline-s: var(--spacing-m)
+Padding Spacing (Internal)
+
+--spacing-padding-xs: var(--spacing-s)
+--spacing-padding-s: var(--spacing-m)
+--spacing-padding-m: var(--spacing-l)
+--spacing-padding-l: var(--spacing-xl)
+Border Radius Theme Semantic Tokens
+--radius-component-default: var(--border-radius-md) (Default radius for most components like cards, buttons)
+--radius-input-field: var(--border-radius-sm) (Slightly smaller radius for inputs)
+--radius-full-pill: 9999px (For completely rounded elements like tags or avatars)
+Shadow Theme Semantic Tokens
+--shadow-elevation-1: var(--shadow-sm) (Subtle shadow for general components)
+--shadow-elevation-2: var(--shadow-md) (More pronounced shadow for modals, active cards)
+--shadow-elevation-3: var(--shadow-lg) (Deepest shadow for floating elements, important dialogs)
+3.2 Voice and Content
+The voice and content strategy will align with the Brand Personality, fostering a supportive and engaging user experience.
+
+3.2.1 Voice
+The application's voice will be:
+
+Trustworthy & Reliable: Professional, clear, and authoritative, especially when conveying health information or security aspects. Avoid jargon where possible.
+
+Empathetic & Caring: Warm, supportive, and understanding, acknowledging the sensitive nature of blood donation. Use encouraging language.
+
+
+Efficient & Streamlined: Direct, concise, and action-oriented, guiding users smoothly through tasks without unnecessary words.
+
+Modern & Innovative: Forward-thinking and approachable, avoiding outdated language to reflect a modern UI/UX.
+
+Community-Oriented & Inspiring: Positive, motivational, and inclusive, emphasizing the collective impact of donations and fostering a sense of belonging. Language will highlight the positive impact, e.g., "save 3 lives per donation".
+
+
+3.2.2 Adaptable Tone
+The tone will adapt based on the context, while maintaining the consistent overall voice:
+
+Informational (FAQs, Guidelines): Clear, factual, and easy to understand.
+Transactional (Booking, Registration): Direct, concise, and guiding, with clear instructions.
+
+Supportive (Error Messages, Help): Empathetic, helpful, and solution-oriented, guiding users to resolution.
+Motivational (Impact, Testimonials): Inspiring, positive, and celebratory, reinforcing the donor's contribution.
+Urgent (Blood Needs Notifications): Direct, clear, and actionable, emphasizing immediate need without causing undue alarm.
+3.2.3 Terminology Glossary
+Consistent use of terminology ensures clarity and reduces user confusion.
+
+Donor: Refers to a blood donor, the primary user of the application. 
+Guest User: An individual Browse the application without logging in. 
+Registered Blood Donor: A user who has created an account and can manage appointments, view history, and use QR for check-in. 
+Center Staff: Employees at donation centers managing donor flow, check-ins, and data. 
+
+Medical Professional: Staff responsible for health declarations, screening, and donor eligibility. 
+
+System Administrator: Responsible for overall system management, content, users, and reporting. 
+
+Appointment: A pre-booked time slot for a blood donation. 
+Pre-registration: The process of signing up online before arriving at the donation center to speed up the process. 
+Digital Health Declaration: An online form where donors provide health information prior to donation. 
+QR Code: A unique code displayed by the donor for quick check-in at the center. 
+Eligibility: Criteria a donor must meet to be able to donate blood. 
+Deferral: A temporary or permanent reason for a donor not being able to donate blood. 
+Walk-in Donor: A donor who arrives at a center without a prior appointment. 
+CMS (Content Management System): The tool used by System Administrators to manage public content. 
+OTP (One-Time Password): Used for secure authentication during login/registration. 
+3.3 Components
+This comprehensive library outlines necessary UI components, including their variants and states, derived from the feature list in Part II of the Project Guideline Document. These components will adhere to the defined visual language and principles.
+
+3.3.1 General Components
+Buttons:
+Variants: Primary (e.g., "Book Now", "Submit"), Secondary (e.g., "Cancel", "Reschedule"), Tertiary (e.g., "Learn More"), Icon Button (e.g., share icon).
+States: Default, Hover, Focused, Active, Disabled, Loading.
+Input Fields:
+Variants: Text Input, Number Input, Phone Input (with OTP support), Date Picker, Time Picker, Text Area, Search Input.
+States: Default, Focused, Filled, Disabled, Error, Valid.
+Checkboxes & Radio Buttons:
+Variants: Single, Grouped.
+States: Default, Checked/Selected, Disabled.
+Toggles/Switches:
+Variants: On/Off switch.
+States: Default, Active, Disabled.
+Dropdowns/Selects:
+Variants: Standard Select, Multi-select.
+States: Default, Open, Disabled.
+Modal/Dialog:
+Variants: Confirmation, Information, Form.
+States: Open, Closed.
+Notifications/Alerts (Toast/Banner):
+Variants: Success, Error, Warning, Info.
+States: Displayed, Dismissed.
+Loading Indicators:
+Variants: Spinner, Progress Bar.
+States: Active, Idle.
+Links:
+Variants: Primary, Secondary, Inline.
+States: Default, Hover, Visited.
+3.3.2 Layout & Navigation Components
+Header/Navigation Bar:
+Variants: Guest, Logged-in Donor, Staff, Medical, Admin.
+States: Default, Scrolled (e.g., sticky header).
+Footer:
+Variants: Standard (with contact info, links).
+States: Default.
+Sidebar Navigation:
+Variants: Collapsible, Fixed.
+States: Open, Closed, Active Item.
+Tabs:
+Variants: Horizontal, Vertical.
+States: Default, Active, Disabled.
+Breadcrumbs:
+Variants: Standard navigation path.
+States: Default.
+3.3.3 Content Display Components
+Cards:
+Variants: Event Card , News Card , Testimonial Card , Donation Record Card , Impact Statistic Card.
+
+
+
+States: Default, Hover, Active.
+Lists:
+Variants: Simple List, Detailed List (e.g., Donor Queue/List , Live Expected Donor List , View Past Donations List ), Notification List.
+
+
+
+States: Default, Empty.
+Tables:
+Variants: Data Table (e.g., for donor bookings , user accounts , event schedules ), Sortable, Filterable.
+
+
+States: Default, Sorted, Filtered, Empty.
+Accordion/Collapsible Panels:
+Variants: Single item, Multi-item (e.g., for FAQs ).
+States: Collapsed, Expanded.
+Image Galleries/Carousels:
+Variants: Photo Gallery , Testimonial Carousel.
+
+States: Playing, Paused.
+Text Blocks/Rich Text Display:
+Variants: Standard text, Markdown/Rich Text.
+States: Default.
+3.3.4 Specific Feature Components
+Map Component:
+Variants: Interactive Map showing Donation Centers.
+States: Default, Panned, Zoomed, Marker Selected.
+Blood Demand Indicator:
+Variants: Visual display of blood demand levels by type.
+States: Low, Medium, High.
+Pre-screening Quiz:
+Variants: Multi-step form with questions.
+States: Question Displayed, Answer Selected, Completed, Error.
+Appointment Time Slot Selector:
+Variants: Calendar view with selectable time slots.
+States: Available, Selected, Unavailable, Full.
+QR Code Display/Scanner:
+Variants: Generates and displays personal QR code for donor check-in , Camera interface for scanning.
+
+States: Displaying, Scanning Active, Scanned Success, Scan Error.
+Health Declaration Form:
+Variants: Multi-page/Multi-step form for digital health declaration.
+States: In Progress, Submitted, Reviewed (Medical).
+Donor Status Update Interface:
+Variants: Dropdown or buttons for updating donor progress (e.g., "Arrived," "Checked-in," "Screening Complete," "No-Show").
+States: Default, Updated.
+Medical Screening Outcome Input:
+Variants: Dropdown for Approve/Decline/Defer , Text area for custom notes.
+States: Default, Selected, Notes Entered.
+Reporting Tools:
+Variants: Report selection dropdown , Date range picker , Chart/Graph display (e.g., for donor activity, event performance) , Data table for report results.
+States: Parameters Set, Report Generated, Exported.
+CMS Editor (WYSIWYG):
+Variants: Rich text editor for managing news, FAQs, event details.
+States: Editing, Saving, Published, Unpublished.
