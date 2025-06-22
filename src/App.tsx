@@ -14,6 +14,7 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import FindCenters from "./pages/FindCenters";
 import EligibilityCheck from "./pages/EligibilityCheck";
 import ImpactStories from "./pages/ImpactStories";
+import DonationProcess from "./pages/DonationProcess";
 import DonorDashboard from "./pages/DonorDashboard";
 import CenterStaffDashboard from "./pages/CenterStaffDashboard";
 import MedicalProfessionalDashboard from "./pages/MedicalProfessionalDashboard";
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/centers" element={<FindCenters />} />
             <Route path="/eligibility-check" element={<EligibilityCheck />} />
             <Route path="/impact-stories" element={<ImpactStories />} />
+            <Route path="/process" element={<DonationProcess />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/donor-dashboard" element={<DonorDashboard />} />
