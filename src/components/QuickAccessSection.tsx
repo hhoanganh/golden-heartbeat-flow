@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +27,7 @@ const QuickAccessSection = () => {
       icon: '❤️',
       label: 'Success Stories',
       description: 'See the impact of donors like you',
-      href: '/stories' // Example link
+      href: '/impact-stories' // Updated link
     },
     {
       icon: '📈',
@@ -38,7 +39,7 @@ const QuickAccessSection = () => {
       icon: '💬',
       label: 'Get Help',
       description: 'Contact our dedicated support team',
-      href: '/#contact-info' // Anchor link to the footer
+      href: '/contact' // Updated to link to contact page
     }
   ];
 

@@ -20,8 +20,8 @@ import DonorDashboard from "./pages/DonorDashboard";
 import CenterStaffDashboard from "./pages/CenterStaffDashboard";
 import MedicalProfessionalDashboard from "./pages/MedicalProfessionalDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
-import NationalHealthMonitor from "./pages/NationalHealthMonitor"; // Import the new page
 
 const queryClient = new QueryClient();
 
@@ -55,11 +55,11 @@ const App = () => (
             <Route path="/national-health-monitor" element={<NationalHealthMonitor />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/donor-dashboard" element={<DonorDashboard />} />
             <Route path="/staff-dashboard" element={<CenterStaffDashboard />} />
             <Route path="/medical-dashboard" element={<MedicalProfessionalDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/national-health-monitor" element={<NationalHealthMonitor />} /> {/* Add route for National Health Monitor */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
