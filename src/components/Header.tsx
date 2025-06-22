@@ -67,11 +67,11 @@ const Header = () => {
               FAQs
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </Link>
-            {/* Updated 'Contact Us' link for desktop navigation */}
-            <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
+            {/* Updated 'Contact Us' link for desktop navigation to point to ContactUs.tsx page */}
+            <Link to="/contact" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 relative group">
               Contact Us
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-supportive-blue transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </a>
+            </Link>
           </nav>
 
           {/* Right side - Login/Register and Language */}
@@ -215,7 +215,7 @@ const Header = () => {
               {/* New "Find Centers" link added here */}
               <Link to="/centers" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Centers</Link>
               <Link to="/faqs" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</Link>
-              <a href="#contact-info" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</a>
+              <Link to="/contact" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</Link>
               <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
             </nav>
           </div>
