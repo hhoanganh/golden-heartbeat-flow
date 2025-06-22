@@ -153,6 +153,7 @@ const Header = () => {
                         
                         <Link to="/medical-dashboard"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
                         <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        
                       <DropdownMenuSeparator />
                        
                         <DropdownMenuItem>Logout</DropdownMenuItem>
@@ -172,12 +173,14 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/admin-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                        
                         <Link to="/admin-dashboard"><DropdownMenuItem>Content Management</DropdownMenuItem></Link>
                         <Link to="/admin-dashboard"><DropdownMenuItem>Event Management</DropdownMenuItem></Link>
                         <Link to="/admin-dashboard"><DropdownMenuItem>User Management</DropdownMenuItem></Link>
+                        
+                        <Link to="/admin-dashboard"><DropdownMenuItem>Document Management</DropdownMenuItem></Link> {/* NEW: Document Management */}
                         <Link to="/admin-dashboard"><DropdownMenuItem>Reporting</DropdownMenuItem></Link>
-
+                        <Link to="/admin-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>

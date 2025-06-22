@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FileText, Calendar, Users, BarChart, LogOut } from 'lucide-react';
+import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen } from 'lucide-react';
 import Header from '@/components/Header';
 
 const AdminDashboard = () => {
@@ -13,6 +13,8 @@ const AdminDashboard = () => {
     { id: 'content', label: 'Public Content Management', icon: FileText },
     { id: 'events', label: 'Event & Schedule Management', icon: Calendar },
     { id: 'users', label: 'User & Role Management', icon: Users },
+    
+    { id: 'documents', label: 'Document Management', icon: FolderOpen }, // NEW: Document Management
     { id: 'reporting', label: 'Basic Operational Reporting', icon: BarChart },
   ];
 
@@ -59,6 +61,17 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <p>View system analytics, donation statistics, and operational reports.</p>
+            </CardContent>
+          </Card>
+        );
+        case 'documents': // NEW: Document Management content
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Document Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Manage scanned paper forms and other digital documents.</p>
             </CardContent>
           </Card>
         );
