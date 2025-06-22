@@ -16,6 +16,7 @@ import EligibilityCheck from "./pages/EligibilityCheck";
 import ImpactStories from "./pages/ImpactStories";
 import DonationProcess from "./pages/DonationProcess";
 import NationalHealthMonitor from "./pages/NationalHealthMonitor";
+import NewsArticles from "./pages/NewsArticles";
 import DonorDashboard from "./pages/DonorDashboard";
 import CenterStaffDashboard from "./pages/CenterStaffDashboard";
 import MedicalProfessionalDashboard from "./pages/MedicalProfessionalDashboard";
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/impact-stories" element={<ImpactStories />} />
             <Route path="/process" element={<DonationProcess />} />
             <Route path="/national-health-monitor" element={<NationalHealthMonitor />} />
+            <Route path="/news" element={<NewsArticles />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/contact" element={<ContactUs />} />

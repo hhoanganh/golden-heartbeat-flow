@@ -106,12 +106,14 @@ const ContentSection = () => {
                 </div>
               ))}
             </div>
-            <Button
-              variant="outline"
-              className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
-            >
-              Dive Deeper into News
-            </Button>
+            <Link to="/news">
+              <Button
+                variant="outline"
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
+              >
+                Dive Deeper into News
+              </Button>
+            </Link>
           </div>
 
           {/* Events Column */}
