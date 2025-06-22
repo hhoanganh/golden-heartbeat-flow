@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ClipboardList, CheckCircle, FileText, LogOut } from 'lucide-react';
+import { QrCode, ClipboardList, CheckCircle, FileText, LogOut } from 'lucide-react'; // Added QrCode
 import Header from '@/components/Header';
 
 const MedicalProfessionalDashboard = () => {
-  const [activeSection, setActiveSection] = useState('review');
+  const [activeSection, setActiveSection] = useState('verifyDonor'); // Default to new top-level function
 
   const menuItems = [
-    { id: 'review', label: 'Health Declaration Review', icon: ClipboardList },
-    { id: 'screening', label: 'Screening Outcome Input', icon: CheckCircle },
+    { id: 'verifyDonor', label: 'Verify Donor for Consultation', icon: QrCode }, // NEW
+    { id: 'review', label: 'Health Declaration Review', icon: ClipboardList }, // UPDATED
     { id: 'history', label: 'Donor Medical History', icon: FileText },
   ];
 
@@ -19,6 +19,18 @@ const MedicalProfessionalDashboard = () => {
     switch (activeSection) {
       case 'review':
         return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Verify Donor for Consultation</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Scan donor QR code or enter ID to initiate consultation process.</p>
+            </CardContent>
+          </Card>
+        );
+      case 'verifyDonor': // This case was missing, now added and moved to top
+        return (
+          
           <Card>
             <CardHeader>
               <CardTitle>Health Declaration Review</CardTitle>
@@ -29,13 +41,13 @@ const MedicalProfessionalDashboard = () => {
           </Card>
         );
       case 'screening':
-        return (
+        return ( // Renamed from 'screening' to 'confirmation'
           <Card>
             <CardHeader>
-              <CardTitle>Screening Outcome Input</CardTitle>
+              <CardTitle>Final Eligibility Confirmation</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Record screening results and medical assessments for donors.</p>
+              <p>Approve or defer donor for blood donation based on medical assessment.</p>
             </CardContent>
           </Card>
         );

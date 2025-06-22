@@ -148,11 +148,12 @@ const Header = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
-                        <Link to="/medical-dashboard"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
-                        <Link to="/medical-dashboard"><DropdownMenuItem>Screening Outcome Input</DropdownMenuItem></Link>
+                      <Link to="/medical-dashboard"><DropdownMenuItem>Verify Donor for Consultation</DropdownMenuItem></Link>
+                      <Link to="/medical-dashboard"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
+                        
                         <Link to="/medical-dashboard"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
-                        <DropdownMenuSeparator />
+                        <Link to="/medical-dashboard"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                      <DropdownMenuSeparator />
                        
                         <DropdownMenuItem>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
