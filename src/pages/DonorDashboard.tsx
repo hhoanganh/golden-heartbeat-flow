@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -8,7 +9,19 @@ import Header from '@/components/Header';
 
 const DonorDashboard = () => {
   const [activeSection, setActiveSection] = useState('profile');
+  const location = useLocation();
 
+  useEffect(() => {
+    const hash = location.hash.substring(1); // Remove '#'
+    if (hash) {
+      const validSection = menuItems.find(item => item.id === hash);
+      if (validSection) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection('profile'); // Default to 'profile' if hash is invalid
+      }
+    }
+  }, [location.hash]);
   const menuItems = [
     { id: 'profile', label: 'My Profile', icon: User },
     { id: 'appointments', label: 'My Appointments', icon: Calendar },
