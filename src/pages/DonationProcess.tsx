@@ -22,7 +22,7 @@ const DonationProcess = () => {
       title: "Register Online & Complete Health Form",
       icon: FileText,
       description: "Before you visit, complete your registration and fill out the digital health declaration form through our app. This saves you significant time at the center.",
-      image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?q=80&w=1000&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1583858643718-515d192db250?q=80&w=1170&auto=format&fit=crop"
     },
     {
       number: 2,
@@ -66,9 +66,9 @@ const DonationProcess = () => {
       <Header />
       
       {/* Hero Container */}
-      <section className="py-20 bg-gradient-to-br from-warm-gray/30 to-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-display text-deep-gray font-bold mb-6">
+      <section className="py-l bg-gradient-to-r from-compassion-red/5 to-supportive-blue/5">
+        <div className="max-w-7xl mx-auto px-3 md:px-5 lg:px-10 text-center">
+          <h1 className="text-display text-deep-gray font-bold mb-4">
             The Journey of a Golden Drop
           </h1>
           <p className="text-body-large text-gentle-gray max-w-2xl mx-auto">
