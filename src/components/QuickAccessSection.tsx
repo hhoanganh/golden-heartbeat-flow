@@ -32,7 +32,7 @@ const QuickAccessSection = () => {
       icon: '📈',
       label: 'Live Blood Demand',
       description: 'View real-time needs across the city',
-      href: '/#demand-section' // Anchor link to a section on the homepage
+      href: '/national-health-monitor' // Link to the National Health Monitor page
     },
     {
       icon: '💬',
