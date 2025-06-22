@@ -10,9 +10,9 @@ const CenterStaffDashboard = () => {
   const [activeSection, setActiveSection] = useState('checkin');
 
   const menuItems = [
-    { id: 'checkin', label: 'Donor Check-in', icon: UserCheck },
-    { id: 'bookings', label: 'Donor Bookings & Details', icon: Calendar },
-    { id: 'status', label: 'Donor Status Updates', icon: UserCog },
+    { id: 'checkin', label: 'Donor Check-in', icon: UserCheck }, // KEEP
+    { id: 'liveList', label: 'Live Donor List', icon: Calendar }, // UPDATE from "Donor Bookings & Details"
+    { id: 'status', label: 'Donor Status Updates', icon: UserCog }, // KEEP
     { id: 'alerts', label: 'Staff Alerts & Broadcasts', icon: Megaphone },
   ];
 
@@ -25,18 +25,18 @@ const CenterStaffDashboard = () => {
               <CardTitle>Donor Check-in</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Process donor arrivals and manage check-in procedures.</p>
+              <p>Use the QR Code Scanner for scheduled donors or find donors by their ID if the QR code fails.</p>
             </CardContent>
           </Card>
         );
-      case 'bookings':
+      case 'liveList':
         return (
           <Card>
             <CardHeader>
-              <CardTitle>Donor Bookings & Details</CardTitle>
+              <CardTitle>Live Donor List</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>View and manage donor appointments and personal details.</p>
+              <p>View today's appointments and access donor details. The "Print Health Declaration" action is available within each donor's detail view.</p>
             </CardContent>
           </Card>
         );
@@ -47,7 +47,7 @@ const CenterStaffDashboard = () => {
               <CardTitle>Donor Status Updates</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Update donor status throughout the donation process.</p>
+              <p>Update donor progress through the various stages of the donation process (e.g., arrived, screening, donating, completed).</p>
             </CardContent>
           </Card>
         );
