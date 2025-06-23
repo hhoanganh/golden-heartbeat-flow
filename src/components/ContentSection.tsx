@@ -106,10 +106,10 @@ const ContentSection = () => {
                 </div>
               ))}
             </div>
-            <Link to="/news">
+            <Link to="/news" className="mt-auto">
               <Button
                 variant="outline"
-                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6"
+                className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 w-full"
               >
                 Dive Deeper into News
               </Button>
@@ -190,7 +190,7 @@ const ContentSection = () => {
                 )
               })}
             </div>
-            <Link to="/events">
+            <Link to="/events" className="mt-auto">
               <Button
                 variant="outline"
                 className="border-supportive-blue text-supportive-blue hover:bg-supportive-blue hover:text-white rounded-md-custom px-6 w-full"
@@ -228,12 +228,14 @@ const ContentSection = () => {
                 </div>
               ))}
             </div>
-            <Button
-              variant="outline"
-              className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 mt-auto"
-            >
-              Share Your Story
-            </Button>
+            <Link to="/impact-stories" className="mt-auto">
+              <Button
+                variant="outline"
+                className="border-compassion-red text-compassion-red hover:bg-compassion-red hover:text-white rounded-md-custom px-6 w-full"
+              >
+                Share Your Story
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
