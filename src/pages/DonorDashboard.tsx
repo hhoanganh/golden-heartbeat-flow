@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { User, Calendar, QrCode, Heart, Bell, LogOut } from 'lucide-react';
 import Header from '@/components/Header';
+import MyProfileSection from '@/components/donor-dashboard/MyProfileSection';
 import MyAppointmentsSection from '@/components/donor-dashboard/MyAppointmentsSection';
 import MyDonationJourneySection from '@/components/donor-dashboard/MyDonationJourneySection';
 import NotificationsSection from '@/components/donor-dashboard/NotificationsSection';
@@ -36,13 +37,7 @@ const DonorDashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'profile':
-        return (
-          <div className="space-y-6">
-            <h1 className="text-heading-2 font-semibold text-deep-gray">My Profile</h1>
-            <p className="text-body text-gentle-gray">View and edit your personal information, contact details, and donation preferences.</p>
-            {/* Placeholder for profile content */}
-          </div>
-        );
+        return <MyProfileSection />;
       case 'appointments':
         return <MyAppointmentsSection />;
       case 'qrcode':
