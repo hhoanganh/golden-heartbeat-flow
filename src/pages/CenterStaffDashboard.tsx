@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import StaffProfileSection from '@/components/staff-dashboard/StaffProfileSection'; // Import the specific profile component
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import Header from '@/components/Header';
 const CenterStaffDashboard = () => {
   const [activeSection, setActiveSection] = useState('checkin');
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hash = location.hash.substring(1);
@@ -29,8 +30,12 @@ const CenterStaffDashboard = () => {
     { id: 'liveList', label: 'Live Donor List', icon: Calendar }, // UPDATE from "Donor Bookings & Details"
     { id: 'status', label: 'Donor Status Updates', icon: UserCog }, // KEEP
     { id: 'alerts', label: 'Staff Alerts & Broadcasts', icon: Megaphone },
-    
-  ];
+    ];
+
+  const handleSectionChange = (sectionId: string) => {
+    setActiveSection(sectionId);
+    navigate(`#${sectionId}`);  
+  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -100,7 +105,7 @@ const CenterStaffDashboard = () => {
                   key={item.id}
                   variant={activeSection === item.id ? "default" : "ghost"}
                   className="w-full justify-start"
-                  onClick={() => setActiveSection(item.id)}
+                  onClick={() => handleSectionChange(item.id)}
                 >
                   <Icon className="mr-2 h-4 w-4" />
                   {item.label}

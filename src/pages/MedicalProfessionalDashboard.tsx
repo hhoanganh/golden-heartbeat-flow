@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MedicalProfileSection from '@/components/medical-dashboard/MedicalProfileSection'; // Import the specific profile component
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import Header from '@/components/Header';
 const MedicalProfessionalDashboard = () => {
   const [activeSection, setActiveSection] = useState('verifyDonor'); // Default to new top-level function
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hash = location.hash.substring(1);
@@ -30,7 +31,10 @@ const MedicalProfessionalDashboard = () => {
     { id: 'history', label: 'Donor Medical History', icon: FileText },
     
   ];
-
+  const handleSectionChange = (sectionId: string) => {
+    setActiveSection(sectionId);
+    navigate(`#${sectionId}`);
+  };
   const renderContent = () => {
     switch (activeSection) {
       case 'verifyDonor':
@@ -90,7 +94,7 @@ const MedicalProfessionalDashboard = () => {
                   key={item.id}
                   variant={activeSection === item.id ? "default" : "ghost"}
                   className="w-full justify-start"
-                  onClick={() => setActiveSection(item.id)}
+                  onClick={() => handleSectionChange(item.id)}
                 >
                   <Icon className="mr-2 h-4 w-4" />
                   {item.label}
