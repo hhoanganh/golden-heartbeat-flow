@@ -24,10 +24,11 @@ const MedicalProfessionalDashboard = () => {
     }
   }, [location.hash]);
   const menuItems = [
+    { id: 'profile', label: 'My Profile', icon: User },
     { id: 'verifyDonor', label: 'Verify Donor for Consultation', icon: QrCode }, // NEW
     { id: 'review', label: 'Health Declaration Review', icon: ClipboardList }, // UPDATED
     { id: 'history', label: 'Donor Medical History', icon: FileText },
-    { id: 'profile', label: 'My Profile', icon: User },
+    
   ];
 
   const renderContent = () => {

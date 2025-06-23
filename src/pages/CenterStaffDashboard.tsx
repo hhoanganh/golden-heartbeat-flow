@@ -24,11 +24,12 @@ const CenterStaffDashboard = () => {
     }
   }, [location.hash]);
   const menuItems = [
+    { id: 'profile', label: 'My Profile', icon: User },
     { id: 'checkin', label: 'Donor Check-in', icon: UserCheck }, // KEEP
     { id: 'liveList', label: 'Live Donor List', icon: Calendar }, // UPDATE from "Donor Bookings & Details"
     { id: 'status', label: 'Donor Status Updates', icon: UserCog }, // KEEP
     { id: 'alerts', label: 'Staff Alerts & Broadcasts', icon: Megaphone },
-    { id: 'profile', label: 'My Profile', icon: User },
+    
   ];
 
   const renderContent = () => {
