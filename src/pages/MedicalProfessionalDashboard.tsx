@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import MedicalProfileSection from '@/components/medical-dashboard/MedicalProfileSection'; // Import the specific profile component
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -66,17 +66,9 @@ const MedicalProfessionalDashboard = () => {
             </CardContent>
           </Card>
         );
-              case 'profile':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Profile</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage your personal medical professional profile and account settings.</p>
-            </CardContent>
-          </Card>
-        );
+        case 'profile':
+      case 'profile':
+        return <MedicalProfileSection />; // Render the MedicalProfileSection component
       default:
         return null;
     }

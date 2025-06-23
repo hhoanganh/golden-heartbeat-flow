@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import StaffProfileSection from '@/components/staff-dashboard/StaffProfileSection'; // Import the specific profile component
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -28,7 +28,7 @@ const CenterStaffDashboard = () => {
     { id: 'liveList', label: 'Live Donor List', icon: Calendar }, // UPDATE from "Donor Bookings & Details"
     { id: 'status', label: 'Donor Status Updates', icon: UserCog }, // KEEP
     { id: 'alerts', label: 'Staff Alerts & Broadcasts', icon: Megaphone },
-      { id: 'profile', label: 'My Profile', icon: User },
+    { id: 'profile', label: 'My Profile', icon: User },
   ];
 
   const renderContent = () => {
@@ -77,17 +77,8 @@ const CenterStaffDashboard = () => {
             </CardContent>
           </Card>
         );
-              case 'profile':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Profile</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage your personal staff profile and account settings.</p>
-            </CardContent>
-          </Card>
-        );
+        case 'profile':
+        return <StaffProfileSection />; // Render the StaffProfileSection component
       default:
         return null;
     }

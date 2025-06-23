@@ -1,14 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { User, Calendar, QrCode, Heart, Bell, LogOut } from 'lucide-react';
+import MyProfileSection from '@/components/donor-dashboard/MyProfileSection'; // Import the specific profile componen
 import Header from '@/components/Header';
-import MyProfileSection from '@/components/donor-dashboard/MyProfileSection';
-import MyAppointmentsSection from '@/components/donor-dashboard/MyAppointmentsSection';
-import MyDonationJourneySection from '@/components/donor-dashboard/MyDonationJourneySection';
-import NotificationsSection from '@/components/donor-dashboard/NotificationsSection';
 
 const DonorDashboard = () => {
   const [activeSection, setActiveSection] = useState('profile');
@@ -25,11 +23,10 @@ const DonorDashboard = () => {
       }
     }
   }, [location.hash]);
-
   const menuItems = [
     { id: 'profile', label: 'My Profile', icon: User },
     { id: 'appointments', label: 'My Appointments', icon: Calendar },
-    { id: 'qrcode', label: 'My QR Code', icon: QrCode },
+    
     { id: 'journey', label: 'My Donation Journey', icon: Heart },
     { id: 'notifications', label: 'Notifications / Alerts', icon: Bell },
   ];
@@ -37,21 +34,41 @@ const DonorDashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'profile':
-        return <MyProfileSection />;
+        return <MyProfileSection />; // Render the MyProfileSection component
       case 'appointments':
-        return <MyAppointmentsSection />;
-      case 'qrcode':
         return (
-          <div className="space-y-6">
-            <h1 className="text-heading-2 font-semibold text-deep-gray">My QR Code</h1>
-            <p className="text-body text-gentle-gray">Your unique QR code for quick check-in at donation centers.</p>
-            {/* Placeholder for QR code content */}
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>My Appointments</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>View your upcoming and past donation appointments.</p>
+            </CardContent>
+          </Card>
         );
+      
       case 'journey':
-        return <MyDonationJourneySection />;
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>My Donation Journey</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Track your donation history and impact over time.</p>
+            </CardContent>
+          </Card>
+        );
       case 'notifications':
-        return <NotificationsSection />;
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Notifications / Alerts</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Important updates and reminders about your donations.</p>
+            </CardContent>
+          </Card>
+        );
       default:
         return null;
     }
