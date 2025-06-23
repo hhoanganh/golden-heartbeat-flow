@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen, User } from 'lucide-react';
+import AdminProfileSection from '@/components/admin-dashboard/AdminProfileSection'; // Import the specific profile component
 import Header from '@/components/Header';
 
 const AdminDashboard = () => {
@@ -23,6 +24,7 @@ const AdminDashboard = () => {
     }
   }, [location.hash]);
   const menuItems = [
+    { id: 'profile', label: 'My Profile', icon: User }, // Added My Profile to sidebar
     { id: 'content', label: 'Public Content Management', icon: FileText },
     { id: 'events', label: 'Event & Schedule Management', icon: Calendar },
     { id: 'users', label: 'User & Role Management', icon: Users },
@@ -87,17 +89,8 @@ const AdminDashboard = () => {
             </CardContent>
           </Card>
         );
-          case 'profile':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Profile</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage your personal administrator profile and account settings.</p>
-            </CardContent>
-          </Card>
-        );
+      case 'profile':
+        return <AdminProfileSection />; // Render the AdminProfileSection component
       default:
         return null;
     }
