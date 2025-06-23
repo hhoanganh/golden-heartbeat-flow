@@ -102,7 +102,7 @@ const Header = () => {
                         <Link to="/donor-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
                         <Link to="/donor-dashboard#appointments"><DropdownMenuItem>My Appointments</DropdownMenuItem></Link>
                         <Link to="/donor-dashboard#journey"><DropdownMenuItem>My Donation Journey</DropdownMenuItem></Link>
-                        <Link to="/donor-dashboard#qrcode"><DropdownMenuItem>My QR Code</DropdownMenuItem></Link>
+                        
                         <Link to="/donor-dashboard#notifications"><DropdownMenuItem>Notifications / Alerts</DropdownMenuItem></Link>
                         
                   <DropdownMenuSeparator />
