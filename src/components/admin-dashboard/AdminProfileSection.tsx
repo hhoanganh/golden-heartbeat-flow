@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
-import { User, Edit2, LogOut, Shield, CheckCircle, Settings } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'; // Keep Avatar imports
+import { Separator } from '@/components/ui/separator'; // Keep Separator import
+import { User, Edit2, LogOut, Shield, CheckCircle, Settings, Key, ListChecks } from 'lucide-react'; // Added Key and ListChecks icons
+
 
 const AdminProfileSection = () => {
   const [isEditing, setIsEditing] = useState({
@@ -123,9 +124,13 @@ const AdminProfileSection = () => {
                   <Button variant="outline" className="w-full">
                     Update Password
                   </Button>
-                  <Button variant="outline" className="w-full mt-2">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Manage Active Sessions
+                  <Button variant="outline" className="w-full mt-2" onClick={() => console.log('Setup Two-Factor Auth clicked')}>
+                    <Key className="mr-2 h-4 w-4" />
+                    Setup Two-Factor Auth
+                  </Button>
+                  <Button variant="outline" className="w-full mt-2" onClick={() => console.log('View Access Logs clicked')}>
+                    <ListChecks className="mr-2 h-4 w-4" />
+                    View Access Logs
                   </Button>
                 </CardContent>
               </Card>
