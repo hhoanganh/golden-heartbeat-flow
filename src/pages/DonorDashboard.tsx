@@ -5,7 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { User, Calendar, QrCode, Heart, Bell, LogOut } from 'lucide-react';
-import MyProfileSection from '@/components/donor-dashboard/MyProfileSection'; // Import the specific profile componen
+import MyProfileSection from '@/components/donor-dashboard/MyProfileSection';
+import MyAppointmentsSection from '@/components/donor-dashboard/MyAppointmentsSection';
+import MyDonationJourneySection from '@/components/donor-dashboard/MyDonationJourneySection';
+import NotificationsSection from '@/components/donor-dashboard/NotificationsSection';
+
 import Header from '@/components/Header';
 
 const DonorDashboard = () => {
@@ -41,39 +45,12 @@ const DonorDashboard = () => {
       case 'profile':
         return <MyProfileSection />; // Render the MyProfileSection component
       case 'appointments':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Appointments</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>View your upcoming and past donation appointments.</p>
-            </CardContent>
-          </Card>
-        );
+        return <MyAppointmentsSection />;
       
       case 'journey':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Donation Journey</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Track your donation history and impact over time.</p>
-            </CardContent>
-          </Card>
-        );
+        return <MyDonationJourneySection />;
       case 'notifications':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Notifications / Alerts</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Important updates and reminders about your donations.</p>
-            </CardContent>
-          </Card>
-        );
+        return <NotificationsSection />;
       default:
         return null;
     }
