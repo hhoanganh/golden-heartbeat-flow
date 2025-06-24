@@ -94,7 +94,8 @@ const DonorDashboard = () => {
         <div className="md:hidden p-4"> {/* This div will contain the mobile trigger */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" className="w-full justify-center">
+              {/* Add asChild={true} to the Button when it's used as a child of SheetTrigger/SheetClose */}
+              <Button variant="outline" className="w-full justify-center" asChild>
                 {/* Wrap icon and text in a single span to satisfy React.Children.only */}
                 {/* This span ensures the Button (when acting as asChild) has only one direct child */}
                 <span>
@@ -110,6 +111,7 @@ const DonorDashboard = () => {
                   const Icon = item.icon;
                   return (
                     <SheetClose asChild key={item.id}> {/* Close sheet on item click */}
+                      {/* Add asChild={true} to the Button when it's used as a child of SheetTrigger/SheetClose */}
                       <Button
                         variant={activeSection === item.id ? "default" : "ghost"}
                         className="w-full justify-start"
@@ -127,6 +129,7 @@ const DonorDashboard = () => {
                 })}
                 <Separator className="my-4" />
                 <SheetClose asChild>
+                  {/* Add asChild={true} to the Button when it's used as a child of SheetTrigger/SheetClose */}
                   <Button variant="ghost" className="w-full justify-start text-red-600">
                     {/* Wrap icon and text in a single span to satisfy React.Children.only */}
                     {/* This span ensures the Button (when acting as asChild) has only one direct child */}
