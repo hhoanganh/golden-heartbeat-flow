@@ -5,10 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'; // Keep Avatar imports
-import { Separator } from '@/components/ui/separator'; // Keep Separator import
-import { User, Edit2, LogOut, Shield, CheckCircle, Settings, Key, ListChecks } from 'lucide-react'; // Added Key and ListChecks icons
-
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
+import { User, Edit2, LogOut, Shield, CheckCircle, Key, ListChecks } from 'lucide-react';
 
 const AdminProfileSection = () => {
   const [isEditing, setIsEditing] = useState({
@@ -58,45 +57,40 @@ const AdminProfileSection = () => {
   return (
     <div className="space-y-6">
       <Card className="w-full">
-        {/* Header & Action Container */}
-        <CardHeader className="flex flex-row items-center justify-between"> {/* flex, flex-row, items-center, justify-between are standard */}
-          <CardTitle className="text-2xl font-semibold text-gray-800">My Profile</CardTitle> {/* text-2xl, font-semibold are standard. text-gray-800 is standard. */}
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-2xl font-semibold text-gray-800">My Profile</CardTitle>
           <Button 
             onClick={handleSaveChanges}
             disabled={!hasChanges}
-            className="bg-harmony-green hover:bg-harmony-green/90"
+            className="bg-green-600 hover:bg-green-700"
           >
             Save Changes
           </Button>
         </CardHeader>
 
         <CardContent>
-          {/* Two-Column Grid Container */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6"> {/* gap-l is custom, replaced with gap-6 */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            {/* Left Column: Identity & Security */}
-            <div className="lg:col-span-1 space-y-6"> {/* space-y-l is custom, replaced with space-y-6 */}
+            <div className="lg:col-span-1 space-y-6">
               
-              {/* Profile Summary Card */}
               <Card>
-                <CardContent className="p-m text-center">
+                <CardContent className="p-6 text-center">
                   <Avatar className="w-24 h-24 mx-auto mb-4">
                     <AvatarImage src="/placeholder.svg" alt="Profile" />
                     <AvatarFallback className="text-lg font-bold">
                       <User className="h-8 w-8" />
                     </AvatarFallback>
                   </Avatar>
-                  <h3 className="text-xl font-medium text-gray-800 mb-2">{formData.fullName}</h3> {/* text-xl, font-medium are standard. text-gray-800 is standard. */}
-                  <Badge variant="default" className="mb-2 bg-compassion-red">System Administrator</Badge>
-                  <p className="text-sm text-gray-500">Username: {systemPermissions.username}</p> {/* text-sm, text-gray-500 are standard. */}
+                  <h3 className="text-xl font-medium text-gray-800 mb-2">{formData.fullName}</h3>
+                  <Badge variant="default" className="mb-2 bg-red-600">System Administrator</Badge>
+                  <p className="text-sm text-gray-500">Username: {systemPermissions.username}</p>
                 </CardContent>
               </Card>
 
-              {/* Account Security Card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-heading-4 flex items-center">
-                    <Shield className="mr-2 h-5 w-5" /> {/* mr-2, h-5, w-5 are standard */}
+                  <CardTitle className="text-lg flex items-center">
+                    <Shield className="mr-2 h-5 w-5" />
                     Account Security
                   </CardTitle>
                 </CardHeader>
@@ -136,13 +130,11 @@ const AdminProfileSection = () => {
               </Card>
             </div>
 
-            {/* Right Column: Details & Permissions */}
-            <div className="lg:col-span-2 space-y-6"> {/* space-y-l is custom, replaced with space-y-6 */}
+            <div className="lg:col-span-2 space-y-6">
               
-              {/* Personal Details Card */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">Personal Details</CardTitle> {/* text-lg is standard */}
+                  <CardTitle className="text-lg">Personal Details</CardTitle>
                   <Button 
                     variant="ghost" 
                     size="icon"
@@ -161,16 +153,15 @@ const AdminProfileSection = () => {
                         onChange={(e) => handleInputChange('fullName', e.target.value)}
                       />
                     ) : (
-                      <p className="text-base text-gray-800">{formData.fullName}</p> {/* text-base, text-gray-800 are standard */}
+                      <p className="text-base text-gray-800">{formData.fullName}</p>
                     )}
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Contact Information Card */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">Contact Information</CardTitle> {/* text-lg is standard */}
+                  <CardTitle className="text-lg">Contact Information</CardTitle>
                   <Button 
                     variant="ghost" 
                     size="icon"
@@ -190,7 +181,7 @@ const AdminProfileSection = () => {
                         onChange={(e) => handleInputChange('workEmail', e.target.value)}
                       />
                     ) : (
-                      <p className="text-base text-gray-800">{formData.workEmail}</p> {/* text-base, text-gray-800 are standard */}
+                      <p className="text-base text-gray-800">{formData.workEmail}</p>
                     )}
                   </div>
                   <div className="space-y-2">
@@ -202,36 +193,35 @@ const AdminProfileSection = () => {
                         onChange={(e) => handleInputChange('workPhone', e.target.value)}
                       />
                     ) : (
-                      <p className="text-base text-gray-800">{formData.workPhone}</p> {/* text-base, text-gray-800 are standard */}
+                      <p className="text-base text-gray-800">{formData.workPhone}</p>
                     )}
                   </div>
                 </CardContent>
               </Card>
 
-              {/* System Permissions Card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center"> {/* text-lg is standard */}
-                    <Shield className="mr-2 h-5 w-5 text-compassion-red" /> {/* text-compassion-red is custom color */}
+                  <CardTitle className="text-lg flex items-center">
+                    <Shield className="mr-2 h-5 w-5 text-red-600" />
                     System Permissions
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="bg-gray-100 p-4 rounded-md"> {/* bg-warm-gray/30 is custom, replaced with bg-gray-100 */}
-                    <p className="text-base text-gray-800 font-medium mb-3"> {/* text-body, text-deep-gray are custom, replaced with text-base, text-gray-800 */}
+                  <div className="bg-gray-100 p-4 rounded-md">
+                    <p className="text-base text-gray-800 font-medium mb-3">
                       You have full administrative access to all system functions:
                     </p>
                     <div className="space-y-3">
                       {systemPermissions.permissions.map((permission, index) => (
                         <div key={index} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-harmony-green flex-shrink-0" />
-                          <span className="text-base text-gray-800">{permission}</span> {/* text-body, text-deep-gray are custom, replaced with text-base, text-gray-800 */}
+                          <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                          <span className="text-base text-gray-800">{permission}</span>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-orange-100 border border-orange-300 rounded-md"> {/* bg-kindness-orange/10, border-kindness-orange/30 are custom, replaced with standard orange shades */}
-                    <p className="text-sm text-gray-800"> {/* text-caption, text-deep-gray are custom, replaced with text-sm, text-gray-800 */}
+                  <div className="mt-4 p-3 bg-orange-100 border border-orange-300 rounded-md">
+                    <p className="text-sm text-gray-800">
                       <strong>Security Notice:</strong> Your administrative privileges allow you to make system-wide changes. 
                       Please ensure all actions comply with organizational policies and data protection regulations.
                     </p>
@@ -241,7 +231,6 @@ const AdminProfileSection = () => {
             </div>
           </div>
 
-          {/* Destructive Actions Container */}
           <Separator className="my-6" />
           <div className="flex justify-center">
             <Button 
