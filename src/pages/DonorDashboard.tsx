@@ -9,7 +9,7 @@ import MyProfileSection from '@/components/donor-dashboard/MyProfileSection';
 import MyAppointmentsSection from '@/components/donor-dashboard/MyAppointmentsSection';
 import MyDonationJourneySection from '@/components/donor-dashboard/MyDonationJourneySection';
 import NotificationsSection from '@/components/donor-dashboard/NotificationsSection';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet'; // Import Sheet components
+import MobileBottomNav from '@/components/MobileBottomNav'; // Import the new MobileBottomNav component
 
 
 import Header from '@/components/Header';
