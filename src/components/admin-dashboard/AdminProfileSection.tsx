@@ -62,7 +62,7 @@ const AdminProfileSection = () => {
           <Button 
             onClick={handleSaveChanges}
             disabled={!hasChanges}
-            className="bg-green-600 hover:bg-green-700"
+            className="bg-compassion-red hover:bg-compassion-red/90"
           >
             Save Changes
           </Button>

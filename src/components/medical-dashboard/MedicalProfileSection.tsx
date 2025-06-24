@@ -65,7 +65,7 @@ const MedicalProfileSection = () => {
           <Button 
             onClick={handleSaveChanges}
             disabled={!hasChanges}
-            className="bg-harmony-green hover:bg-harmony-green/90"
+            className="bg-compassion-red hover:bg-compassion-red/90"
           >
             Save Changes
           </Button>
