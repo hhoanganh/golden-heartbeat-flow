@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen, User } from 'lucide-react';
-import AdminProfileSection from '@/components/admin-dashboard/AdminProfileSection'; // Import the specific profile component
+import AdminProfileSection from '@/components/admin-dashboard/AdminProfileSection';
 import Header from '@/components/Header';
 import ContentManagementSection from '@/components/admin-dashboard/ContentManagementSection';
 import EventManagementSection from '@/components/admin-dashboard/EventManagementSection';
@@ -34,16 +34,18 @@ const AdminDashboard = () => {
       if (validSection) {
         setActiveSection(hash);
       } else {
-        setActiveSection('profile'); // Default to 'profile' for consistency
+        setActiveSection('profile');
       }
     } else {
-      setActiveSection('profile'); // Ensure 'profile' is active if no hash is present
+      setActiveSection('profile');
     }
-  }, [location.hash, menuItems]); // Added menuItems to dependency array
+  }, [location.hash]);
+
   const handleSectionChange = (sectionId: string) => {
     setActiveSection(sectionId);
     navigate(`#${sectionId}`);
   };
+
   const renderContent = () => {
     switch (activeSection) {
       case 'content':
@@ -57,19 +59,19 @@ const AdminDashboard = () => {
       case 'documents':
         return <DocumentManagementSection />;
       case 'profile':
-        return <AdminProfileSection />; // Render the AdminProfileSection component
+        return <AdminProfileSection />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50"> {/* bg-gray-50 is standard */}
+    <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-64 bg-white border-r border-gray-200 min-h-screen p-4"> {/* bg-white, border-gray-200 are standard */}
-          <h2 className="text-lg font-semibold text-kindness-orange mb-6">Admin Dashboard</h2> {/* text-lg, font-semibold are standard. text-kindness-orange is custom color. */}
+        <div className="w-64 bg-white border-r border-gray-200 min-h-screen p-4">
+          <h2 className="text-lg font-semibold text-orange-600 mb-6">Admin Dashboard</h2>
           <nav className="space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -85,7 +87,7 @@ const AdminDashboard = () => {
                 </Button>
               );
             })}
-            <Separator className="my-4" /> {/* my-4 is standard */}
+            <Separator className="my-4" />
             <Button variant="ghost" className="w-full justify-start text-red-600">
               <LogOut className="mr-2 h-4 w-4" />
               Logout
