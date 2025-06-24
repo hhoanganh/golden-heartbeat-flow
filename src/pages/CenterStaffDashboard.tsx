@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import StaffProfileSection from '@/components/staff-dashboard/StaffProfileSection'; // Import the specific profile component
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { UserCheck, Calendar, UserCog, Megaphone, LogOut, User } from 'lucide-react';
 import Header from '@/components/Header';
+import DonorCheckInSection from '@/components/staff-dashboard/DonorCheckInSection';
+import LiveDonorListSection from '@/components/staff-dashboard/LiveDonorListSection';
+import DonorStatusUpdatesSection from '@/components/staff-dashboard/DonorStatusUpdatesSection';
+import StaffAlertsSection from '@/components/staff-dashboard/StaffAlertsSection';
 
 const CenterStaffDashboard = () => {
   const [activeSection, setActiveSection] = useState('checkin');
@@ -40,50 +43,14 @@ const CenterStaffDashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'checkin':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Donor Check-in</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Use the QR Code Scanner for scheduled donors or find donors by their ID if the QR code fails.</p>
-            </CardContent>
-          </Card>
-        );
+        return <DonorCheckInSection />;
       case 'liveList':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Live Donor List</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>View today's appointments and access donor details. The "Print Health Declaration" action is available within each donor's detail view.</p>
-            </CardContent>
-          </Card>
-        );
+        return <LiveDonorListSection />;
       case 'status':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Donor Status Updates</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Update donor progress through the various stages of the donation process (e.g., arrived, screening, donating, completed).</p>
-            </CardContent>
-          </Card>
-        );
+        return <DonorStatusUpdatesSection />;
       case 'alerts':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Staff Alerts & Broadcasts</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Important announcements and alerts for center staff.</p>
-            </CardContent>
-          </Card>
-        );
-        case 'profile':
+        return <StaffAlertsSection />;
+      case 'profile':
         return <StaffProfileSection />; // Render the StaffProfileSection component
       default:
         return null;
