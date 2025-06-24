@@ -233,7 +233,9 @@ const Header = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
-                      <User className="mr-2 h-5 w-5" /> Registered Donor
+                      <span> {/* Wrap icon and text in a single span */}
+                        <User className="mr-2 h-5 w-5" /> Registered Donor
+                      </span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
@@ -252,7 +254,9 @@ const Header = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
-                      <ClipboardList className="mr-2 h-5 w-5" /> Center Staff
+                      <span> {/* Wrap icon and text in a single span */}
+                        <ClipboardList className="mr-2 h-5 w-5" /> Center Staff
+                      </span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
@@ -272,7 +276,9 @@ const Header = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
-                      <Stethoscope className="mr-2 h-5 w-5" /> Medical Professional
+                      <span> {/* Wrap icon and text in a single span */}
+                        <Stethoscope className="mr-2 h-5 w-5" /> Medical Professional
+                      </span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
@@ -291,7 +297,9 @@ const Header = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
-                      <LayoutDashboard className="mr-2 h-5 w-5" /> System Administrator
+                      <span> {/* Wrap icon and text in a single span */}
+                        <LayoutDashboard className="mr-2 h-5 w-5" /> System Administrator
+                      </span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
