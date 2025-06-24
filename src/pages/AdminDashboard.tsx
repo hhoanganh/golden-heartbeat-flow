@@ -7,6 +7,20 @@ import { Separator } from '@/components/ui/separator';
 import { FileText, Calendar, Users, BarChart, LogOut, FolderOpen, User } from 'lucide-react';
 import AdminProfileSection from '@/components/admin-dashboard/AdminProfileSection'; // Import the specific profile component
 import Header from '@/components/Header';
+import ContentManagementSection from '@/components/admin-dashboard/ContentManagementSection';
+import EventManagementSection from '@/components/admin-dashboard/EventManagementSection';
+import UserManagementSection from '@/components/admin-dashboard/UserManagementSection';
+import DocumentManagementSection from '@/components/admin-dashboard/DocumentManagementSection';
+import ReportingSection from '@/components/admin-dashboard/ReportingSection';
+
+const menuItems = [
+  { id: 'profile', label: 'My Profile', icon: User },
+  { id: 'content', label: 'Public Content Management', icon: FileText },
+  { id: 'events', label: 'Event & Schedule Management', icon: Calendar },
+  { id: 'users', label: 'User & Role Management', icon: Users },
+  { id: 'documents', label: 'Document Management', icon: FolderOpen },
+  { id: 'reporting', label: 'Basic Operational Reporting', icon: BarChart },
+];
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('profile');
@@ -20,18 +34,12 @@ const AdminDashboard = () => {
       if (validSection) {
         setActiveSection(hash);
       } else {
-        setActiveSection('content');
+        setActiveSection('profile'); // Default to 'profile' for consistency
       }
+    } else {
+      setActiveSection('profile'); // Ensure 'profile' is active if no hash is present
     }
-  }, [location.hash]);
-  const menuItems = [
-    { id: 'profile', label: 'My Profile', icon: User }, // Added My Profile to sidebar
-    { id: 'content', label: 'Public Content Management', icon: FileText },
-    { id: 'events', label: 'Event & Schedule Management', icon: Calendar },
-    { id: 'users', label: 'User & Role Management', icon: Users },
-    { id: 'documents', label: 'Document Management', icon: FolderOpen }, // NEW: Document Management
-    { id: 'reporting', label: 'Basic Operational Reporting', icon: BarChart },
-  ];
+  }, [location.hash, menuItems]); // Added menuItems to dependency array
   const handleSectionChange = (sectionId: string) => {
     setActiveSection(sectionId);
     navigate(`#${sectionId}`);
@@ -39,60 +47,15 @@ const AdminDashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'content':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Public Content Management</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage website content, announcements, and public information.</p>
-            </CardContent>
-          </Card>
-        );
+        return <ContentManagementSection />;
       case 'events':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Event & Schedule Management</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Create and manage donation events, schedules, and center operations.</p>
-            </CardContent>
-          </Card>
-        );
+        return <EventManagementSection />;
       case 'users':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>User & Role Management</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage user accounts, roles, and access permissions across the system.</p>
-            </CardContent>
-          </Card>
-        );
+        return <UserManagementSection />;
       case 'reporting':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Basic Operational Reporting</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>View system analytics, donation statistics, and operational reports.</p>
-            </CardContent>
-          </Card>
-        );
-        case 'documents': // NEW: Document Management content
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Document Management</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage scanned paper forms and other digital documents.</p>
-            </CardContent>
-          </Card>
-        );
+        return <ReportingSection />;
+      case 'documents':
+        return <DocumentManagementSection />;
       case 'profile':
         return <AdminProfileSection />; // Render the AdminProfileSection component
       default:
@@ -101,12 +64,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50"> {/* bg-gray-50 is standard */}
       <Header />
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-64 bg-white border-r border-gray-200 min-h-screen p-4">
-          <h2 className="text-lg font-semibold text-kindness-orange mb-6">Admin Dashboard</h2>
+        <div className="w-64 bg-white border-r border-gray-200 min-h-screen p-4"> {/* bg-white, border-gray-200 are standard */}
+          <h2 className="text-lg font-semibold text-kindness-orange mb-6">Admin Dashboard</h2> {/* text-lg, font-semibold are standard. text-kindness-orange is custom color. */}
           <nav className="space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -122,7 +85,7 @@ const AdminDashboard = () => {
                 </Button>
               );
             })}
-            <Separator className="my-4" />
+            <Separator className="my-4" /> {/* my-4 is standard */}
             <Button variant="ghost" className="w-full justify-start text-red-600">
               <LogOut className="mr-2 h-4 w-4" />
               Logout
