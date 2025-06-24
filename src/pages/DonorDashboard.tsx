@@ -96,6 +96,7 @@ const DonorDashboard = () => {
             <SheetTrigger asChild>
               <Button variant="outline" className="w-full justify-center">
                 {/* Wrap icon and text in a single span to satisfy React.Children.only */}
+                {/* This span ensures the Button (when acting as asChild) has only one direct child */}
                 <span>
                   <Menu className="mr-2 h-4 w-4" />
                   Select Dashboard Section
@@ -115,6 +116,7 @@ const DonorDashboard = () => {
                         onClick={() => handleSectionChange(item.id)}
                       >
                         {/* Wrap icon and text in a single span to satisfy React.Children.only */}
+                        {/* This span ensures the Button (when acting as asChild) has only one direct child */}
                         <span>
                           <Icon className="mr-2 h-4 w-4" />
                           {item.label}
@@ -127,6 +129,7 @@ const DonorDashboard = () => {
                 <SheetClose asChild>
                   <Button variant="ghost" className="w-full justify-start text-red-600">
                     {/* Wrap icon and text in a single span to satisfy React.Children.only */}
+                    {/* This span ensures the Button (when acting as asChild) has only one direct child */}
                     <span>
                       <LogOut className="mr-2 h-4 w-4" />
                       Logout
