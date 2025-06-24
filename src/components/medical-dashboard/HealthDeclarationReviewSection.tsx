@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,7 @@ const HealthDeclarationReviewSection = () => {
         <CardTitle>Health Declaration Review</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gentle-gray mb-4">Review and assess donor health declarations for donation eligibility.</p>
+        <p className="text-gray-600 mb-4">Review and assess donor health declarations for donation eligibility.</p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -34,7 +35,11 @@ const HealthDeclarationReviewSection = () => {
                 <TableCell>{declaration.id}</TableCell>
                 <TableCell>{declaration.donorName}</TableCell>
                 <TableCell>{declaration.date}</TableCell>
-                <TableCell><Badge variant={declaration.status === 'Pending Review' ? 'warning' : 'success'}>{declaration.status}</Badge></TableCell>
+                <TableCell>
+                  <Badge variant={declaration.status === 'Pending Review' ? 'secondary' : 'default'}>
+                    {declaration.status}
+                  </Badge>
+                </TableCell>
                 <TableCell>
                   <Button variant="outline" size="sm">Review</Button>
                 </TableCell>

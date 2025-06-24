@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,7 @@ const DonorMedicalHistorySection = () => {
         <CardTitle>Donor Medical History</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gentle-gray mb-4">Access comprehensive medical history and donation records.</p>
+        <p className="text-gray-600 mb-4">Access comprehensive medical history and donation records.</p>
         <div className="flex gap-2 mb-6 max-w-md">
           <Input placeholder="Search by Donor ID or Name" />
           <Button variant="outline">
