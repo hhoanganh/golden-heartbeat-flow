@@ -5,8 +5,11 @@ import MedicalProfileSection from '@/components/medical-dashboard/MedicalProfile
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { QrCode, ClipboardList, CheckCircle, FileText, LogOut, User } from 'lucide-react';
+import { QrCode, ClipboardList, FileText, LogOut, User } from 'lucide-react';
 import Header from '@/components/Header';
+import VerifyDonorSection from '@/components/medical-dashboard/VerifyDonorSection';
+import HealthDeclarationReviewSection from '@/components/medical-dashboard/HealthDeclarationReviewSection';
+import DonorMedicalHistorySection from '@/components/medical-dashboard/DonorMedicalHistorySection';
 
 const MedicalProfessionalDashboard = () => {
   const [activeSection, setActiveSection] = useState('profile'); // Default to new top-level function
@@ -38,40 +41,11 @@ const MedicalProfessionalDashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'verifyDonor':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Verify Donor for Consultation</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Scan donor QR code or enter ID to initiate consultation process.</p>
-            </CardContent>
-          </Card>
-        );
+        return <VerifyDonorSection />;
       case 'review':
-        return (
-           <Card>
-            <CardHeader>
-              <CardTitle>Health Declaration Review</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Review and assess donor health declarations for donation eligibility.</p>
-            </CardContent>
-          </Card>
-        );
-
+        return <HealthDeclarationReviewSection />;
       case 'history':
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>Donor Medical History</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Access comprehensive medical history and donation records.</p>
-            </CardContent>
-          </Card>
-        );
-        case 'profile':
+        return <DonorMedicalHistorySection />;
       case 'profile':
         return <MedicalProfileSection />; // Render the MedicalProfileSection component
       default:
