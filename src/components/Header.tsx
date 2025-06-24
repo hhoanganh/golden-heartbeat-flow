@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Separator } from '@/components/ui/separator';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -212,14 +213,101 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-warm-gray/30 shadow-md-custom">
             <nav className="flex flex-col space-y-4 p-4">
-              <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Home</Link>
-              <Link to="/impact-stories" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Our Impact</Link>
-              <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Events</Link>
-              {/* New "Find Centers" link added here */}
-              <Link to="/centers" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Find Centers</Link>
-              <Link to="/faqs" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">FAQs</Link>
-              <Link to="/contact" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Contact Us</Link>
-              <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200">Login / Register</Link>
+              <div className="flex flex-col space-y-1">
+                <Link to="/" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Home</Link>
+                <Link to="/impact-stories" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Our Impact</Link>
+                <Link to="/events" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Find Events</Link>
+                <Link to="/centers" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Find Centers</Link>
+                <Link to="/faqs" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">FAQs</Link>
+                <Link to="/contact" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Contact Us</Link>
+              </div>
+
+              <Separator className="my-2" />
+
+              <div className="flex flex-col space-y-1">
+                <Link to="/login" className="text-body text-deep-gray hover:text-supportive-blue transition-colors duration-200 p-2 rounded-md hover:bg-warm-gray/50">Login / Register</Link>
+
+                <div className="px-2 pt-2 text-sm font-semibold text-gentle-gray">User Dashboards</div>
+
+                {/* Donor Dashboard Link */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
+                      <User className="mr-2 h-5 w-5" /> Registered Donor
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
+                    <DropdownMenuLabel>Registered Donor</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link to="/donor-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                    <Link to="/donor-dashboard#appointments"><DropdownMenuItem>My Appointments</DropdownMenuItem></Link>
+                    <Link to="/donor-dashboard#journey"><DropdownMenuItem>My Donation Journey</DropdownMenuItem></Link>
+                    <Link to="/donor-dashboard#notifications"><DropdownMenuItem>Notifications / Alerts</DropdownMenuItem></Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Center Staff Dashboard Link */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
+                      <ClipboardList className="mr-2 h-5 w-5" /> Center Staff
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
+                    <DropdownMenuLabel>Center Staff Dashboard</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link to="/staff-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                    <Link to="/staff-dashboard#checkin"><DropdownMenuItem>Donor Check-in</DropdownMenuItem></Link>
+                    <Link to="/staff-dashboard#liveList"><DropdownMenuItem>Live Donor List</DropdownMenuItem></Link>
+                    <Link to="/staff-dashboard#status"><DropdownMenuItem>Donor Status Updates</DropdownMenuItem></Link>
+                    <Link to="/staff-dashboard#alerts"><DropdownMenuItem>Staff Alerts & Broadcasts</DropdownMenuItem></Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Medical Professional Dashboard Link */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
+                      <Stethoscope className="mr-2 h-5 w-5" /> Medical Professional
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
+                    <DropdownMenuLabel>Medical Professional Dashboard</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link to="/medical-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                    <Link to="/medical-dashboard#verifyDonor"><DropdownMenuItem>Verify Donor for Consultation</DropdownMenuItem></Link>
+                    <Link to="/medical-dashboard#review"><DropdownMenuItem>Health Declaration Review</DropdownMenuItem></Link>
+                    <Link to="/medical-dashboard#history"><DropdownMenuItem>Donor Medical History</DropdownMenuItem></Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* System Admin Dashboard Link */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-start text-body text-deep-gray hover:text-supportive-blue hover:bg-supportive-blue/10">
+                      <LayoutDashboard className="mr-2 h-5 w-5" /> System Administrator
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-[calc(100vw-4rem)]">
+                    <DropdownMenuLabel>System Administrator</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link to="/admin-dashboard#profile"><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
+                    <Link to="/admin-dashboard#content"><DropdownMenuItem>Content Management</DropdownMenuItem></Link>
+                    <Link to="/admin-dashboard#events"><DropdownMenuItem>Event Management</DropdownMenuItem></Link>
+                    <Link to="/admin-dashboard#users"><DropdownMenuItem>User Management</DropdownMenuItem></Link>
+                    <Link to="/admin-dashboard#documents"><DropdownMenuItem>Document Management</DropdownMenuItem></Link>
+                    <Link to="/admin-dashboard#reporting"><DropdownMenuItem>Reporting</DropdownMenuItem></Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </nav>
           </div>
         )}
