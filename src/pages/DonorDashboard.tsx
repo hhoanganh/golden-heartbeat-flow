@@ -95,8 +95,10 @@ const DonorDashboard = () => {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" className="w-full justify-center">
-                <Menu className="mr-2 h-4 w-4" />
-                Select Dashboard Section
+                <span> {/* Wrap icon and text in a single span */}
+                  <Menu className="mr-2 h-4 w-4" />
+                  Select Dashboard Section
+                </span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-64 p-4"> {/* Mobile sidebar content */}
@@ -111,8 +113,10 @@ const DonorDashboard = () => {
                         className="w-full justify-start"
                         onClick={() => handleSectionChange(item.id)}
                       >
-                        <Icon className="mr-2 h-4 w-4" />
-                        {item.label}
+                        <span> {/* Wrap icon and text in a single span */}
+                          <Icon className="mr-2 h-4 w-4" />
+                          {item.label}
+                        </span>
                       </Button>
                     </SheetClose>
                   );
@@ -120,8 +124,10 @@ const DonorDashboard = () => {
                 <Separator className="my-4" />
                 <SheetClose asChild>
                   <Button variant="ghost" className="w-full justify-start text-red-600">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
+                    <span> {/* Wrap icon and text in a single span */}
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </span>
                   </Button>
                 </SheetClose>
               </nav>
