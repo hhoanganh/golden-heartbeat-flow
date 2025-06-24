@@ -20,7 +20,7 @@ const DonorDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const hash = location.hash.substring(1); // Remove '#'
+    const hash = location.hash.substring(1);
     if (hash) {
       const validSection = menuItems.find(item => item.id === hash);
       if (validSection) {
@@ -28,6 +28,8 @@ const DonorDashboard = () => {
       } else {
         setActiveSection('profile'); // Default to 'profile' if hash is invalid
       }
+    } else {
+      setActiveSection('profile'); // Ensure 'profile' is active if no hash is present
     }
   }, [location.hash]);
   const menuItems = [
