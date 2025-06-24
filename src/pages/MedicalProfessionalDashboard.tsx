@@ -9,7 +9,7 @@ import { QrCode, ClipboardList, CheckCircle, FileText, LogOut, User } from 'luci
 import Header from '@/components/Header';
 
 const MedicalProfessionalDashboard = () => {
-  const [activeSection, setActiveSection] = useState('verifyDonor'); // Default to new top-level function
+  const [activeSection, setActiveSection] = useState('profile'); // Default to new top-level function
   const location = useLocation();
   const navigate = useNavigate();
 

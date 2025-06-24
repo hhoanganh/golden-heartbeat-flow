@@ -9,7 +9,7 @@ import AdminProfileSection from '@/components/admin-dashboard/AdminProfileSectio
 import Header from '@/components/Header';
 
 const AdminDashboard = () => {
-  const [activeSection, setActiveSection] = useState('content');
+  const [activeSection, setActiveSection] = useState('profile');
   const location = useLocation();
   const navigate = useNavigate();
 

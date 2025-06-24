@@ -12,7 +12,7 @@ import DonorStatusUpdatesSection from '@/components/staff-dashboard/DonorStatusU
 import StaffAlertsSection from '@/components/staff-dashboard/StaffAlertsSection';
 
 const CenterStaffDashboard = () => {
-  const [activeSection, setActiveSection] = useState('checkin');
+  const [activeSection, setActiveSection] = useState('profile'); // Initialize with 'profile' as it's the first menu item
   const location = useLocation();
   const navigate = useNavigate();
 
